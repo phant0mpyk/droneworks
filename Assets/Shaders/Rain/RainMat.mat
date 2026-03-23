@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rain
+  m_Name: RainMat
   m_Shader: {fileID: 4800000, guid: 5f699825c29892247a79777e3835ee44, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
