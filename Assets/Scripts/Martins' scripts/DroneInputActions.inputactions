@@ -7,27 +7,18 @@
             "id": "3285ef26-c8c5-424f-9c02-64edcef3be82",
             "actions": [
                 {
-                    "name": "Throttle",
-                    "type": "Value",
-                    "id": "11162621-1370-46dd-9fd9-38f4b7a7edec",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Yaw",
-                    "type": "Value",
-                    "id": "22e44a80-94fb-4a39-a767-1a9b643e4298",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Arrows",
+                    "name": "Arrows/RightJoystick",
                     "type": "Value",
                     "id": "350d7048-27aa-4036-8d88-0cdffc17a4c8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "WASD/LeftJoystick",
+                    "type": "Value",
+                    "id": "ef1b8780-5ce1-43f2-b3b2-c7be4c52fd6c",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -42,7 +33,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows",
+                    "action": "Arrows/RightJoystick",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -53,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows",
+                    "action": "Arrows/RightJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -64,7 +55,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows",
+                    "action": "Arrows/RightJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -75,7 +66,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows",
+                    "action": "Arrows/RightJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -86,73 +77,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows",
+                    "action": "Arrows/RightJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "ba85769f-a68b-4d84-b979-c330ec66153f",
-                    "path": "1DAxis",
+                    "name": "2D Vector",
+                    "id": "6bcc1826-4d1a-4789-8b00-56fbc82f7852",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throttle",
+                    "action": "WASD/LeftJoystick",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "38320bdc-2486-4326-b071-2c54845b4319",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throttle",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "8e794edd-0754-497f-b3d8-06f302734180",
+                    "name": "up",
+                    "id": "ed708188-7aa1-49e9-b251-c3cfaff313c1",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Throttle",
+                    "action": "WASD/LeftJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "be540815-f1cb-487c-b666-402b07578943",
-                    "path": "1DAxis",
+                    "name": "down",
+                    "id": "17b74cc7-d64a-40d5-97c9-4f4aa8ed9da6",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Yaw",
-                    "isComposite": true,
-                    "isPartOfComposite": false
+                    "action": "WASD/LeftJoystick",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
-                    "id": "d1a9f171-65cb-41b0-9495-4ec86b8ecb48",
+                    "name": "left",
+                    "id": "a14bfc08-8d03-4f1e-a5e1-b8733e8eb012",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Yaw",
+                    "action": "WASD/LeftJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "a4fa8255-a0b2-4955-8001-92be81388ee5",
+                    "name": "right",
+                    "id": "9889bcf4-04cb-45c7-b841-b4a7142fc90a",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Yaw",
+                    "action": "WASD/LeftJoystick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
