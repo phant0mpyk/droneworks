@@ -1,4 +1,5 @@
 using Unity.Mathematics;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,11 +8,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider))]
 public class DroneScript : MonoBehaviour
 {
-    [Tooltip("Array of the drone propellers")]
-    [SerializeField] 
-    GameObject[] propellers;
-    PropellerScript[] propellerScripts;
-
+    Rigidbody droneRigidbody;
+    float throttleAxis;
+    float pitchAxis;
+    float yawAxis;
+    float rollAxis;
     [Header("Controls")]
     [SerializeField] 
     InputActionReference flyWASD;
@@ -19,12 +20,39 @@ public class DroneScript : MonoBehaviour
     [SerializeField] 
     InputActionReference flyArrows;
 
+    [SerializeField]
+    Camera droneCamera;
+
+    [Tooltip("Camera up-tilt in degrees. 0-10 is standard for cinematic drones, 10-25 for FPV freestyle drones, above 25 for racing drones.")]
+    [SerializeField]
+    float cameraTilt = 0f;
+
     [Header("Environment")]
     [Tooltip("Density of the air, standard is 1.225 kg/m^3 at sea level")]
     [SerializeField]
     private float airDensity = 1.225f;
 
-    [Header("RPM Settings")]
+    enum FlightMode { Stabilized, Acrobatic }
+
+    [SerializeField]
+    [Header("Flight Mode")]
+    private FlightMode stabilizationFlightMode;
+
+    [Header("Acrobatic Flight Mode Settings")]
+
+    [Tooltip("Array of the drone propellers")]
+    [SerializeField] 
+    GameObject[] propellers;
+    PropellerScript[] propellerScripts;
+
+    [Tooltip("Rotation speed multiplier for tilting (roll/pitch) the drone for fine-tuning.")]
+    [SerializeField]
+    float tiltAcrobaticRotationMultiplier = 1f;
+
+    [Tooltip("Rotation speed multiplier for yawing the drone for fine-tuning.")]
+    [SerializeField]
+    float yawAcrobaticRotationMultiplier = 1f;
+
     [Tooltip("Change in RPM. Per 1 propeller.")]
     [SerializeField]
     float deltaRPM;
@@ -33,33 +61,46 @@ public class DroneScript : MonoBehaviour
     [SerializeField]
     float minRPMPercentage;
 
-    [Tooltip("RPM at which the drone hovers when throttle stick is at 50%. In Percentage of max RPM. Per 1 propeller.")]
-    [SerializeField]
-    float hoverRPMPercentage;
-
     [Tooltip("Maximum RPM the drone propeller can reach. Per 1 propeller.")]
     [SerializeField]
     float maxRPM;
 
-    [Header("Stabilization")]
+    [Tooltip("RPM at which the drone hovers when throttle stick is at 50%. In Percentage of max RPM. Per 1 propeller.")]
     [SerializeField]
-    private bool stabilizationFlightMode; 
+    float hoverRPMPercentage;
+
+    float minRPM;
+    float hoverRPM;
+
+    [Header("Stabilized Flight Mode Settings")]
+    //stabilization settings 
     [Tooltip("Maximum pitch/roll angle for the propeller.")]
     [SerializeField]
     Vector3 maxTiltAngle;
-    Vector3 currRotation;
-    [SerializeField] PID rollPID;
-    [SerializeField] PID pitchPID;
-    [SerializeField] PID yawPID;
-    Rigidbody droneRigidbody;
 
-    float throttleAxis;
-    float pitchAxis;
-    float yawAxis;
-    float rollAxis;
-    float minRPM;
-    float hoverRPM;
-    
+    [Tooltip("Rotation speed multiplier for tilting (roll/pitch) the drone for fine-tuning.")]
+    [SerializeField]
+    float tiltStabilizedRotationMultiplier = 1f;
+
+    [Tooltip("Rotation speed multiplier for yawing the drone for fine-tuning.")]
+    [SerializeField]
+    float yawStabilizedRotationMultiplier = 1f;
+
+    [Tooltip("Thrust at which the drone is idle, so when throttle is all the way down. In Percentage of max thrust. Per 1 propeller.")]
+    [SerializeField]
+    float minThrustPercentage;
+
+    [Tooltip("Maximum possible thrust for the propeller. Per 1 propeller in Newtons.")]
+    [SerializeField]
+    float maxThrust;
+
+    [Tooltip("Thrust at which the drone hovers when throttle stick is at 50%. In Percentage of max thrust. Per 1 propeller.")]
+    [SerializeField]
+    float hoverThrustPercentage;
+
+    float minThrust;
+    float hoverThrust;
+
     void Awake()
     {
         droneRigidbody = GetComponent<Rigidbody>();
@@ -72,6 +113,8 @@ public class DroneScript : MonoBehaviour
         }
         minRPM = minRPMPercentage/100 * maxRPM;
         hoverRPM = hoverRPMPercentage/100 * maxRPM;
+        minThrust = minThrustPercentage/100 * maxThrust;
+        hoverThrust = hoverThrustPercentage/100 * maxThrust;
     }
     void Update()
     {
@@ -81,50 +124,54 @@ public class DroneScript : MonoBehaviour
         Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
         rollAxis = arrowInput.x;
         pitchAxis = arrowInput.y;
+        droneCamera.transform.localRotation = Quaternion.Euler(-cameraTilt, 0f, 0f);
     }
 
-    //Logic for applying forces to the drone based on the player input
+    //Applies thrust and rotations based on the current flight mode. 
+    //Acrobatic flight mode calculates thrust realistically based on RPM on all 4 propellers and applies it with physics
+    //Stabilized flight mode applies simplified thrust and rotates it using transform instead if torque
     void FixedUpdate()
     {
-        float fullRPM = 0f;
-        float pitchDelta = 0;
-        float rollDelta = 0;
-        float yawDelta = 0;
-        if(stabilizationFlightMode)
+        switch (stabilizationFlightMode)
         {
-            //non functioning stabilization code, needs to be fixed
-            currRotation = transform.eulerAngles;
-            float currRoll = NormalizeAngle(currRotation.z);
-            float currPitch = NormalizeAngle(currRotation.x);
-            //float currYaw = NormalizeAngle(currRotation.y);
-            float targetRoll = rollAxis * maxTiltAngle.z;
-            float targetPitch = pitchAxis * maxTiltAngle.x;
-            //float targetYaw = yawAxis * maxTiltAngle.y;
-            float rollError = Mathf.DeltaAngle(currRoll, targetRoll);
-            float pitchError = Mathf.DeltaAngle(currPitch, targetPitch);
-            //float yawError = Mathf.DeltaAngle(currYaw, targetYaw);
-            float rollCorrection = rollPID.GetValue(rollError, Time.fixedDeltaTime);
-            float pitchCorrection = pitchPID.GetValue(pitchError, Time.fixedDeltaTime);
-            //float yawCorrection = yawPID.GetValue(yawError, Time.fixedDeltaTime);
-            if (Mathf.Abs(rollError) < 1f) rollCorrection = 0;
-            if (Mathf.Abs(pitchError) < 1f) pitchCorrection = 0;
-            //if (Mathf.Abs(yawError) < 1f) yawCorrection = 0;
-            rollCorrection = Mathf.Clamp(rollCorrection, -1f, 1f);
-            pitchCorrection = Mathf.Clamp(pitchCorrection, -1f, 1f);
-            //yawCorrection = Mathf.Clamp(yawCorrection, -1f, 1f);
-            pitchDelta = pitchCorrection * deltaRPM;
-            rollDelta = rollCorrection * deltaRPM;
-            //yawDelta = yawCorrection * deltaRPM;
-            yawDelta = yawAxis * deltaRPM;
-            Debug.Log(pitchDelta + " " + rollDelta + " " + yawDelta);
+            case FlightMode.Stabilized:
+                StabilizedFlightPhysics();
+                break;
+            case FlightMode.Acrobatic:
+                AcrobaticFlightPhysics();
+                break;
         }
-        else
+    }
+
+    //Simplified version of drone physics without 4 propellers, just one thrust
+    //The rotation is manipulated with transform over physics like in acrobatic flight mode because the previous version with PID and propeller RPM/thrust was not working correctly, most likely because of tiny errors and PID being too aggresive
+    //Also the previous version was working with tilt/yaw but roll/combining of rotations caused a spinout
+    void StabilizedFlightPhysics()
+    {
+        float finalThrust = 0f;
+        Quaternion targetRotation = Quaternion.Euler(pitchAxis * maxTiltAngle.x, transform.eulerAngles.y, -rollAxis * maxTiltAngle.z);
+        //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
+        //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis
+        transform.Rotate(Vector3.up, yawAxis * yawStabilizedRotationMultiplier * Time.fixedDeltaTime, Space.World);
+        for (int i = 0; i < propellerScripts.Length; i++)
         {
-            pitchDelta = pitchAxis * deltaRPM;
-            rollDelta = rollAxis * deltaRPM;
-            yawDelta = yawAxis * deltaRPM;
+            float thrust = hoverThrust + throttleAxis * (maxThrust - hoverThrust);
+            thrust = Mathf.Clamp(thrust, minThrust, maxThrust);
+            propellerScripts[i].ApplyPropellerForceStabilized(thrust);
+            finalThrust += thrust;
         }
-        print("Pitch Delta: " + pitchDelta + " Roll Delta: " + rollDelta + " Yaw Delta: " + yawDelta);
+        Debug.Log("Applying total stabilized thrust: " + finalThrust + "Max thrust: " + maxThrust * propellerScripts.Length);
+    }
+
+    void AcrobaticFlightPhysics()
+    {
+        float pitchDelta = 0f;
+        float rollDelta = 0f;
+        float yawDelta = 0f;
+        pitchDelta = pitchAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
+        rollDelta = rollAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
+        yawDelta = yawAxis * deltaRPM * yawAcrobaticRotationMultiplier;
         for (int i = 0; i < propellerScripts.Length; i++)
         {
             float currRPM = hoverRPM + throttleAxis * (maxRPM - hoverRPM);
@@ -150,16 +197,8 @@ public class DroneScript : MonoBehaviour
             int yawSign = (int)propellerScripts[i].GetPropellerRotation();
             currRPM += yawDelta * yawSign;
             currRPM = Mathf.Clamp(currRPM, minRPM, maxRPM);
-            propellerScripts[i].ApplyPropellerForce(currRPM, airDensity);
-            fullRPM += currRPM;
+            propellerScripts[i].ApplyPropellerForceAcrobatic(currRPM, airDensity);
         }
-        print("Full RPM after applying forces: " + fullRPM); 
-    }
-
-    float NormalizeAngle(float angle)
-    {
-        while (angle > 180f) angle -= 360f;
-        while (angle < -180f) angle += 360f;
-        return angle;
     }
 }
+

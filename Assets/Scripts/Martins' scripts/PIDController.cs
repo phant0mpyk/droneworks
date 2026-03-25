@@ -8,11 +8,11 @@ public class PID
     float integral;
     float lastError;
 
-    public float GetValue(float error, float dt)
+    public float GetValue(float _error, float _deltaTime)
     {
-        integral += error * dt;
-        float derivative = (error - lastError) / dt;
-        lastError = error;
-        return Kp * error + Ki * integral + Kd * derivative;
+        integral += _error * _deltaTime;
+        float derivative = (_error - lastError) / _deltaTime;
+        lastError = _error;
+        return Kp * _error + Ki * integral + Kd * derivative;
     }
 }

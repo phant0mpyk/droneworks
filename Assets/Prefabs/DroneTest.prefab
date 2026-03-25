@@ -670,19 +670,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccf32da004ac2945b4466a782e2eb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyWASD: {fileID: -4033907026776619546, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  flyArrows: {fileID: -5552527504604634810, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  droneCamera: {fileID: 4516501671408747888}
+  cameraTilt: 10
+  airDensity: 1.225
+  stabilizationFlightMode: 1
   propellers:
   - {fileID: 5810521259402606288}
   - {fileID: 5041830162222483905}
   - {fileID: 4851915496724469247}
   - {fileID: 7301924430585213937}
-  flyWASD: {fileID: -4033907026776619546, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-  flyArrows: {fileID: -5552527504604634810, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  tiltAcrobaticRotationMultiplier: 10
+  yawAcrobaticRotationMultiplier: 10
   deltaRPM: 460
   minRPMPercentage: 5
-  hoverRPMPercentage: 52.75
   maxRPM: 16928
-  stabilizationFlightMode: 1
-  maxAngle: 40
+  hoverRPMPercentage: 52.5
+  maxTiltAngle: {x: 30, y: 0, z: 30}
+  tiltStabilizedRotationMultiplier: 2.5
+  yawStabilizedRotationMultiplier: 100
+  minThrustPercentage: 5
+  maxThrust: 2.15
+  hoverThrustPercentage: 28
 --- !u!54 &2719785237803607778
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -692,8 +702,8 @@ Rigidbody:
   m_GameObject: {fileID: 7474544466922042017}
   serializedVersion: 4
   m_Mass: 0.246
-  m_Drag: 0.1
-  m_AngularDrag: 0.5
+  m_Drag: 0.5
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -804,7 +814,7 @@ Transform:
   m_GameObject: {fileID: 7939694346491807252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.568, z: -3.256}
+  m_LocalPosition: {x: 0, y: 0.568, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
