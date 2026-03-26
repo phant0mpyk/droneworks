@@ -3,11 +3,11 @@
     "name": "DroneInputActions",
     "maps": [
         {
-            "name": "Flying",
+            "name": "FlyingForKeyboard",
             "id": "3285ef26-c8c5-424f-9c02-64edcef3be82",
             "actions": [
                 {
-                    "name": "Arrows/rightStick",
+                    "name": "Arrows",
                     "type": "Value",
                     "id": "350d7048-27aa-4036-8d88-0cdffc17a4c8",
                     "expectedControlType": "Vector2",
@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "WASD/leftStick",
+                    "name": "WASD",
                     "type": "Value",
                     "id": "ef1b8780-5ce1-43f2-b3b2-c7be4c52fd6c",
                     "expectedControlType": "Vector2",
@@ -33,51 +33,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/rightStick",
+                    "action": "Arrows",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "9dca1865-9a17-4460-a6df-36f158abb83c",
-                    "path": "<XInputController>/rightStick/up",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/rightStick",
+                    "action": "Arrows",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
                     "id": "c3215e9f-4dfa-4c95-a787-96bc4b2a1824",
-                    "path": "<XInputController>/rightStick/down",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/rightStick",
+                    "action": "Arrows",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "db89b868-310b-4e46-814a-695b3568e8b6",
-                    "path": "<XInputController>/rightStick/left",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/rightStick",
+                    "action": "Arrows",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "fcb6819a-bc40-400c-bf28-05016861bdee",
-                    "path": "<XInputController>/rightStick/right",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/rightStick",
+                    "action": "Arrows",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -88,51 +88,187 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/leftStick",
+                    "action": "WASD",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "ed708188-7aa1-49e9-b251-c3cfaff313c1",
-                    "path": "<XInputController>/leftStick/up",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/leftStick",
+                    "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
                     "id": "17b74cc7-d64a-40d5-97c9-4f4aa8ed9da6",
-                    "path": "<XInputController>/leftStick/down",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/leftStick",
+                    "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "a14bfc08-8d03-4f1e-a5e1-b8733e8eb012",
-                    "path": "<XInputController>/leftStick/left",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/leftStick",
+                    "action": "WASD",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "9889bcf4-04cb-45c7-b841-b4a7142fc90a",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WASD",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "FlyingForController",
+            "id": "5db43ca0-9c46-4334-9980-cdb7cd5ac5f4",
+            "actions": [
+                {
+                    "name": "Left",
+                    "type": "Value",
+                    "id": "398228d1-c9fd-4af6-ad1f-12db7c9313bd",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Right",
+                    "type": "Value",
+                    "id": "35033f39-4ead-40de-b678-68612e56ada2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "0e885f40-0023-421a-87ac-0f97c7e0fade",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "acabf11c-fe3c-4ac7-9144-535e634ba3ff",
+                    "path": "<XInputController>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "e64c500e-e792-465c-95cc-7a667306ef6c",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "266d272a-efa9-4ef3-8c69-0eca62d0bdd6",
+                    "path": "<XInputController>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2eaf181e-e13a-48f5-84f0-f7f3e8946d37",
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/leftStick",
+                    "action": "Left",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "c57ea372-4edf-44e2-886d-d8da6b6f6e77",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "788aecac-871f-4c7b-9ba8-fafc47277008",
+                    "path": "<Gamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "a6b17702-b44e-4f49-a55f-f8aec74c0342",
+                    "path": "<XInputController>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "b9e3985e-b10a-4156-b635-05551aab59c6",
+                    "path": "<XInputController>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "be39fc71-b408-481c-91c7-028905f2caa4",
+                    "path": "<XInputController>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

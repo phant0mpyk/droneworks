@@ -21,6 +21,12 @@ public class DroneScript : MonoBehaviour
     InputActionReference flyArrows;
 
     [SerializeField]
+    InputActionReference leftStickInputAxis;
+
+    [SerializeField]
+    InputActionReference rightStickInputAxis;
+
+    [SerializeField]
     Camera droneCamera;
 
     [Tooltip("Camera up-tilt in degrees. 0-10 is standard for cinematic drones, 10-25 for FPV freestyle drones, above 25 for racing drones.")]
@@ -118,12 +124,20 @@ public class DroneScript : MonoBehaviour
     }
     void Update()
     {
-        Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
-        throttleAxis = flyWASDInput.y; 
-        yawAxis = flyWASDInput.x;     
-        Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
-        rollAxis = arrowInput.x;
-        pitchAxis = arrowInput.y;
+        Vector2 flyLeftStickInput = leftStickInputAxis.action.ReadValue<Vector2>();
+        Vector2 flyRightStickInput = rightStickInputAxis.action.ReadValue<Vector2>();
+        throttleAxis = flyLeftStickInput.y;
+        yawAxis = flyLeftStickInput.x;
+        pitchAxis = flyRightStickInput.y;
+        rollAxis = flyRightStickInput.x;
+        Debug.Log(yawAxis +" " + pitchAxis +  " " + rollAxis + " " + throttleAxis);
+        //for keyboard, implement input switching later
+        // Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
+        // throttleAxis = flyWASDInput.y; 
+        // yawAxis = flyWASDInput.x;     
+        // Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
+        // rollAxis = arrowInput.x;
+        // pitchAxis = arrowInput.y;
         droneCamera.transform.localRotation = Quaternion.Euler(-cameraTilt, 0f, 0f);
     }
 
@@ -150,6 +164,7 @@ public class DroneScript : MonoBehaviour
     {
         float finalThrust = 0f;
         Quaternion targetRotation = Quaternion.Euler(pitchAxis * maxTiltAngle.x, transform.eulerAngles.y, -rollAxis * maxTiltAngle.z);
+        Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
         //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
         //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis

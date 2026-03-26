@@ -761,7 +761,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: New Control Scheme
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Flying
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4516501671408747888}

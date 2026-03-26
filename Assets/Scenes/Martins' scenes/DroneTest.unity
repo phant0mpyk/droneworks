@@ -357,13 +357,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
-      propertyPath: m_Actions
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: yawInputAxis
       value: 
-      objectReference: {fileID: -944628639613478452, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+      objectReference: {fileID: -710995436078065627, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: rollInputAxis
+      value: 
+      objectReference: {fileID: 8297851346331220953, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: pitchInputAxis
+      value: 
+      objectReference: {fileID: -9041703954419696464, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: throttleInputAxis
+      value: 
+      objectReference: {fileID: -337859090959593987, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: leftStickInputAxis
+      value: 
+      objectReference: {fileID: 6883144049890311571, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: rightStickInputAxis
+      value: 
+      objectReference: {fileID: 3503887548239233130, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1778781513265599250, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: stabilizationFlightMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
       propertyPath: m_DefaultActionMap
-      value: Flying
+      value: 5db43ca0-9c46-4334-9980-cdb7cd5ac5f4
       objectReference: {fileID: 0}
     - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
       propertyPath: m_DefaultControlScheme
