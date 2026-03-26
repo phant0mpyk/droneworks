@@ -672,10 +672,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flyWASD: {fileID: -4033907026776619546, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
   flyArrows: {fileID: -5552527504604634810, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  leftStickInputAxis: {fileID: 6883144049890311571, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  rightStickInputAxis: {fileID: 3503887548239233130, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
   droneCamera: {fileID: 4516501671408747888}
   cameraTilt: 10
   airDensity: 1.225
-  stabilizationFlightMode: 1
+  stabilizationFlightMode: 0
   propellers:
   - {fileID: 5810521259402606288}
   - {fileID: 5041830162222483905}
@@ -762,7 +764,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Flying
+  m_DefaultActionMap: FlyingForController
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4516501671408747888}
 --- !u!65 &8804267774759964322
