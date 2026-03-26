@@ -7,20 +7,20 @@
             "id": "3285ef26-c8c5-424f-9c02-64edcef3be82",
             "actions": [
                 {
-                    "name": "Arrows/RightJoystick",
+                    "name": "Arrows/rightStick",
                     "type": "Value",
                     "id": "350d7048-27aa-4036-8d88-0cdffc17a4c8",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "WASD/LeftJoystick",
+                    "name": "WASD/leftStick",
                     "type": "Value",
                     "id": "ef1b8780-5ce1-43f2-b3b2-c7be4c52fd6c",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=1.401298E-45)",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -33,51 +33,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/RightJoystick",
+                    "action": "Arrows/rightStick",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "9dca1865-9a17-4460-a6df-36f158abb83c",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<XInputController>/rightStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/RightJoystick",
+                    "action": "Arrows/rightStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
                     "id": "c3215e9f-4dfa-4c95-a787-96bc4b2a1824",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<XInputController>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/RightJoystick",
+                    "action": "Arrows/rightStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "db89b868-310b-4e46-814a-695b3568e8b6",
-                    "path": "<Keyboard>/leftArrow",
+                    "path": "<XInputController>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/RightJoystick",
+                    "action": "Arrows/rightStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "fcb6819a-bc40-400c-bf28-05016861bdee",
-                    "path": "<Keyboard>/rightArrow",
+                    "path": "<XInputController>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Arrows/RightJoystick",
+                    "action": "Arrows/rightStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -88,51 +88,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/LeftJoystick",
+                    "action": "WASD/leftStick",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "up",
                     "id": "ed708188-7aa1-49e9-b251-c3cfaff313c1",
-                    "path": "<Keyboard>/w",
+                    "path": "<XInputController>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/LeftJoystick",
+                    "action": "WASD/leftStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "down",
                     "id": "17b74cc7-d64a-40d5-97c9-4f4aa8ed9da6",
-                    "path": "<Keyboard>/s",
+                    "path": "<XInputController>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/LeftJoystick",
+                    "action": "WASD/leftStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "left",
                     "id": "a14bfc08-8d03-4f1e-a5e1-b8733e8eb012",
-                    "path": "<Keyboard>/a",
+                    "path": "<XInputController>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/LeftJoystick",
+                    "action": "WASD/leftStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "9889bcf4-04cb-45c7-b841-b4a7142fc90a",
-                    "path": "<Keyboard>/d",
+                    "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WASD/LeftJoystick",
+                    "action": "WASD/leftStick",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
@@ -146,6 +146,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

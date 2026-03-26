@@ -357,6 +357,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Flying
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909450143220495668, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7474544466922042017, guid: f0f756baaec21d243aee5ac86cfc7518, type: 3}
       propertyPath: m_Name
       value: DroneTest
