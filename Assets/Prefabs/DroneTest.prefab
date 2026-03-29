@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7979700592676256151}
@@ -231,13 +231,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 2
   propellerRotation: 1
-  currRPM: 0
-  maxPitchAngle: 0
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
   propellerDiameter: 0.119
-  thrust: 0
 --- !u!1 &5041830162222483905
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,13 +358,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 1
   propellerRotation: 1
-  currRPM: 0
-  maxPitchAngle: 0
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
   propellerDiameter: 0.119
-  thrust: 0
 --- !u!1 &5810521259402606288
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,13 +485,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 0
   propellerRotation: -1
-  currRPM: 0
-  maxPitchAngle: 0
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
   propellerDiameter: 0.119
-  thrust: 0
 --- !u!1 &7301924430585213937
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,13 +612,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: 3
   propellerRotation: -1
-  currRPM: 0
-  maxPitchAngle: 0
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
   propellerDiameter: 0.119
-  thrust: 0
 --- !u!1 &7474544466922042017
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +629,7 @@ GameObject:
   - component: {fileID: 2719785237803607778}
   - component: {fileID: 6947782410419046038}
   - component: {fileID: 4909450143220495668}
+  - component: {fileID: 8804267774759964322}
   m_Layer: 0
   m_Name: DroneTest
   m_TagString: Untagged
@@ -681,17 +670,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eccf32da004ac2945b4466a782e2eb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flyWASD: {fileID: -4033907026776619546, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  flyArrows: {fileID: -5552527504604634810, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  leftStickInputAxis: {fileID: 6883144049890311571, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  rightStickInputAxis: {fileID: 3503887548239233130, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  droneCamera: {fileID: 4516501671408747888}
+  cameraTilt: 10
+  airDensity: 1.225
+  stabilizationFlightMode: 0
   propellers:
   - {fileID: 5810521259402606288}
   - {fileID: 5041830162222483905}
   - {fileID: 4851915496724469247}
   - {fileID: 7301924430585213937}
-  throttle: {fileID: -1255365327300968898, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-  yaw: {fileID: 5776062297816954157, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-  flyArrows: {fileID: -5552527504604634810, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  tiltAcrobaticRotationMultiplier: 10
+  yawAcrobaticRotationMultiplier: 10
   deltaRPM: 460
-  hoverRPM: 8800
+  minRPMPercentage: 5
   maxRPM: 16928
+  hoverRPMPercentage: 52.5
+  maxTiltAngle: {x: 30, y: 0, z: 30}
+  tiltStabilizedRotationMultiplier: 2.5
+  yawStabilizedRotationMultiplier: 100
+  minThrustPercentage: 5
+  maxThrust: 2.15
+  hoverThrustPercentage: 28
 --- !u!54 &2719785237803607778
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -701,8 +704,8 @@ Rigidbody:
   m_GameObject: {fileID: 7474544466922042017}
   serializedVersion: 4
   m_Mass: 0.246
-  m_Drag: 0.1
-  m_AngularDrag: 0.5
+  m_Drag: 0.5
+  m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -760,10 +763,31 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: New Control Scheme
-  m_DefaultActionMap: Flying
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: FlyingForController
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 4516501671408747888}
+--- !u!65 &8804267774759964322
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474544466922042017}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7939694346491807252
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 7939694346491807252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.568, z: -3.256}
+  m_LocalPosition: {x: 0, y: 0.568, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
