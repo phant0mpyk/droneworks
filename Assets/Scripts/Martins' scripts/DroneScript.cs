@@ -20,11 +20,15 @@ public class DroneScript : MonoBehaviour
     [SerializeField] 
     InputActionReference flyArrows;
 
+    bool keyboardInputActive = false;
+
     [SerializeField]
     InputActionReference leftStickInputAxis;
 
     [SerializeField]
     InputActionReference rightStickInputAxis;
+
+    bool controllerInputActive = false;
 
     [SerializeField]
     Camera droneCamera;
@@ -121,24 +125,46 @@ public class DroneScript : MonoBehaviour
         hoverRPM = hoverRPMPercentage/100 * maxRPM;
         minThrust = minThrustPercentage/100 * maxThrust;
         hoverThrust = hoverThrustPercentage/100 * maxThrust;
+        flyWASD.action.Enable();
+        flyArrows.action.Enable();
+        leftStickInputAxis.action.Enable();
+        rightStickInputAxis.action.Enable();
     }
     void Update()
     {
-        Vector2 flyLeftStickInput = leftStickInputAxis.action.ReadValue<Vector2>();
-        Vector2 flyRightStickInput = rightStickInputAxis.action.ReadValue<Vector2>();
-        throttleAxis = flyLeftStickInput.y;
-        yawAxis = flyLeftStickInput.x;
-        pitchAxis = flyRightStickInput.y;
-        rollAxis = flyRightStickInput.x;
-        Debug.Log(yawAxis +" " + pitchAxis +  " " + rollAxis + " " + throttleAxis);
-        //for keyboard, implement input switching later
-        // Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
-        // throttleAxis = flyWASDInput.y; 
-        // yawAxis = flyWASDInput.x;     
-        // Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
-        // rollAxis = arrowInput.x;
-        // pitchAxis = arrowInput.y;
+        //tilt of the camera
         droneCamera.transform.localRotation = Quaternion.Euler(-cameraTilt, 0f, 0f);
+        //changing of current input layout
+        if(flyWASD.action.triggered || flyArrows.action.triggered)
+        {
+            controllerInputActive = false;
+            keyboardInputActive = true;
+        }else if (leftStickInputAxis.action.triggered || rightStickInputAxis.action.triggered)
+        {
+            controllerInputActive = true;
+            keyboardInputActive = false;
+        }
+        //input depending on the currently active controls
+        //looks like action.triggered only fires once when the input is first detected so there are booleans which indicate which layout is active instead
+        if (controllerInputActive)
+        {
+            Vector2 flyLeftStickInput = leftStickInputAxis.action.ReadValue<Vector2>();
+            Vector2 flyRightStickInput = rightStickInputAxis.action.ReadValue<Vector2>();
+            throttleAxis = flyLeftStickInput.y;
+            yawAxis = flyLeftStickInput.x;
+            pitchAxis = flyRightStickInput.y;
+            rollAxis = flyRightStickInput.x;
+        }else if (keyboardInputActive)
+        {
+            Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
+            throttleAxis = flyWASDInput.y; 
+            yawAxis = flyWASDInput.x;     
+            Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
+            rollAxis = arrowInput.x;
+            pitchAxis = arrowInput.y;
+        }
+        // Debug.Log(yawAxis +" " + pitchAxis +  " " + rollAxis + " " + throttleAxis);
+        Debug.Log("Controller active: " + controllerInputActive + " Keyboard active: " + keyboardInputActive);
     }
 
     //Applies thrust and rotations based on the current flight mode. 
@@ -164,7 +190,7 @@ public class DroneScript : MonoBehaviour
     {
         float finalThrust = 0f;
         Quaternion targetRotation = Quaternion.Euler(pitchAxis * maxTiltAngle.x, transform.eulerAngles.y, -rollAxis * maxTiltAngle.z);
-        Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
+        // Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
         //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
         //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis
@@ -176,7 +202,7 @@ public class DroneScript : MonoBehaviour
             propellerScripts[i].ApplyPropellerForceStabilized(thrust);
             finalThrust += thrust;
         }
-        Debug.Log("Applying total stabilized thrust: " + finalThrust + "Max thrust: " + maxThrust * propellerScripts.Length);
+        // Debug.Log("Applying total stabilized thrust: " + finalThrust + "Max thrust: " + maxThrust * propellerScripts.Length);
     }
 
     void AcrobaticFlightPhysics()
