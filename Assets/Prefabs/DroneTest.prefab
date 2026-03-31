@@ -626,6 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7979700592676256151}
   - component: {fileID: 1778781513265599250}
+  - component: {fileID: 6775227532064017982}
   - component: {fileID: 2719785237803607778}
   - component: {fileID: 6947782410419046038}
   - component: {fileID: 4909450143220495668}
@@ -677,6 +678,19 @@ MonoBehaviour:
   droneCamera: {fileID: 4516501671408747888}
   cameraTilt: 10
   airDensity: 1.225
+  batteryCapacity: 2250
+  internalBatteryResistance: 0.08
+  KV: 2800
+  propellerLoadedEfficiency: 80
+  batteryCells: 2
+  maxCellVoltage: 4.2
+  nominalCellVoltage: 3.7
+  minCellVoltage: 3
+  batteryDischargePercentage: 80
+  averageCurrentDraw: 10
+  batteryWarningCellVoltage: 3.5
+  estimatedFlightTimeMinutes: 1.5
+  calculatedFlightTimeMinutes: 0
   stabilizationFlightMode: 0
   propellers:
   - {fileID: 5810521259402606288}
@@ -695,6 +709,20 @@ MonoBehaviour:
   minThrustPercentage: 5
   maxThrust: 2.15
   hoverThrustPercentage: 28
+--- !u!114 &6775227532064017982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474544466922042017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b53b9103ded6545a736fd56942bbdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryCellVoltageText: {fileID: 0}
+  flightTimeText: {fileID: 0}
 --- !u!54 &2719785237803607778
 Rigidbody:
   m_ObjectHideFlags: 0
