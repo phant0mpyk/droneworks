@@ -16,7 +16,7 @@ public class DroneUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        batteryCellVoltageText.text = "Battery Voltage: " + droneScript.currBatteryVoltage/2 + "V per cell"; 
-        flightTimeText.text = "Remaining Flight Time: " + droneScript.remainingFlightTimeMinutes;
+        batteryCellVoltageText.text = "Battery Voltage: " + droneScript.GetBatteryPercentageWithBatterySafety() + "% (" + droneScript.currBatteryVoltage/3 + "V per cell)"; 
+        // flightTimeText.text = "Remaining Flight Time: " + droneScript.remainingFlightTimeMinutes;
     }
 }

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -42,12 +43,18 @@ public class DroneScript : MonoBehaviour
     [SerializeField]
     float cameraTilt = 0f;
 
+    [Tooltip("Array of the drone propellers")]
+    [SerializeField] 
+    GameObject[] propellers;
+    PropellerScript[] propellerScripts;
+
     [Header("Environment")]
     [Tooltip("Density of the air, standard is 1.225 kg/m^3 at sea level")]
     [SerializeField]
     private float airDensity = 1.225f;
     float currAltitude = 0f;
 
+    //the battery settings need to be set by the drone model individually, however flight time can be adjusted as needed
     [Header("Battery Settings")]
     [Tooltip("Battery capacity in mAh.")]
     [SerializeField]
@@ -83,27 +90,32 @@ public class DroneScript : MonoBehaviour
 
     [Tooltip("Battery discharge that you allow during the flight. As batteries can be damaged if fully discharged, it's common practice never to discharge them by more than 80%. In percentage.")]
     [SerializeField]
-    float batteryDischargePercentage = 80f;
+    float batteryMaxDischargePercentage = 80f;
 
     [Tooltip("Average current draw in Amps. Used to calculate battery draining. Per 1 propeller.")]
     [SerializeField]
-    float averageCurrentDraw = 0f;
+    float averageBatteryCurrentDraw = 0f;
 
     [Tooltip("For a battery warning at a certain Voltage. Per 1 cell.")]
     [SerializeField]
     float batteryWarningCellVoltage = 3.5f;
 
+    [Tooltip("Maximum possible flight time of the drone in minutes.")]
+    [SerializeField]
+    float maxFlightTimeMinutes;
+
+    float remainingFlightTimeMinutes;
+
+    [SerializeField]
+    float energy;
+
+    [SerializeField]
+    float currBatteryChargeWithSafetyLimit;
+
+    [SerializeField]
+    float currBatteryChargeOverall;
+
     public float currBatteryVoltage { get; private set; }
-
-    //calculating this based off of
-    [Tooltip("Estimated maximum flight time in minutes. Required to calculate the battery voltage drop during flight. It's an estimate that can be found on the internet per drone.")]
-    [SerializeField]
-    float estimatedFlightTimeMinutes;
-
-    [SerializeField]
-    float calculatedFlightTimeMinutes;
-
-    public float remainingFlightTimeMinutes { get; private set; }
 
     public enum FlightMode { Stabilized, Acrobatic }
 
@@ -111,21 +123,7 @@ public class DroneScript : MonoBehaviour
     [Header("Flight Mode")]
     private FlightMode stabilizationFlightMode;
 
-    [Header("Acrobatic Flight Mode Settings")]
-
-    [Tooltip("Array of the drone propellers")]
-    [SerializeField] 
-    GameObject[] propellers;
-    PropellerScript[] propellerScripts;
-
-    [Tooltip("Rotation speed multiplier for tilting (roll/pitch) the drone for fine-tuning.")]
-    [SerializeField]
-    float tiltAcrobaticRotationMultiplier = 1f;
-
-    [Tooltip("Rotation speed multiplier for yawing the drone for fine-tuning.")]
-    [SerializeField]
-    float yawAcrobaticRotationMultiplier = 1f;
-
+    [Header("Motor RPM Settings")]
     [Tooltip("Change in RPM. Per 1 propeller.")]
     [SerializeField]
     float deltaRPM;
@@ -147,6 +145,15 @@ public class DroneScript : MonoBehaviour
     float minRPM;
     float hoverRPM;
 
+    [Header("Acrobatic Flight Mode Settings")]
+    [Tooltip("Rotation speed multiplier for tilting (roll/pitch) the drone for fine-tuning.")]
+    [SerializeField]
+    float tiltAcrobaticRotationMultiplier = 1f;
+
+    [Tooltip("Rotation speed multiplier for yawing the drone for fine-tuning.")]
+    [SerializeField]
+    float yawAcrobaticRotationMultiplier = 1f;
+
     [Header("Stabilized Flight Mode Settings")]
     //stabilization settings 
     [Tooltip("Maximum pitch/roll angle for the propeller.")]
@@ -160,21 +167,6 @@ public class DroneScript : MonoBehaviour
     [Tooltip("Rotation speed multiplier for yawing the drone for fine-tuning.")]
     [SerializeField]
     float yawStabilizedRotationMultiplier = 1f;
-
-    [Tooltip("Thrust at which the drone is idle, so when throttle is all the way down. In Percentage of max thrust. Per 1 propeller.")]
-    [SerializeField]
-    float minThrustPercentage;
-
-    [Tooltip("Maximum possible thrust for the propeller. Per 1 propeller in Newtons.")]
-    [SerializeField]
-    float maxThrust;
-
-    [Tooltip("Thrust at which the drone hovers when throttle stick is at 50%. In Percentage of max thrust. Per 1 propeller.")]
-    [SerializeField]
-    float hoverThrustPercentage;
-
-    float minThrust;
-    float hoverThrust;
 
     void Awake()
     {
@@ -192,27 +184,38 @@ public class DroneScript : MonoBehaviour
         leftStickInputAxis.action.Enable();
         rightStickInputAxis.action.Enable();
         
-        averageCurrentDraw = (batteryCapacity/1000f)/estimatedFlightTimeMinutes;
-        remainingFlightTimeMinutes = estimatedFlightTimeMinutes;
+        //calculates max battery charge based off of the dischargePercentage
+        //irl this is set to conserve the battery, so it doesn't let you discharge it fully
+        float usableBatteryCapacity = batteryCapacity * (batteryMaxDischargePercentage / 100f);
+        currBatteryChargeWithSafetyLimit = usableBatteryCapacity;
+        currBatteryChargeOverall = batteryCapacity;
+        remainingFlightTimeMinutes = maxFlightTimeMinutes;
+
+        //the power shouldn't change based on the remaining flight time, otherwise the voltage drop would be much greater than expected, because the average didn't change
+        // remainingFlightTimeMinutes -= Time.deltaTime / 60f; // Convert seconds to minutes
+        // float power = energy/(remainingFlightTimeMinutes/60f); 
+
+        //calculates the average current draw per propeller with power using predetermined energy, maxFlightTime and nominal cell voltage
+        //before it wasn't calculated with power but from the battery capacity and flight time, which lead to the voltage drop not being realistic and dropping too fast
+        //calculates the electrical power in Watts, that is produced by the drone with it's motors based on the maximum flight time it has. It could also be calculated using a predetermined averageBatteryCurrentDraw.
+        float power = energy/(maxFlightTimeMinutes/60f);
+        //average current draw formula per propeller with power and nominal cell voltage
+        //could also be predefined so we wouldn't need to calculate it based on the max flight time, but this way we can adjust the flight time how we want it. Don't set it too low though.
+        averageBatteryCurrentDraw = power/(nominalCellVoltage * propellerScripts.Length);
+        Debug.Log("Average current draw per propeller: " + averageBatteryCurrentDraw + "A");
         originalMaxRPM = maxRPM;
     }
+
+    //tip for values (English to Slovak)
+    //current = prud (Ampers), voltage = napatie (Volts), power = vykon (Watts), energy = energia (Wh), capacity = kapacita (mAh), resistance = odpor (Ohms)
     void Update()
     {
         if (droneActive)
         {
-            remainingFlightTimeMinutes -= Time.deltaTime / 60f; // Convert seconds to minutes
-            if (remainingFlightTimeMinutes <= 0 || currBatteryVoltage/batteryCells <= minCellVoltage)
-            {
-                remainingFlightTimeMinutes = 0;
-                droneActive = false;
-                Debug.Log("Battery is fully discharged.");
-            }
-            CheckBatteryVoltage();
-            //update each frame cuz it needs to respond to the battery voltage dropping
+            CheckCellVoltage();
+            //update each frame cuz it needs to respond to the battery voltage dropping the maxRPM over time as battery runs out
             minRPM = minRPMPercentage/100 * maxRPM;
             hoverRPM = hoverRPMPercentage/100 * maxRPM;
-            minThrust = minThrustPercentage/100 * maxThrust;
-            hoverThrust = hoverThrustPercentage/100 * maxThrust;
             //tilt of the camera
             droneCamera.transform.localRotation = Quaternion.Euler(-cameraTilt, 0f, 0f);
             //changing of current input layout
@@ -254,6 +257,7 @@ public class DroneScript : MonoBehaviour
     //Stabilized flight mode applies same as acrobatic but rotates it using transform instead of torque (also disregards that during currRPM calculations)
     void FixedUpdate()
     {
+        // Debug.Log(GetBatteryPercentageWithBatterySafety() + "% battery remaining. Current battery voltage: " + currBatteryVoltage + "V");
         if(droneActive)
         {
             CalculateVoltageDrop();
@@ -261,7 +265,6 @@ public class DroneScript : MonoBehaviour
         }
         // Debug.Log("Current max RPM: " + maxRPM + " Current hover RPM: " + hoverRPM + " Current min RPM: " + minRPM);
     }
-
 
     void CalculateAndApplyCurrRPM()
     {
@@ -323,108 +326,79 @@ public class DroneScript : MonoBehaviour
         }
     }
 
-    // //Simplified version of drone physics without 4 propellers, just one thrust
-    // //The rotation is manipulated with transform over physics like in acrobatic flight mode because the previous version with PID and propeller RPM/thrust was not working correctly, most likely because of tiny errors and PID being too aggresive
-    // //Also the previous version was working with tilt/yaw but roll/combining of rotations caused a spinout
-    // void StabilizedFlightPhysics()
-    // {
-    //     // float finalThrust = 0f;
-    //     Quaternion targetRotation = Quaternion.Euler(pitchAxis * maxTiltAngle.x, transform.eulerAngles.y, -rollAxis * maxTiltAngle.z);
-    //     // Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
-    //     //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
-    //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
-    //     //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis
-    //     transform.Rotate(Vector3.up, yawAxis * yawStabilizedRotationMultiplier * Time.fixedDeltaTime, Space.World);
-    //     for (int i = 0; i < propellerScripts.Length; i++)
-    //     {
-    //         float thrust = hoverThrust + throttleAxis * (maxThrust - hoverThrust);
-    //         thrust = Mathf.Clamp(thrust, minThrust, maxThrust);
-    //         propellerScripts[i].ApplyPropellerForceStabilized(thrust);
-    //         // finalThrust += thrust;
-    //     }
-    //     // Debug.Log("Applying total stabilized thrust: " + finalThrust + "Max thrust: " + maxThrust * propellerScripts.Length);
-    // }
-
-    // void AcrobaticFlightPhysics()
-    // {
-    //     float pitchDelta = 0f;
-    //     float rollDelta = 0f;
-    //     float yawDelta = 0f;
-    //     pitchDelta = pitchAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
-    //     rollDelta = rollAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
-    //     yawDelta = yawAxis * deltaRPM * yawAcrobaticRotationMultiplier;
-    //     for (int i = 0; i < propellerScripts.Length; i++)
-    //     {
-    //         float currRPM = hoverRPM + throttleAxis * (maxRPM - hoverRPM);
-    //         //Adjust currRPM based on propeller position
-    //         switch (propellerScripts[i].GetPropellerPosition())
-    //         {
-    //             case PropellerScript.PropellerPosition.FrontLeft:
-    //                 currRPM = currRPM - pitchDelta + rollDelta;                 
-    //                 break;
-    //             case PropellerScript.PropellerPosition.FrontRight:
-    //                 currRPM = currRPM - pitchDelta - rollDelta;
-    //                 break;
-    //             case PropellerScript.PropellerPosition.BackLeft:   
-    //                 currRPM = currRPM + pitchDelta + rollDelta;
-    //                 break;
-    //             case PropellerScript.PropellerPosition.BackRight:
-    //                 currRPM = currRPM + pitchDelta - rollDelta;
-    //                 break;
-    //             default:
-    //                 break;
-    //         }     
-    //         // Adjust currRPM depending on the propeller rotation direction as well
-    //         int yawSign = (int)propellerScripts[i].GetPropellerRotation();
-    //         currRPM += yawDelta * yawSign;
-    //         currRPM = Mathf.Clamp(currRPM, minRPM, maxRPM);
-            
-    //     }
-    // }
-
-
-    //is calculated with a predetermined flight time that lowers the battery capacity
     void CalculateVoltageDrop()
     {
-        float maxBatteryCapacity = batteryCapacity * (batteryDischargePercentage / 100f);
-        Debug.Log("Max battery capacity for this flight: " + maxBatteryCapacity + "mAh");
-        averageCurrentDraw = (batteryCapacity/1000f)/remainingFlightTimeMinutes; 
-        Debug.Log("Average current draw per propeller: " + averageCurrentDraw + "A" + " Remaining flight time: " + remainingFlightTimeMinutes + " minutes");
-        float totalCurrentDraw = averageCurrentDraw * propellerScripts.Length;
-        calculatedFlightTimeMinutes = ((batteryCapacity/1000f) * batteryDischargePercentage) / totalCurrentDraw; 
-        Debug.Log("Calculated flight time: " + calculatedFlightTimeMinutes + " minutes" + " Total current draw: " + totalCurrentDraw + "A");
-        float voltageDrop = totalCurrentDraw * internalBatteryResistance; // Ohm's law
-        Debug.Log("Voltage drop: " + voltageDrop + "V" + " Total current draw: " + totalCurrentDraw + "A" + " Average current draw per propeller: " + averageCurrentDraw + "A");
+        // total current draw is also affected by the throttle input, clamped so it changes based on throttle, not entirely realistic though because this change should not be linear (higher throttle can lead to even higher current draw)
+        float batteryCurrentDraw = averageBatteryCurrentDraw * Mathf.Clamp(1 + throttleAxis, 0.5f, 1.5f);
+        currBatteryChargeWithSafetyLimit -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f); 
+        currBatteryChargeWithSafetyLimit = Mathf.Clamp(currBatteryChargeWithSafetyLimit, 0, batteryCapacity);
+        currBatteryChargeOverall -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f);
+        currBatteryChargeOverall = Mathf.Clamp(currBatteryChargeOverall, 0, batteryCapacity);
+        //the currBatteryCharge will also affect the internal resistance of the battery, with added resistance that increases as the battery runs out of charge
+        float voltageDrop = batteryCurrentDraw * internalBatteryResistance * CalculateIncreaseInBatteryResistance(); // Ohm's law
+        // Debug.Log("Voltage drop: " + voltageDrop + "V" + " Total current draw: " + batteryCurrentDraw + "A" + " Average current draw per propeller: " + averageCellCurrentDraw + "A");
         ApplyVoltageDropToMaxRPM(voltageDrop);
     }
 
-    // //for calculating C rate using battery specifications and current draw, converting from mAh to Ah and then to A, also taking into account the battery discharge percentage to get the usable capacity of the battery for the flight
-    // void CalculateCRate()
-    // {
-    //     float maxBatteryCapacity = batteryCapacity * (batteryDischargePercentage / 100f);
-    //     averageCurrentDraw = (batteryCapacity/1000f)/remainingFlightTimeMinutes; 
-    //     float totalCurrentDraw = averageCurrentDraw * propellerScripts.Length;
-    //     cRate = totalCurrentDraw / maxBatteryCapacity; // C rate is the ratio of the current draw to the battery capacity, so it gives an indication of how fast the battery is being discharged. A higher C rate means a faster discharge, which can lead to shorter flight times and potential damage to the battery if it exceeds its maximum C rating.
-    // }
-
-    //changes maxRPM, so the overall power of the drone will be lower because of the voltage drop  
+    //changes maxRPM and currBatteryVoltage, so the overall power of the drone will be lower because of the voltage drop  
     void ApplyVoltageDropToMaxRPM(float _voltageDrop)
     {
-        currBatteryVoltage = (batteryCells * maxCellVoltage) - _voltageDrop;
+        currBatteryVoltage = maxCellVoltage * batteryCells - _voltageDrop;
+        Debug.Log("Current battery voltage: " + currBatteryVoltage + "V" + " Voltage drop: " + _voltageDrop + "V");
+        currBatteryVoltage = Mathf.Clamp(currBatteryVoltage, 0, maxCellVoltage * batteryCells);
         maxRPM = KV * currBatteryVoltage * propellerLoadedEfficiency/100f; // The voltage drop reduces the effective voltage available to the motors, which in turn reduces the maximum RPM they can achieve.
     }
 
-    //checks the battery voltage for debugging purposes for now
-    void CheckBatteryVoltage()
+    void CheckCellVoltage()
     {
-        float currentCellVoltage = (batteryCells * maxCellVoltage) - (averageCurrentDraw * internalBatteryResistance);
-        if (currentCellVoltage <= minCellVoltage)
+        if (currBatteryVoltage / batteryCells <= batteryWarningCellVoltage)
         {
-            Debug.Log("Battery voltage is critically low: " + currentCellVoltage + "V per cell. Please land the drone immediately.");
-        }else if (currentCellVoltage <= batteryWarningCellVoltage)
-        {
-            Debug.Log("Battery voltage is low: " + currentCellVoltage + "V per cell. Please land the drone soon.");
+            Debug.LogWarning("Battery cell voltage is low: " + (currBatteryVoltage / batteryCells) + "V per cell. Please land the drone soon.");
         }
-        Debug.Log("Current battery voltage: " + currentCellVoltage + "V per cell.");
     }
+
+    //safety battery percentage limit is for setting a warning for the user
+    public float GetBatteryPercentageWithBatterySafety()
+    {
+        return (currBatteryChargeWithSafetyLimit / (batteryCapacity * (batteryMaxDischargePercentage / 100f))) * 100f;
+    }
+
+    //overall battery percentage without the safety limit for calculating internal battery resistance
+    public float GetBatteryPercentageOverall()
+    {
+        return (currBatteryChargeOverall / batteryCapacity) * 100f;
+    }
+
+    //calculates increase in battery resistance based on the remaining battery charge, because the lower the charge the higher the internal resistance
+    //change the values based on testing
+    //also include temperature in the future, because it also affects it
+    float CalculateIncreaseInBatteryResistance()
+    {
+        switch(GetBatteryPercentageOverall())
+        {
+            case 100f:
+                return 1f;
+            case > 90f:
+                return 1.10f;
+            case > 80f:
+                return 1.15f; 
+            case > 70f:
+                return 1.20f;
+            case > 60f:
+                return 1.25f; 
+            case > 50f:
+                return 1.50f;
+            case > 40f:
+                return 1.75f; 
+            case > 30f:
+                return 2f;
+            case > 20f:
+                return 2.5f; 
+            case > 10f:
+                return 3f; 
+            default:
+                return 1f; 
+        }
+    }
+
 }

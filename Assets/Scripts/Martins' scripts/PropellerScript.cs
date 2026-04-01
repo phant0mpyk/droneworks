@@ -49,31 +49,6 @@ public class PropellerScript: MonoBehaviour
         
     }
 
-    // // Applies the calculated thrust and torque to the drone at the position of the propeller based on the current RPM of the propeller and the air density
-    // public void ApplyPropellerForceAcrobatic(float _currRPM, float _airDensity)
-    // {        
-    //     float thrust = thrustCoefficient * _airDensity * Mathf.Pow(_currRPM / 60f, 2) * Mathf.Pow(propellerDiameter, 4);
-    //     float torqueStrength = thrust * propellerDiameter * torqueCoefficient * torqueMultiplier; 
-    //     if(droneRigidbody != null)
-    //     {
-    //         droneRigidbody.AddForceAtPosition(propellerTransform.up * thrust, propellerTransform.position);
-    //         droneRigidbody.AddTorque(droneRigidbody.transform.up * torqueStrength * yawSign);
-    //     }else{
-    //         Debug.LogError("Drone Rigidbody not found for propeller: " + position);
-    //     }
-    // }
-
-    // //Applies simplified thrust at the propellers position.
-    // public void ApplyPropellerForceStabilized(float _currThrust)
-    // {   
-    //     if(droneRigidbody != null)
-    //     {
-    //         droneRigidbody.AddForceAtPosition(propellerTransform.up * _currThrust, propellerTransform.position);
-    //     }else{
-    //         Debug.LogError("Drone Rigidbody not found for propeller: " + position);
-    //     }
-    // }
-
     public void ApplyPropellerForce(float _currRPM, float _airDensity, DroneScript.FlightMode _flightMode)
     {
         float thrust = thrustCoefficient * _airDensity * Mathf.Pow(Mathf.Round(_currRPM) / 60f, 2) * Mathf.Pow(propellerDiameter, 4);

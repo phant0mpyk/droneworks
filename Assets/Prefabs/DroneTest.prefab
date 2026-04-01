@@ -677,38 +677,37 @@ MonoBehaviour:
   rightStickInputAxis: {fileID: 3503887548239233130, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
   droneCamera: {fileID: 4516501671408747888}
   cameraTilt: 10
-  airDensity: 1.225
-  batteryCapacity: 2250
-  internalBatteryResistance: 0.08
-  KV: 2800
-  propellerLoadedEfficiency: 80
-  batteryCells: 2
-  maxCellVoltage: 4.2
-  nominalCellVoltage: 3.7
-  minCellVoltage: 3
-  batteryDischargePercentage: 80
-  averageCurrentDraw: 10
-  batteryWarningCellVoltage: 3.5
-  estimatedFlightTimeMinutes: 1.5
-  calculatedFlightTimeMinutes: 0
-  stabilizationFlightMode: 0
   propellers:
   - {fileID: 5810521259402606288}
   - {fileID: 5041830162222483905}
   - {fileID: 4851915496724469247}
   - {fileID: 7301924430585213937}
-  tiltAcrobaticRotationMultiplier: 10
-  yawAcrobaticRotationMultiplier: 10
+  airDensity: 1.225
+  batteryCapacity: 2453
+  internalBatteryResistance: 0.02
+  KV: 1500
+  propellerLoadedEfficiency: 80
+  batteryCells: 3
+  maxCellVoltage: 4.2
+  nominalCellVoltage: 3.7
+  minCellVoltage: 3
+  batteryMaxDischargePercentage: 80
+  averageBatteryCurrentDraw: 0
+  batteryWarningCellVoltage: 3.5
+  maxFlightTimeMinutes: 5
+  energy: 36.5
+  currBatteryChargeWithSafetyLimit: 0
+  currBatteryChargeOverall: 0
+  stabilizationFlightMode: 0
   deltaRPM: 460
   minRPMPercentage: 5
   maxRPM: 16928
   hoverRPMPercentage: 52.5
+  tiltAcrobaticRotationMultiplier: 10
+  yawAcrobaticRotationMultiplier: 10
   maxTiltAngle: {x: 30, y: 0, z: 30}
   tiltStabilizedRotationMultiplier: 2.5
   yawStabilizedRotationMultiplier: 100
-  minThrustPercentage: 5
-  maxThrust: 2.15
-  hoverThrustPercentage: 28
 --- !u!114 &6775227532064017982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,7 +730,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7474544466922042017}
   serializedVersion: 4
-  m_Mass: 0.246
+  m_Mass: 0.248
   m_Drag: 0.5
   m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
