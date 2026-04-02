@@ -42,7 +42,7 @@ public class CargoScript : MonoBehaviour
         if (isAttached) return;
 
         Rigidbody targetRb = other.attachedRigidbody;
-        if (targetRb != null && (other.CompareTag("Player") || other.GetComponent<DroneScript>()))
+        if (targetRb != null && (other.CompareTag("Player") || other.GetComponent<FlightController>()))
         {
             AttachToDrone(targetRb);
         }

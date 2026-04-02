@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class PropellerScript: MonoBehaviour
+public class DronePropellerScript: MonoBehaviour
 {
     public enum PropellerPosition { FrontLeft, FrontRight, BackLeft, BackRight }
     public enum RotationDirection { Clockwise = -1, CounterClockwise = 1 }
@@ -49,7 +49,7 @@ public class PropellerScript: MonoBehaviour
         
     }
 
-    public void ApplyPropellerForce(float _currRPM, float _airDensity, DroneScript.FlightMode _flightMode)
+    public void ApplyPropellerForce(float _currRPM, float _airDensity, FlightController.FlightMode _flightMode)
     {
         float thrust = thrustCoefficient * _airDensity * Mathf.Pow(Mathf.Round(_currRPM) / 60f, 2) * Mathf.Pow(propellerDiameter, 4);
         float torqueStrength = thrust * propellerDiameter * torqueCoefficient * torqueMultiplier;
@@ -58,10 +58,10 @@ public class PropellerScript: MonoBehaviour
             droneRigidbody.AddForceAtPosition(propellerTransform.up * thrust, propellerTransform.position);
             switch (_flightMode)
             {
-                case DroneScript.FlightMode.Acrobatic:
+                case FlightController.FlightMode.Acrobatic:
                     droneRigidbody.AddTorque(droneRigidbody.transform.up * torqueStrength * yawSign);
                     break;
-                case DroneScript.FlightMode.Stabilized:
+                case FlightController.FlightMode.Stabilized:
                     // No additional torque applied in stabilized mode, because it already did it with the entire drone itself using transform rotation
                     break;
                 default:
