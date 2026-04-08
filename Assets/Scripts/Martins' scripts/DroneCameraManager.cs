@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class DroneCameraManager : MonoBehaviour
 {
     [Header("Cameras")]
     [SerializeField]
@@ -26,7 +27,6 @@ public class CameraManager : MonoBehaviour
         SetCamera(droneScript.GetCurrFlightMode());
         droneFrontCamera?.gameObject.SetActive(true);
         droneBottomCamera?.gameObject.SetActive(false);
-        ToggleCameraPosition(currCameraPosition);
     }
 
     // Update is called once per frame
@@ -58,21 +58,21 @@ public class CameraManager : MonoBehaviour
         }   
     }
 
-    public void ToggleCameraPosition(CameraPosition _cameraPosition)
+    public void ToggleCameraPosition()
     {
-        switch (_cameraPosition)
+        switch (currCameraPosition)
         {
             case CameraPosition.Front:
-                droneFrontCamera?.gameObject.SetActive(true);
-                droneBottomCamera?.gameObject.SetActive(false);
-                break;
-            case CameraPosition.Bottom:
+                currCameraPosition = CameraPosition.Bottom;
                 droneFrontCamera?.gameObject.SetActive(false);
                 droneBottomCamera?.gameObject.SetActive(true);
                 break;
-            default:
+            case CameraPosition.Bottom:
+            currCameraPosition = CameraPosition.Front;
                 droneFrontCamera?.gameObject.SetActive(true);
                 droneBottomCamera?.gameObject.SetActive(false);
+                break;
+            default:
                 break;
         }
     }

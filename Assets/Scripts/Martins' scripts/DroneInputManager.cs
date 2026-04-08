@@ -3,6 +3,9 @@ using UnityEngine.InputSystem;
 
 public class DroneInputManager : MonoBehaviour
 {
+    [SerializeField]
+    FlightController flightController;
+
     float throttleAxis;
     float pitchAxis; 
     float yawAxis; 
@@ -16,6 +19,9 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField] 
     InputActionReference flyArrows;
 
+    [SerializeField]
+    InputActionReference toggleCameraKeyboard;
+
     bool keyboardInputActive = false;
     [Header("Controller")]
     [SerializeField]
@@ -23,6 +29,9 @@ public class DroneInputManager : MonoBehaviour
 
     [SerializeField]
     InputActionReference rightStickInputAxis;
+
+    [SerializeField]
+    InputActionReference toggleCameraController;
 
     bool controllerInputActive = false; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +43,10 @@ public class DroneInputManager : MonoBehaviour
         flyArrows.action.Enable();
         leftStickInputAxis.action.Enable();
         rightStickInputAxis.action.Enable();
+        toggleCameraKeyboard.action.Enable();
+        toggleCameraController.action.Enable();
+        toggleCameraController.action.performed += CameraToggle;
+        toggleCameraKeyboard.action.performed += CameraToggle;
     }
 
     // Update is called once per frame
@@ -97,5 +110,10 @@ public class DroneInputManager : MonoBehaviour
     public float GetRollAxis()
     {
         return rollAxis;
+    }
+
+    private void CameraToggle(InputAction.CallbackContext context)
+    {
+        flightController.OnCameraToggle();
     }
 }

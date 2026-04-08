@@ -21,6 +21,10 @@ public class FlightController : MonoBehaviour
     [SerializeField]
     DroneBatteryManager battery;
 
+    [SerializeField]
+    DroneCameraManager cameraManager;
+
+
     Rigidbody droneRigidbody;
 
     bool droneActive = false;
@@ -203,5 +207,10 @@ public class FlightController : MonoBehaviour
     public int GetPropellerCount()
     {
         return propellerScripts.Length;
+    }
+
+    public void OnCameraToggle()
+    {
+        cameraManager.ToggleCameraPosition();
     }
 }
