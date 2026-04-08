@@ -186,7 +186,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 0.119
+  propellerDiameterMeter: 0.1524
 --- !u!1 &2002486062700562990
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 0.119
+  propellerDiameterMeter: 0.1524
 --- !u!1 &2991164824301586737
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,8 +413,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b53b9103ded6545a736fd56942bbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droneScript: {fileID: 0}
+  batteryScript: {fileID: 0}
   batteryCellVoltageText: {fileID: 0}
-  flightTimeText: {fileID: 0}
+  timePassedText: {fileID: 0}
 --- !u!54 &1338260013907687678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -634,7 +636,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 0.119
+  propellerDiameterMeter: 0.1524
 --- !u!1 &4941326479523512847
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +813,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 0.119
+  propellerDiameterMeter: 0.1524
 --- !u!1 &5444006668031596195
 GameObject:
   m_ObjectHideFlags: 0

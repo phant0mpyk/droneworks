@@ -126,7 +126,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 1.486
+  propellerDiameterMeter: 1.375
 --- !u!1 &1827721743952330805
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 1.486
+  propellerDiameterMeter: 1.375
 --- !u!1 &5660670222718470659
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 1.486
+  propellerDiameterMeter: 1.375
 --- !u!1 &8296639645340301421
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ MonoBehaviour:
   thrustCoefficient: 0.11
   torqueCoefficient: 0.049
   torqueMultiplier: 10
-  propellerDiameter: 1.486
+  propellerDiameterMeter: 1.375
 --- !u!1001 &1024003643694788568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -519,6 +519,10 @@ PrefabInstance:
     - target: {fileID: 441699924044276619, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: propellerDiameter
       value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 441699924044276619, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: propellerDiameterMeter
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 1338260013907687678, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Mass
@@ -573,20 +577,60 @@ PrefabInstance:
       value: DroneDJIFlyCart30
       objectReference: {fileID: 0}
     - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: KV
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: energy
+      value: 1984.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: batteryCells
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: batteryCapacity
+      value: 38000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: maxFlightTimeMinutes
       value: 29
       objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: droneScript
+      value: 
+      objectReference: {fileID: 2797042497696819970}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: batteryScript
+      value: 
+      objectReference: {fileID: 4114613324468280518}
     - target: {fileID: 5157292769408053533, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: propellerDiameter
       value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157292769408053533, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: propellerDiameterMeter
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 6432765099442639754, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: propellerDiameter
       value: 1.486
       objectReference: {fileID: 0}
+    - target: {fileID: 6432765099442639754, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: propellerDiameterMeter
+      value: 1.375
+      objectReference: {fileID: 0}
     - target: {fileID: 6467321524898338933, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: propellerDiameter
       value: 1.486
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467321524898338933, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: propellerDiameterMeter
+      value: 1.375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -605,6 +649,28 @@ PrefabInstance:
       addedObject: {fileID: 8295853949133487611}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+--- !u!114 &2797042497696819970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_PrefabInstance: {fileID: 1024003643694788568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eccf32da004ac2945b4466a782e2eb50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4114613324468280518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_PrefabInstance: {fileID: 1024003643694788568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd06dd07c256a7d41bd76dc6da2e6859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8686909559114803553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8555686846881433273, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
