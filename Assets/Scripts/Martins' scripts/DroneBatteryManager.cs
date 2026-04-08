@@ -56,6 +56,7 @@ public class DroneBatteryManager : MonoBehaviour
 
     float remainingFlightTimeMinutes;
 
+    [Tooltip("Energy in Wh. Per 1 battery.")]
     [SerializeField]
     float energy;
 
@@ -88,10 +89,11 @@ public class DroneBatteryManager : MonoBehaviour
         //calculates the average current draw per propeller with power using predetermined energy, maxFlightTime and nominal cell voltage
         //before it wasn't calculated with power but from the battery capacity and flight time, which lead to the voltage drop not being realistic and dropping too fast
         //calculates the electrical power in Watts, that is produced by the drone with it's motors based on the maximum flight time it has. 
-        float power = energy/(maxFlightTimeMinutes/60f);
+        // float power = energy/(maxFlightTimeMinutes/60f);
         //average current draw formula per propeller with power and nominal cell voltage
         //could also be predefined so we wouldn't need to calculate it based on the max flight time, but this way we can adjust the flight time how we want it. Don't set it too low though.
-        averageBatteryCurrentDraw = power/(nominalCellVoltage * flightController.GetPropellerCount());
+        // averageBatteryCurrentDraw = power/(nominalCellVoltage * flightController.GetPropellerCount());
+        averageBatteryCurrentDraw = 25;
         Debug.Log("Average current draw per propeller: " + averageBatteryCurrentDraw + "A");
     }
 
@@ -103,9 +105,9 @@ public class DroneBatteryManager : MonoBehaviour
     public float CalculateVoltageDrop(float _throttleAxis)
     {
         // total current draw is also affected by the throttle input, clamped so it changes based on throttle, not entirely realistic though because this change should not be linear (higher throttle can lead to even higher current draw)
-        float batteryCurrentDraw = averageBatteryCurrentDraw * Mathf.Clamp(1 + _throttleAxis, 0.5f, 1.5f);
+        float batteryCurrentDraw = averageBatteryCurrentDraw * Mathf.Clamp(1 + _throttleAxis, 0.75f, 1.25f);
         currBatteryChargeWithSafetyLimit -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f); 
-        currBatteryChargeWithSafetyLimit = Mathf.Clamp(currBatteryChargeWithSafetyLimit, 0, batteryCapacity);
+        currBatteryChargeWithSafetyLimit = Mathf.Clamp(GetBatteryPercentageOverall(), 0, batteryCapacity);
         currBatteryChargeOverall -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f);
         currBatteryChargeOverall = Mathf.Clamp(currBatteryChargeOverall, 0, batteryCapacity);
         //the currBatteryCharge will also affect the internal resistance of the battery, with added resistance that increases as the battery runs out of charge
@@ -144,6 +146,11 @@ public class DroneBatteryManager : MonoBehaviour
         return (currBatteryChargeOverall / batteryCapacity) * 100f;
     }
 
+    public float GetRemainingFlightTime()
+    {
+        return remainingFlightTimeMinutes;
+    }
+
     //calculates increase in battery resistance based on the remaining battery charge, because the lower the charge the higher the internal resistance
     //change the values based on testing
     //also include temperature and wind applied in the future, because it also affects it
@@ -154,21 +161,21 @@ public class DroneBatteryManager : MonoBehaviour
             case 100f:
                 return 1f;
             case > 90f:
-                return 1.10f;
+                return 1.05f;
             case > 80f:
-                return 1.15f; 
+                return 1.10f; 
             case > 70f:
-                return 1.20f;
+                return 1.15f;
             case > 60f:
                 return 1.25f; 
             case > 50f:
-                return 1.50f;
+                return 1.35f;
             case > 40f:
-                return 1.75f; 
+                return 1.50f; 
             case > 30f:
-                return 2f;
+                return 1.70f;
             case > 20f:
-                return 2.5f; 
+                return 2f; 
             case > 10f:
                 return 3f; 
             default:

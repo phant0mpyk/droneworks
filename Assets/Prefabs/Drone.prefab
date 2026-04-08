@@ -685,7 +685,6 @@ MonoBehaviour:
   droneAcrobaticFrontCameraTilt: 10
   droneStabilizedFrontCameraTilt: 15
   droneBottomCamera: {fileID: 8930069352759281480}
-  currCameraPosition: 0
 --- !u!1 &5267247683896991157
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,9 +27,9 @@ public class DronePropellerScript: MonoBehaviour
     [SerializeField]
     float torqueMultiplier;
 
-    [Tooltip("Diameter of the propeller.")]
+    [Tooltip("Diameter of the propeller. In Meters")]
     [SerializeField]
-    float propellerDiameter;
+    float propellerDiameterMeter;
 
     Transform propellerTransform;
 
@@ -51,8 +51,8 @@ public class DronePropellerScript: MonoBehaviour
 
     public void ApplyPropellerForce(float _currRPM, float _airDensity, FlightController.FlightMode _flightMode)
     {
-        float thrust = thrustCoefficient * _airDensity * Mathf.Pow(Mathf.Round(_currRPM) / 60f, 2) * Mathf.Pow(propellerDiameter, 4);
-        float torqueStrength = thrust * propellerDiameter * torqueCoefficient * torqueMultiplier;
+        float thrust = thrustCoefficient * _airDensity * Mathf.Pow(Mathf.Round(_currRPM) / 60f, 2) * Mathf.Pow(propellerDiameterMeter, 4);
+        float torqueStrength = thrust * propellerDiameterMeter * torqueCoefficient * torqueMultiplier;
         if(droneRigidbody != null)
         {
             droneRigidbody.AddForceAtPosition(propellerTransform.up * thrust, propellerTransform.position);

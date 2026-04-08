@@ -3,7 +3,6 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [Header("Cameras")]
-    [Space(1)]
     [SerializeField]
     Camera droneFrontCamera;
 
@@ -19,8 +18,7 @@ public class CameraManager : MonoBehaviour
     Camera droneBottomCamera;  
 
     public enum CameraPosition { Front, Bottom }
-    [SerializeField]
-    CameraPosition currCameraPosition;
+    CameraPosition currCameraPosition = CameraPosition.Front;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
