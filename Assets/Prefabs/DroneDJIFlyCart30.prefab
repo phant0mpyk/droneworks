@@ -530,19 +530,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1212
+      value: 377.042
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22
+      value: 300.854
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1599
+      value: 313.79086
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.20637505
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -550,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.978473
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -562,7 +562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -156.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -571,6 +571,14 @@ PrefabInstance:
     - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: flightMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: yawAcrobaticRotationMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: tiltAcrobaticRotationMultiplier
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Name
@@ -598,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: droneScript

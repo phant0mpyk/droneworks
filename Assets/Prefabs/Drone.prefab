@@ -381,8 +381,8 @@ MonoBehaviour:
   minRPMPercentage: 5
   maxRPM: 16928
   hoverRPMPercentage: 52.5
-  tiltAcrobaticRotationMultiplier: 10
-  yawAcrobaticRotationMultiplier: 10
+  tiltAcrobaticRotationMultiplier: 1
+  yawAcrobaticRotationMultiplier: 1
   maxTiltAngle: {x: 30, y: 0, z: 30}
   tiltStabilizedRotationMultiplier: 2.5
   yawStabilizedRotationMultiplier: 100

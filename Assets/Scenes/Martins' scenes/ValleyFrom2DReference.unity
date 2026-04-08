@@ -411,10 +411,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneDJIFlyCart30
       objectReference: {fileID: 0}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
