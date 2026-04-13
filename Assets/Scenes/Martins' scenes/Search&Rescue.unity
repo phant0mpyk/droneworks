@@ -548,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2797042497696819970, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
       propertyPath: flightMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2861823622920660713, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
       propertyPath: m_Name
