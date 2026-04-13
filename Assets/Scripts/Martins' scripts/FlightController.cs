@@ -213,4 +213,18 @@ public class FlightController : MonoBehaviour
     {
         cameraManager.ToggleCameraPosition();
     }
+
+    public void RotateGimbalUp()
+    {
+        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Up);
+    }
+    public void RotateGimbalDown()
+    {
+        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Down);
+    }
+
+    public void RotateGimbalNone()
+    {
+        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.None);
+    }
 }

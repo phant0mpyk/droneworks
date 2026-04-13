@@ -19,12 +19,33 @@ public class DroneCameraManager : MonoBehaviour
     Camera droneBottomCamera;  
 
     public enum CameraPosition { Front, Bottom }
+
+    [SerializeField]
+    Vector2 cameraGimbalRotationCap;
     CameraPosition currCameraPosition = CameraPosition.Front;
+    public enum CameraGimbalRotationDirection {Up = 1, Down = -1, None = 0};
+    CameraGimbalRotationDirection currCameraGimbalRotationDirection = CameraGimbalRotationDirection.None;
+
+    float currGimbalAngle;
+
+    [SerializeField]
+    float cameraGimbalRotationSpeed = 5f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         FlightController droneScript = GetComponentInParent<FlightController>();
-        SetCamera(droneScript.GetCurrFlightMode());
+        switch (droneScript.GetCurrFlightMode())
+        {
+            case FlightController.FlightMode.Acrobatic:
+                SetCamera(FlightController.FlightMode.Acrobatic);
+                currGimbalAngle = droneAcrobaticFrontCameraTilt;
+                break;
+            case FlightController.FlightMode.Stabilized:
+                SetCamera(FlightController.FlightMode.Stabilized);
+                currGimbalAngle = -droneStabilizedFrontCameraTilt;
+                break;
+        }
         droneFrontCamera?.gameObject.SetActive(true);
         droneBottomCamera?.gameObject.SetActive(false);
     }
@@ -68,12 +89,20 @@ public class DroneCameraManager : MonoBehaviour
                 droneBottomCamera?.gameObject.SetActive(true);
                 break;
             case CameraPosition.Bottom:
-            currCameraPosition = CameraPosition.Front;
+                currCameraPosition = CameraPosition.Front;
                 droneFrontCamera?.gameObject.SetActive(true);
                 droneBottomCamera?.gameObject.SetActive(false);
                 break;
             default:
                 break;
         }
+    }
+
+    public void RotateCameraGimbal(CameraGimbalRotationDirection _rotationDirection)
+    {
+        currCameraGimbalRotationDirection = _rotationDirection;
+        currGimbalAngle += (int)currCameraGimbalRotationDirection * cameraGimbalRotationSpeed * Time.deltaTime;
+        currGimbalAngle = Mathf.Clamp(currGimbalAngle, cameraGimbalRotationCap.x,cameraGimbalRotationCap.y);
+        droneFrontCamera.gameObject.transform.localRotation = Quaternion.Euler(-currGimbalAngle,0,0);
     }
 }

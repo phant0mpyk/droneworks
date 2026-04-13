@@ -494,6 +494,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: cameraGimbalRotationCap.x
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: cameraGimbalRotationCap.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: cameraGimbalRotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.7
@@ -534,10 +546,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2797042497696819970, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: flightMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2861823622920660713, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
       propertyPath: m_Name
       value: DroneDJIFlyCart30
       objectReference: {fileID: 0}
+    - target: {fileID: 4153528328783192103, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: rotateControllerGimbalUp
+      value: 
+      objectReference: {fileID: 2397272684899367043, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4153528328783192103, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
+      propertyPath: rotateControllerGimbalDown
+      value: 
+      objectReference: {fileID: -2183099883301340956, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

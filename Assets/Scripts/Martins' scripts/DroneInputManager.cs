@@ -33,10 +33,21 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField]
     InputActionReference toggleCameraController;
 
+    [SerializeField]
+    InputActionReference rotateControllerGimbalUp;
+
+    [SerializeField]
+    InputActionReference rotateControllerGimbalDown;
+
     bool controllerInputActive = false; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
+    {
+
+    }
+
+    void Start()
     {
         //enable the input actions, because two of them at the same time cancelled eachother
         flyWASD.action.Enable();
@@ -45,6 +56,8 @@ public class DroneInputManager : MonoBehaviour
         rightStickInputAxis.action.Enable();
         toggleCameraKeyboard.action.Enable();
         toggleCameraController.action.Enable();
+        rotateControllerGimbalUp.action.Enable();
+        rotateControllerGimbalDown.action.Enable();
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
     }
@@ -81,6 +94,9 @@ public class DroneInputManager : MonoBehaviour
             yawAxis = flyLeftStickInput.x;
             pitchAxis = flyRightStickInput.y;
             rollAxis = flyRightStickInput.x;
+            //rotation only allowed for controller, because it's a feature on the dji controller
+            //also it might be too much for the keyboard drone, since it's moves are very erratic, so there will only be toggle with that one
+            GimbalRotation();
         }else if (keyboardInputActive)
         {
             Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
@@ -115,5 +131,18 @@ public class DroneInputManager : MonoBehaviour
     private void CameraToggle(InputAction.CallbackContext context)
     {
         flightController.OnCameraToggle();
+    }
+
+    private void GimbalRotation()
+    {
+            if (rotateControllerGimbalUp.action.IsPressed())
+            {
+                Debug.Log("UP");
+                flightController.RotateGimbalUp();
+            }else if(rotateControllerGimbalDown.action.IsPressed())
+            {
+                Debug.Log("Down");
+                flightController.RotateGimbalDown();
+            }
     }
 }
