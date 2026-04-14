@@ -17,6 +17,7 @@ public class CargoScript : MonoBehaviour
     public bool isAttached = false; 
     private float originalDroneMass;
     private Collider cargoPhysicalCollider;
+    public static CargoScript Instance;
 
     void Awake()
     {
@@ -31,9 +32,12 @@ public class CargoScript : MonoBehaviour
 
     void Update()
     {
+        if (isAttached) Instance = this;
+
         if (isAttached && dropAction.action.WasPressedThisFrame())
         {
             DetachFromDrone();
+            Instance = null;
         }
     }
 
