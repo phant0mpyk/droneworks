@@ -530,15 +530,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 377.042
+      value: -35.7
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 300.854
+      value: 256.9
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 313.79086
+      value: -456.1
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -605,17 +605,49 @@ PrefabInstance:
       value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: speedText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: compassDisk
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: droneScript
       value: 
       objectReference: {fileID: 2797042497696819970}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: headingText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: horizonLine
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: batteryScript
       value: 
       objectReference: {fileID: 4114613324468280518}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: timePassedText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: altitudeAGLText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: altitudeASLText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: cargoWeightText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: batteryCellVoltageText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5157292769408053533, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: propellerDiameter
       value: 1.486

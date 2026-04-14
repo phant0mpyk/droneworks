@@ -405,6 +405,8 @@ MonoBehaviour:
   leftStickInputAxis: {fileID: 6883144049890311571, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
   rightStickInputAxis: {fileID: 3503887548239233130, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
   toggleCameraController: {fileID: 5639357399304967394, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  rotateControllerGimbalUp: {fileID: 2397272684899367043, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+  rotateControllerGimbalDown: {fileID: -2183099883301340956, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
 --- !u!114 &4699556527386056234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,7 +414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2991164824301586737}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0b53b9103ded6545a736fd56942bbdd, type: 3}
   m_Name: 
@@ -421,6 +423,18 @@ MonoBehaviour:
   batteryScript: {fileID: 0}
   batteryCellVoltageText: {fileID: 0}
   timePassedText: {fileID: 0}
+  horizonLine: {fileID: 0}
+  pitchSensitivity: 5
+  cargoWeightText: {fileID: 0}
+  altitudeASLText: {fileID: 0}
+  altitudeAGLText: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  compassDisk: {fileID: 0}
+  headingText: {fileID: 0}
+  speedText: {fileID: 0}
+  droneRigidbody: {fileID: 1338260013907687678}
 --- !u!54 &1338260013907687678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -691,6 +705,8 @@ MonoBehaviour:
   droneAcrobaticFrontCameraTilt: 10
   droneStabilizedFrontCameraTilt: 15
   droneBottomCamera: {fileID: 8930069352759281480}
+  cameraGimbalRotationCap: {x: -60, y: 30}
+  cameraGimbalRotationSpeed: 10
 --- !u!1 &5267247683896991157
 GameObject:
   m_ObjectHideFlags: 0

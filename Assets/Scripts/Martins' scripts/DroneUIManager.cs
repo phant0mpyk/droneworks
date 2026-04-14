@@ -79,7 +79,7 @@ public class DroneUIManager : MonoBehaviour
     }
     void UpdateBatteryUI()
     {
-        float vPerCell = batteryScript.currBatteryVoltage / 14f;
+        float vPerCell = batteryScript.currBatteryVoltage / batteryScript.GetBatteryCells();
         int percentage = Mathf.RoundToInt(batteryScript.GetBatteryPercentageOverall());
         batteryCellVoltageText.text = $"{percentage}% ({vPerCell:F2}V per cell)";
     }
@@ -91,7 +91,7 @@ public class DroneUIManager : MonoBehaviour
         compassDisk.localRotation = Quaternion.Euler(0, 0, heading);
         if (headingText != null)
         {
-            headingText.text = $"{Mathf.RoundToInt(heading)}°";
+            headingText.text = $"{Mathf.RoundToInt(heading)}ï¿½";
         }
     }
 

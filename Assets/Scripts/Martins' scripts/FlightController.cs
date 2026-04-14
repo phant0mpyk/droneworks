@@ -183,6 +183,7 @@ public class FlightController : MonoBehaviour
                 {
                     float currRPM = hoverRPM + _throttleAxis * (maxRPM - hoverRPM);
                     currRPM = Mathf.Clamp(currRPM, minRPM, maxRPM);
+                    Debug.Log(propellerScripts[i]);
                     propellerScripts[i].ApplyPropellerForce(currRPM, airDensity, flightMode);
                 }
                 //Simplified version of drone rotation for stabilized mode without 4 propellers changing torque, but just static limited rotation

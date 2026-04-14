@@ -649,11 +649,6 @@ MonoBehaviour:
   minFalloff: 60.8
   max: 1994.7
   maxFalloff: 1009.2
---- !u!54 &881907369 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 2064770167576041254, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-  m_PrefabInstance: {fileID: 2026599522}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &937653228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,135 +1964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &2026599522
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: cameraGimbalRotationCap.x
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: cameraGimbalRotationCap.y
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 187369982370660058, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: cameraGimbalRotationSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -35.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 256.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -456.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1728490387095419314, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2797042497696819970, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: flightMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2861823622920660713, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_Name
-      value: DroneDJIFlyCart30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153528328783192103, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: rotateControllerGimbalUp
-      value: 
-      objectReference: {fileID: 2397272684899367043, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-    - target: {fileID: 4153528328783192103, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: rotateControllerGimbalDown
-      value: 
-      objectReference: {fileID: -2183099883301340956, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: speedText
-      value: 
-      objectReference: {fileID: 68502676}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: compassDisk
-      value: 
-      objectReference: {fileID: 937653229}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: headingText
-      value: 
-      objectReference: {fileID: 1006248903}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: horizonLine
-      value: 
-      objectReference: {fileID: 1410932720}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: droneRigidbody
-      value: 
-      objectReference: {fileID: 881907369}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: timePassedText
-      value: 
-      objectReference: {fileID: 499277616}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: altitudeAGLText
-      value: 
-      objectReference: {fileID: 1581862034}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: altitudeASLText
-      value: 
-      objectReference: {fileID: 1914251432}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: cargoWeightText
-      value: 
-      objectReference: {fileID: 2108502758}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5696437941154675186, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
-      propertyPath: batteryCellVoltageText
-      value: 
-      objectReference: {fileID: 2009899866}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b728f905632d16e4388dc79ae082d7f1, type: 3}
 --- !u!1 &2068866267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2310,6 +2176,107 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108502756}
   m_CullTransparentMesh: 1
+--- !u!1001 &6697148123533321110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 624503940978350954, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: hoverRPMPercentage
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 706085750377715329, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_Name
+      value: DroneDJIMini2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684824922448080046, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: averageBatteryCurrentDraw
+      value: 4.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -45.893482
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 254.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -460.50876
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: speedText
+      value: 
+      objectReference: {fileID: 68502676}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: compassDisk
+      value: 
+      objectReference: {fileID: 937653229}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: headingText
+      value: 
+      objectReference: {fileID: 1006248903}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: horizonLine
+      value: 
+      objectReference: {fileID: 1410932720}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: timePassedText
+      value: 
+      objectReference: {fileID: 499277616}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: altitudeAGLText
+      value: 
+      objectReference: {fileID: 1581862034}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: altitudeASLText
+      value: 
+      objectReference: {fileID: 1914251432}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: cargoWeightText
+      value: 
+      objectReference: {fileID: 2108502758}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: batteryCellVoltageText
+      value: 
+      objectReference: {fileID: 2009899866}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
 --- !u!1001 &7257516198309470741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2472,7 +2439,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 59093385}
-  - {fileID: 2026599522}
+  - {fileID: 6697148123533321110}
   - {fileID: 541466911}
   - {fileID: 7257516198309470741}
   - {fileID: 1997563861}

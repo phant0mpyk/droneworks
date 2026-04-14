@@ -40,26 +40,24 @@ public class DroneBatteryManager : MonoBehaviour
 
     [Tooltip("Battery discharge that you allow during the flight. As batteries can be damaged if fully discharged, it's common practice never to discharge them by more than 80%. In percentage.")]
     [SerializeField]
-    float batteryMaxDischargePercentage = 80f;
+    float batteryMaxDischargePercentage = 90f;
 
-    [Tooltip("Average current draw in Amps. Used to calculate battery draining. Per 1 propeller.")]
+    [Tooltip("Average current draw in Amps. Used to calculate how fast the battery drains. Per battery.")]
     [SerializeField]
     float averageBatteryCurrentDraw = 0f;
+
+    //added so the battery current draw is higher as the throttle is held down on higher throttle
+    float batteryCurrentDrawModifier;
 
     [Tooltip("For a battery warning at a certain Voltage. Per 1 cell.")]
     [SerializeField]
     float batteryWarningCellVoltage = 3.5f;
 
-    [Tooltip("Maximum possible flight time of the drone in minutes. This is only an estimated value, because the battery can drain faster")]
-    [SerializeField]
-    float maxFlightTimeMinutes;
-
-    float remainingFlightTimeMinutes;
-
     [Tooltip("Energy in Wh. Per 1 battery.")]
     [SerializeField]
     float energy;
 
+    [Header("Battery Debugging")]
     [SerializeField]
     float currBatteryChargeWithSafetyLimit;
 
@@ -69,6 +67,7 @@ public class DroneBatteryManager : MonoBehaviour
     public float currBatteryVoltage { get; private set; }
 
     bool batteryActive = false;
+
 
     void Awake()
     {
@@ -84,7 +83,6 @@ public class DroneBatteryManager : MonoBehaviour
         float usableBatteryCapacity = batteryCapacity * (batteryMaxDischargePercentage / 100f);
         currBatteryChargeWithSafetyLimit = usableBatteryCapacity;
         currBatteryChargeOverall = batteryCapacity;
-        remainingFlightTimeMinutes = maxFlightTimeMinutes;
 
         //calculates the average current draw per propeller with power using predetermined energy, maxFlightTime and nominal cell voltage
         //before it wasn't calculated with power but from the battery capacity and flight time, which lead to the voltage drop not being realistic and dropping too fast
@@ -93,7 +91,6 @@ public class DroneBatteryManager : MonoBehaviour
         //average current draw formula per propeller with power and nominal cell voltage
         //could also be predefined so we wouldn't need to calculate it based on the max flight time, but this way we can adjust the flight time how we want it. Don't set it too low though.
         // averageBatteryCurrentDraw = power/(nominalCellVoltage * flightController.GetPropellerCount());
-        averageBatteryCurrentDraw = 25;
         Debug.Log("Average current draw per propeller: " + averageBatteryCurrentDraw + "A");
     }
 
@@ -105,9 +102,19 @@ public class DroneBatteryManager : MonoBehaviour
     public float CalculateVoltageDrop(float _throttleAxis)
     {
         // total current draw is also affected by the throttle input, clamped so it changes based on throttle, not entirely realistic though because this change should not be linear (higher throttle can lead to even higher current draw)
-        float batteryCurrentDraw = averageBatteryCurrentDraw * Mathf.Clamp(1 + _throttleAxis, 0.75f, 1.25f);
+        float batteryCurrentDraw = averageBatteryCurrentDraw * Mathf.Clamp(1 + _throttleAxis, 0.5f, 2f);
+        //temporary fix for quicker battery draining as the throttle is being held down over time
+        if (_throttleAxis >= .75)
+        {
+            batteryCurrentDrawModifier += .25f;
+            batteryCurrentDraw *= 1 + Mathf.Clamp(batteryCurrentDrawModifier,0,3);
+        }
+        else
+        {
+            batteryCurrentDrawModifier = 0;
+        }
         currBatteryChargeWithSafetyLimit -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f); 
-        currBatteryChargeWithSafetyLimit = Mathf.Clamp(GetBatteryPercentageOverall(), 0, batteryCapacity);
+        currBatteryChargeWithSafetyLimit = Mathf.Clamp(currBatteryChargeWithSafetyLimit, 0, batteryCapacity);
         currBatteryChargeOverall -= batteryCurrentDraw * 1000f * (Time.fixedDeltaTime/3600f);
         currBatteryChargeOverall = Mathf.Clamp(currBatteryChargeOverall, 0, batteryCapacity);
         //the currBatteryCharge will also affect the internal resistance of the battery, with added resistance that increases as the battery runs out of charge
@@ -146,11 +153,6 @@ public class DroneBatteryManager : MonoBehaviour
         return (currBatteryChargeOverall / batteryCapacity) * 100f;
     }
 
-    public float GetRemainingFlightTime()
-    {
-        return remainingFlightTimeMinutes;
-    }
-
     //calculates increase in battery resistance based on the remaining battery charge, because the lower the charge the higher the internal resistance
     //change the values based on testing
     //also include temperature and wind applied in the future, because it also affects it
@@ -161,19 +163,19 @@ public class DroneBatteryManager : MonoBehaviour
             case 100f:
                 return 1f;
             case > 90f:
-                return 1.05f;
+                return 1.10f;
             case > 80f:
-                return 1.10f; 
+                return 1.20f; 
             case > 70f:
-                return 1.15f;
+                return 1.25f;
             case > 60f:
-                return 1.25f; 
+                return 1.3f;
             case > 50f:
                 return 1.35f;
             case > 40f:
-                return 1.50f; 
+                return 1.4f; 
             case > 30f:
-                return 1.70f;
+                return 1.55f;
             case > 20f:
                 return 2f; 
             case > 10f:
@@ -188,8 +190,13 @@ public class DroneBatteryManager : MonoBehaviour
         batteryActive = _batteryActive;
     }
 
-    public bool GetDroneBattery()
+    public bool GetDroneBatteryState()
     {
         return batteryActive;
+    }
+
+    public int GetBatteryCells()
+    {
+        return batteryCells;
     }
 }
