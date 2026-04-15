@@ -113,6 +113,7 @@ public class DroneInputManager : MonoBehaviour
             Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
             rollAxis = arrowInput.x;
             pitchAxis = arrowInput.y;
+            GimbalRotation();
         }
     }
 
