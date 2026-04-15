@@ -1195,6 +1195,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581862032}
   m_CullTransparentMesh: 1
+--- !u!4 &1753071873 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6657063434801568618, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+  m_PrefabInstance: {fileID: 6697148123533321110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1763263443
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2244,6 +2249,10 @@ PrefabInstance:
       propertyPath: compassDisk
       value: 
       objectReference: {fileID: 937653229}
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: droneCamera
+      value: 
+      objectReference: {fileID: 1753071873}
     - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: headingText
       value: 

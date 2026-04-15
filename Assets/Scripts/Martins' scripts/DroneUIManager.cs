@@ -14,6 +14,7 @@ public class DroneUIManager : MonoBehaviour
     [Header("Crosshair & Horizon")]
     [SerializeField] private RectTransform horizonLine;
     [SerializeField] private float pitchSensitivity = 5f;
+    [SerializeField] private Transform droneCamera;
 
     [Header("Cargo Settings")]
     [SerializeField] private TMPro.TextMeshProUGUI cargoWeightText;
@@ -119,13 +120,16 @@ public class DroneUIManager : MonoBehaviour
 
     void UpdateArtificialHorizon()
     {
-        if (horizonLine == null) return;
-        Vector3 rotation = droneScript.transform.eulerAngles;
-        float roll = rotation.z;
-        float pitch = rotation.x;
-        if (pitch > 180) pitch -= 360;
+        if (horizonLine == null || droneCamera == null) return;
+        Vector3 droneRotation = droneScript.transform.eulerAngles;
+        float roll = droneRotation.z;
+        float dronePitch = droneRotation.x;
+        if (dronePitch > 180) dronePitch -= 360;
+        float cameraLocalPitch = droneCamera.localEulerAngles.x;
+        if (cameraLocalPitch > 180) cameraLocalPitch -= 360;
+        float adjustedPitch = dronePitch - cameraLocalPitch;
         horizonLine.localRotation = Quaternion.Euler(0, 0, -roll);
-        float yOffset = pitch * pitchSensitivity;
+        float yOffset = adjustedPitch * pitchSensitivity;
         horizonLine.anchoredPosition = new Vector2(0, -yOffset);
     }
 }
