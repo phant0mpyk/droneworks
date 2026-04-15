@@ -10,6 +10,7 @@ public class PingableObject : MonoBehaviour
     [System.Serializable] public class MyEvent : UnityEvent {}
 
     [SerializeField] private MyEvent onPing;
+    [SerializeField] private Transform trans;
     
     void Start()
     {
@@ -19,6 +20,7 @@ public class PingableObject : MonoBehaviour
         }
         sphereCollider.radius = radius;
         sphereCollider.isTrigger = true;
+        sphereCollider.center = trans.position;
     }
 
     private void OnTriggerStay(Collider other)

@@ -11,16 +11,17 @@ using Vector3 = UnityEngine.Vector3;
 public class Waypoint : MonoBehaviour
 {
     private Canvas canvas;
-    private Vector3 worldPosition;
+    public Vector3 worldPosition;
     public Sprite sprite;
     private Image img;
     RectTransform rect;
     private Camera mainCam;
     public float scale = 1;
 
+
     void Start()
     {
-        worldPosition = transform.position;
+        //worldPosition = transform.position;
         canvas = FindFirstObjectByType<Canvas>();
         transform.SetParent(canvas.transform);
         if (!TryGetComponent(out rect))

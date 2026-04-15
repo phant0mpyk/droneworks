@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 913194859578528002, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: cameraGimbalRotationSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1550143894339360751, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.05
@@ -34,11 +38,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 254.03
+      value: 251.73
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -460.50876
+      value: -473.93
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -195,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 6426678241587060953, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696616782316606726, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6782188712728515433, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Enabled
