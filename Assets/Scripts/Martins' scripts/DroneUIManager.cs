@@ -92,7 +92,7 @@ public class DroneUIManager : MonoBehaviour
         compassDisk.localRotation = Quaternion.Euler(0, 0, heading);
         if (headingText != null)
         {
-            headingText.text = $"{Mathf.RoundToInt(heading)}�";
+            headingText.text = $"{Mathf.RoundToInt(heading)}*";
         }
     }
 
@@ -121,15 +121,14 @@ public class DroneUIManager : MonoBehaviour
     void UpdateArtificialHorizon()
     {
         if (horizonLine == null || droneCamera == null) return;
-        Vector3 droneRotation = droneScript.transform.eulerAngles;
-        float roll = droneRotation.z;
-        float dronePitch = droneRotation.x;
+        float roll = droneScript.transform.eulerAngles.z;
+        float dronePitch = droneScript.transform.eulerAngles.x;
         if (dronePitch > 180) dronePitch -= 360;
         float cameraLocalPitch = droneCamera.localEulerAngles.x;
         if (cameraLocalPitch > 180) cameraLocalPitch -= 360;
-        float adjustedPitch = dronePitch - cameraLocalPitch;
+        float adjustedPitch = dronePitch + cameraLocalPitch;
         horizonLine.localRotation = Quaternion.Euler(0, 0, -roll);
         float yOffset = adjustedPitch * pitchSensitivity;
-        horizonLine.anchoredPosition = new Vector2(0, -yOffset);
+        horizonLine.anchoredPosition = new Vector2(0, yOffset);
     }
 }
