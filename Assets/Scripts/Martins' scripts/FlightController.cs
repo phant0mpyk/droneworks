@@ -24,6 +24,11 @@ public class FlightController : MonoBehaviour
     [SerializeField]
     DroneCameraManager cameraManager;
 
+    [SerializeField]
+    ToggleThermalVision toggleThermalVision;
+
+    [SerializeField]
+    SpawnMarker ping;
 
     Rigidbody droneRigidbody;
 
@@ -227,5 +232,15 @@ public class FlightController : MonoBehaviour
     public void RotateGimbalNone()
     {
         cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.None);
+    }
+
+    public void ToggleThermalVision()
+    {
+        toggleThermalVision.ToggleVision();
+    }
+
+    public void Ping()
+    {
+        ping.TryToPing();
     }
 }

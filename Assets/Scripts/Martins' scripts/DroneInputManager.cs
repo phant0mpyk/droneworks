@@ -28,6 +28,12 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField]
     InputActionReference rotateKeyboardGimbalDown;
 
+    [SerializeField]
+    InputActionReference toggleKeyboardThermalVision;
+
+    [SerializeField]
+    InputActionReference pingKeyboard;
+
     bool keyboardInputActive = false;
     [Header("Controller")]
     [SerializeField]
@@ -45,6 +51,11 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField]
     InputActionReference rotateControllerGimbalDown;
 
+    [SerializeField]
+    InputActionReference toggleControllerThermalVision;
+
+    [SerializeField]
+    InputActionReference pingController;
     bool controllerInputActive = false; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -66,6 +77,15 @@ public class DroneInputManager : MonoBehaviour
         rotateControllerGimbalDown.action.Enable();
         rotateKeyboardGimbalUp.action.Enable();
         rotateKeyboardGimbalDown.action.Enable();
+        toggleKeyboardThermalVision.action.Enable();
+        toggleControllerThermalVision.action.Enable();
+        pingKeyboard.action.Enable();
+        pingController.action.Enable();
+        
+        toggleKeyboardThermalVision.action.performed += ToggleThermalVision;
+        toggleControllerThermalVision.action.performed += ToggleThermalVision;
+        pingKeyboard.action.performed += Ping;
+        pingController.action.performed += Ping;
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
     }
@@ -140,6 +160,16 @@ public class DroneInputManager : MonoBehaviour
     private void CameraToggle(InputAction.CallbackContext context)
     {
         flightController.OnCameraToggle();
+    }
+
+    private void Ping(InputAction.CallbackContext context)
+    {
+        flightController.Ping();
+    }
+
+    private void ToggleThermalVision(InputAction.CallbackContext context)
+    {
+        flightController.ToggleThermalVision();
     }
 
     private void GimbalRotation()

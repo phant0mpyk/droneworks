@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ToggleThermalVision",
+                    "type": "Button",
+                    "id": "e6b194fa-236a-4b42-8d04-0461c2270365",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RotateCameraUp",
                     "type": "Button",
                     "id": "2e0f5284-d7e7-4aa5-a725-56c7e5ce4ed0",
@@ -46,6 +55,15 @@
                     "name": "RotateCameraDown",
                     "type": "Button",
                     "id": "9a1096b9-8daf-46d4-aa84-854e53eca36d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ping",
+                    "type": "Button",
+                    "id": "a2e996c0-4fcf-4b5e-a814-4bd35f61c04f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -107,6 +125,17 @@
                     "action": "Arrows",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "8bcfb78d-cda1-4878-8a75-528bb6a8fa15",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ping",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "2D Vector",
@@ -195,6 +224,17 @@
                     "action": "RotateCameraDown",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1758d0bc-4269-4cef-8232-a152ab6a6c6c",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleThermalVision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -230,6 +270,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ToggleThermalVision",
+                    "type": "Button",
+                    "id": "08867ab1-22da-4678-943a-5a815fda016d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RotateCameraUp",
                     "type": "Button",
                     "id": "033006bf-ad8e-48a4-86b4-f61e3ef33311",
@@ -242,6 +291,15 @@
                     "name": "RotateCameraDown",
                     "type": "Button",
                     "id": "ff1d9959-7758-46bd-8d1d-51f3f792e555",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ping",
+                    "type": "Button",
+                    "id": "77a59de8-ed85-464a-8654-2d3239270ace",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -303,6 +361,17 @@
                     "action": "Left",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c99aa08d-8cd8-4329-b9db-2394dd9bd4bb",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleThermalVision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "2D Vector",
@@ -389,6 +458,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RotateCameraDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1fc18f99-6650-4580-aba1-cd2b58417a0e",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ping",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
