@@ -3,15 +3,15 @@ Shader "Hidden/NewImageEffectShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Offset ("Offset", Float) = 0
+        _Amplitude ("Amplitude", Float) = 0
         _UpDownSpeed ("Up Down Speed", Float) = 0
         _RotateSpeed ("Rotate Speed", Float) = 0
     }
     SubShader
     {
         // No culling or depth
-        Cull Off ZWrite Off ZTest Always
-        Blend SrcAlpha OneMinusSrcAlpha
+        //Cull Off ZWrite Off ZTest Always
+        //Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
             CGPROGRAM
@@ -33,14 +33,14 @@ Shader "Hidden/NewImageEffectShader"
                 float4 vertex : SV_POSITION;
             };
             
-            float _Offset;
+            float _Amplitude;
             float _UpDownSpeed;
             float _RotateSpeed;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                v.vertex.y += _Offset * sin(_Time.y * _UpDownSpeed);
+                v.vertex.y += _Amplitude + _Amplitude * sin(_Time.y * _UpDownSpeed);
                 
                 float s = sin(_Time.y * _RotateSpeed);
                 float c = cos(_Time.y * _RotateSpeed);
