@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: hoverRPMPercentage
-      value: 54.7
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Name
@@ -102,12 +102,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: averageBatteryCurrentDraw
-      value: 2
+      value: 4.35
       objectReference: {fileID: 0}
     - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: batteryMaxDischargePercentage
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: rotateKeyboardGimbalUp
+      value: 
+      objectReference: {fileID: -2737161150400826265, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: rotateKeyboardGimbalDown
+      value: 
+      objectReference: {fileID: 7255833069205610283, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     - target: {fileID: 4035110902729009978, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.048
@@ -132,6 +140,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: droneCamera
+      value: 
+      objectReference: {fileID: 6657063434801568618}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: droneScript
       value: 
@@ -274,6 +286,11 @@ MonoBehaviour:
 --- !u!4 &4145401326177913306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_PrefabInstance: {fileID: 2327874683591548848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6657063434801568618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8947779845502239962, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
   m_PrefabInstance: {fileID: 2327874683591548848}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3756444400259857080

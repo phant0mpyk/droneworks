@@ -32,6 +32,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCameraUp",
+                    "type": "Button",
+                    "id": "2e0f5284-d7e7-4aa5-a725-56c7e5ce4ed0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCameraDown",
+                    "type": "Button",
+                    "id": "9a1096b9-8daf-46d4-aa84-854e53eca36d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -148,11 +166,33 @@
                 {
                     "name": "",
                     "id": "1234b09c-8c62-4acd-bcf1-73f4e5824d7f",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "ToggleCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4786320d-798b-4242-9911-8c5a08d0f9bf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCameraUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c4b530cd-b672-43a1-a776-0b1047f7c8f0",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCameraDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

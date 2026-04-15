@@ -22,6 +22,12 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField]
     InputActionReference toggleCameraKeyboard;
 
+    [SerializeField]
+    InputActionReference rotateKeyboardGimbalUp;
+
+    [SerializeField]
+    InputActionReference rotateKeyboardGimbalDown;
+
     bool keyboardInputActive = false;
     [Header("Controller")]
     [SerializeField]
@@ -58,6 +64,8 @@ public class DroneInputManager : MonoBehaviour
         toggleCameraController.action.Enable();
         rotateControllerGimbalUp.action.Enable();
         rotateControllerGimbalDown.action.Enable();
+        rotateKeyboardGimbalUp.action.Enable();
+        rotateKeyboardGimbalDown.action.Enable();
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
     }
@@ -135,11 +143,11 @@ public class DroneInputManager : MonoBehaviour
 
     private void GimbalRotation()
     {
-            if (rotateControllerGimbalUp.action.IsPressed())
+            if (rotateControllerGimbalUp.action.IsPressed() || rotateKeyboardGimbalUp.action.IsPressed())
             {
                 Debug.Log("UP");
                 flightController.RotateGimbalUp();
-            }else if(rotateControllerGimbalDown.action.IsPressed())
+            }else if(rotateControllerGimbalDown.action.IsPressed() || rotateKeyboardGimbalDown.action.IsPressed())
             {
                 Debug.Log("Down");
                 flightController.RotateGimbalDown();
