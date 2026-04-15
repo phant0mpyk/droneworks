@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/V's scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/V's scenes/MainMenu.unity
+    guid: 4562fa80dc9c4da4bafb2da2059af835
+  - enabled: 1
+    path: Assets/Scenes/V's scenes/DroneUITest.unity
+    guid: e40659ccc9cd4704190c81f2916dc7f0
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6527c4cd4c5d03a43b55027c1d4e4ebd, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

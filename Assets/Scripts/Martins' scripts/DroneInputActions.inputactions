@@ -25,7 +25,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "KeyboardUsed",
+                    "name": "ToggleCamera",
                     "type": "Button",
                     "id": "3ba4728a-1cd8-4a95-8e79-01fcc9dbe3fa",
                     "expectedControlType": "",
@@ -147,12 +147,12 @@
                 },
                 {
                     "name": "",
-                    "id": "66f7c0c0-0e04-4e41-93e7-5a92d59b9845",
-                    "path": "<Keyboard>/anyKey",
+                    "id": "1234b09c-8c62-4acd-bcf1-73f4e5824d7f",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "KeyboardUsed",
+                    "action": "ToggleCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -179,6 +179,33 @@
                     "processors": "StickDeadzone(min=0.1,max=1)",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleCamera",
+                    "type": "Button",
+                    "id": "9544bb55-e50e-411d-bbff-56b6d02b95d4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCameraUp",
+                    "type": "Button",
+                    "id": "033006bf-ad8e-48a4-86b4-f61e3ef33311",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RotateCameraDown",
+                    "type": "Button",
+                    "id": "ff1d9959-7758-46bd-8d1d-51f3f792e555",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -196,7 +223,7 @@
                 {
                     "name": "up",
                     "id": "acabf11c-fe3c-4ac7-9144-535e634ba3ff",
-                    "path": "<XInputController>/leftStick/up",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -207,7 +234,7 @@
                 {
                     "name": "down",
                     "id": "e64c500e-e792-465c-95cc-7a667306ef6c",
-                    "path": "<XInputController>/leftStick/down",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -218,7 +245,7 @@
                 {
                     "name": "left",
                     "id": "266d272a-efa9-4ef3-8c69-0eca62d0bdd6",
-                    "path": "<XInputController>/leftStick/left",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -229,7 +256,7 @@
                 {
                     "name": "right",
                     "id": "2eaf181e-e13a-48f5-84f0-f7f3e8946d37",
-                    "path": "<XInputController>/leftStick/right",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -262,7 +289,7 @@
                 {
                     "name": "down",
                     "id": "a6b17702-b44e-4f49-a55f-f8aec74c0342",
-                    "path": "<XInputController>/rightStick/down",
+                    "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -273,7 +300,7 @@
                 {
                     "name": "left",
                     "id": "b9e3985e-b10a-4156-b635-05551aab59c6",
-                    "path": "<XInputController>/rightStick/left",
+                    "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -284,13 +311,46 @@
                 {
                     "name": "right",
                     "id": "be39fc71-b408-481c-91c7-028905f2caa4",
-                    "path": "<XInputController>/rightStick/right",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Right",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4ccea836-b3eb-40f1-a544-b1fe183ac173",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32d7eb6e-7310-4be3-b8c1-bce8f5d0e500",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCameraUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81ddef7b-beea-470f-959b-ba0f9912d560",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCameraDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
