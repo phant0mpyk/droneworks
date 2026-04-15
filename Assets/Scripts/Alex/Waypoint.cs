@@ -12,11 +12,11 @@ public class Waypoint : MonoBehaviour
 {
     private Canvas canvas;
     private Vector3 worldPosition;
-    [SerializeField] public Sprite sprite;
+    public Sprite sprite;
     private Image img;
     RectTransform rect;
     private Camera mainCam;
-    private float scale = 1;
+    public float scale = 1;
 
     void Start()
     {

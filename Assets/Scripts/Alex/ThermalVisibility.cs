@@ -12,6 +12,6 @@ public class ThermalVisibility : MonoBehaviour
         thermalObject.transform.localScale = Vector3.one * 1.05f;
         thermalObject.AddComponent<MeshRenderer>().material = glow;
         thermalObject.AddComponent<MeshFilter>().mesh = GetComponent<MeshFilter>().mesh;
-        thermalObject.layer = 8; //Night Vision Layer
+        thermalObject.layer = LayerMask.NameToLayer("NightVision");
     }
 }
