@@ -15,7 +15,7 @@ public class ToggleThermalVision : MonoBehaviour
         vol.enabled = false;
     }
 
-    void ToggleVision()
+    public void ToggleVision()
     {
         if (vol.enabled)
         {
@@ -32,9 +32,9 @@ public class ToggleThermalVision : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            ToggleVision();
-        }
+        // if(Input.GetKeyDown(KeyCode.N))
+        // {
+        //     ToggleVision();
+        // }
     }
 }
