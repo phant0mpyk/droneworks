@@ -243,4 +243,23 @@ public class FlightController : MonoBehaviour
     {
         ping.TryToPing();
     }
+    //added by V
+    public void SetFlightModeAcrobatic()
+    {
+        flightMode = FlightMode.Acrobatic;
+        Debug.Log("Flight Mode Switched to: ACROBATIC");
+    }
+
+    public void SetFlightModeStabilized()
+    {
+        flightMode = FlightMode.Stabilized;
+        Debug.Log("Flight Mode Switched to: STABILIZED");
+    }
+
+    public void ToggleFlightMode()
+    {
+        flightMode = (flightMode == FlightMode.Stabilized) ? FlightMode.Acrobatic : FlightMode.Stabilized;
+        Debug.Log("Flight Mode Toggled to: " + flightMode);
+    }
+    //end of added by V
 }
