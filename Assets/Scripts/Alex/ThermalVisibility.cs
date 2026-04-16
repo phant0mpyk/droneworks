@@ -8,10 +8,13 @@ public class ThermalVisibility : MonoBehaviour
         GameObject thermalObject = new GameObject("ThermalObject");
         thermalObject.transform.position = transform.position;
         thermalObject.transform.rotation = transform.rotation;
+        thermalObject.transform.localScale = transform.localScale;
         thermalObject.transform.parent = transform;
-        thermalObject.transform.localScale = Vector3.one * 1.05f;
         thermalObject.AddComponent<MeshRenderer>().material = glow;
         thermalObject.AddComponent<MeshFilter>().mesh = GetComponent<MeshFilter>().mesh;
         thermalObject.layer = LayerMask.NameToLayer("NightVision");
+        
+        
+        gameObject.layer = LayerMask.NameToLayer("NoNightVision");
     }
 }
