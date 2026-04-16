@@ -2,7 +2,9 @@ using UnityEngine;
 using System.Collections;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor.Experimental.GraphView;
+#endif
 
 public class SpawnMarker : MonoBehaviour
 {
