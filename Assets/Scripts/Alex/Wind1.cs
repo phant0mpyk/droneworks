@@ -2,20 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wind : MonoBehaviour
+public class Wind1 : MonoBehaviour
 {
     [SerializeField] private float windVelocity;
     [SerializeField] private float airDensity = 1.225f;
-    private float dragCoefficient = 1.2f;
-    public float windStrength;
-    [SerializeField] public Vector3 windDirection;
+    private float dragCoefficient = 1.5f;
+    private float windStrength;
+    [SerializeField] private Vector3 windDirection;
     [SerializeField] private float windPrecision;
     [SerializeField] private GameObject drone;
     [SerializeField] private float raycastDistance = 5;
+    [SerializeField] private float tuning = 0.01f;
     private GameObject ping;
     float oldWindPrecision;
     float oldRaycastDistance;
-    float oldWindVelocity;
     private List<GameObject> raycastPoints;
     BoxCollider windCollider;
     bool windZone =  true;
@@ -49,15 +49,14 @@ public class Wind : MonoBehaviour
         CalculateRaycastPoints();
         oldWindPrecision = windPrecision;
         oldRaycastDistance = raycastDistance;
-        oldWindVelocity = windVelocity;
         transform.forward = windDirection;
         ping.transform.localPosition = new Vector3(0, 0, raycastDistance);
-        CalculateWindStrength();
     }
 
     void CalculateWindStrength()
     {
-        windStrength = 0.5f * windVelocity * windVelocity * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient / 3.6f; //calculate wind force from the relative velocity
+        Vector3 relativeWindVelocity = droneRigidbody.linearVelocity - (windVelocity*3.6f*windDirection.normalized);
+        windStrength = tuning * 0.5f * (relativeWindVelocity.magnitude * relativeWindVelocity.magnitude) * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient; //calculate wind force from the relative velocity
     }
     
     private void Start()
@@ -86,7 +85,7 @@ public class Wind : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (oldWindPrecision != windPrecision || oldRaycastDistance != raycastDistance || oldWindVelocity !=  windVelocity)
+        if (oldWindPrecision != windPrecision || oldRaycastDistance != raycastDistance)
         {
             UpdateWind();
         }
@@ -114,8 +113,12 @@ public class Wind : MonoBehaviour
                             continue;
                         }
                         if (hitBack.collider.tag == "Wind")
-                        { 
-                            droneRigidbody.AddForceAtPosition((Time.deltaTime * windStrength) * -point.transform.forward, hit.point, ForceMode.Force);
+                        {
+                            Vector3 relativeWindDirection = (droneRigidbody.linearVelocity - ( 3.6f * windVelocity * windDirection.normalized)).normalized;
+                            float alignment = Mathf.Max(0f, Vector3.Dot(relativeWindDirection, -hit.normal));
+                            alignment *= alignment;
+                            //droneRigidbody.AddForceAtPosition((Time.deltaTime * windStrength / raycastPoints.Count) * -point.transform.forward, hit.point, ForceMode.Force);
+                            droneRigidbody.AddForceAtPosition((windStrength * alignment) * relativeWindDirection, hit.point);
 
                         }
                     }
