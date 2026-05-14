@@ -59,9 +59,9 @@ Material:
     - EFFECT_BILLBOARD: 0
     - EFFECT_EXTRA_TEX: 1
     - _AlphaClipThreshold: 0.33
-    - _Glossiness: 1
+    - _Glossiness: 0.23
     - _HueVariationKwToggle: 0
-    - _Metallic: 1
+    - _Metallic: 0
     - _NormalMapKwToggle: 1
     - _OldHueVarBehavior: 0
     - _QueueControl: 0
