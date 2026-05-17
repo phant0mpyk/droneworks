@@ -163,17 +163,17 @@ public class DroneBatteryManager : MonoBehaviour
             case 100f:
                 return 1f;
             case > 90f:
-                return 1.10f;
+                return 1.20f;
             case > 80f:
-                return 1.20f; 
+                return 1.30f; 
             case > 70f:
-                return 1.25f;
-            case > 60f:
-                return 1.3f;
-            case > 50f:
                 return 1.35f;
+            case > 60f:
+                return 1.4f;
+            case > 50f:
+                return 1.45f;
             case > 40f:
-                return 1.4f; 
+                return 1.5f; 
             case > 30f:
                 return 1.55f;
             case > 20f:

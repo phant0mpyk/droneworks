@@ -27,7 +27,6 @@ public class CutoffEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grain.SetFloat("_UnscaledTime", Time.unscaledTime);
         glitch.SetFloat("_UnscaledTime", Time.unscaledTime);
 
         if (glitchTimer > 0)
@@ -36,12 +35,12 @@ public class CutoffEffect : MonoBehaviour
             
         } else if (grainTimer > 0)
         {
+            Time.timeScale = 1;
             grainTimer -= Time.unscaledDeltaTime;
             grain.SetFloat("_Speed", grainSpeed);
         }
         else
         {
-            Time.timeScale = 1;
             onDone.Invoke();
             Destroy(gameObject);
         }

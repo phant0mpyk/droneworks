@@ -50,7 +50,7 @@ MonoBehaviour:
   grainTimer: 2
   noiseMultiplier: 20
   glitchStrength: 750
-  grainSpeed: 30
+  grainSpeed: 75.1
   onDone:
     m_PersistentCalls:
       m_Calls:

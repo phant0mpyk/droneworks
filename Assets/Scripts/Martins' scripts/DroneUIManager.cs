@@ -56,21 +56,24 @@ public class DroneUIManager : MonoBehaviour
     void Update()
     {
         droneDestroyed = droneScript.GetDroneDestroyed();
-        if (droneDestroyed && !spawnedDeathScreen)
+        //makes sure that the rest of the code only runs when the drone is alive and that spawning of death screen is only done once
+        if (droneDestroyed)
         {
-            DestroyDrone();
+            if (!spawnedDeathScreen)
+            {
+                spawnedDeathScreen = true;
+                DestroyDroneUI();
+            }
+            return;
         }
-        else
-        {
-            spawnedDeathScreen = false;
-            UpdateBatteryUI();
-            UpdateFlightTimer();
-            UpdateArtificialHorizon();
-            UpdateCargoUI();
-            UpdateAltitudeUI();
-            UpdateCompass();
-            UpdateSpeedUI();
-        }
+        spawnedDeathScreen = false;
+        UpdateBatteryUI();
+        UpdateFlightTimer();
+        UpdateArtificialHorizon();
+        UpdateCargoUI();
+        UpdateAltitudeUI();
+        UpdateCompass();
+        UpdateSpeedUI();
     }
     void UpdateSpeedUI()
     {
@@ -169,16 +172,9 @@ public class DroneUIManager : MonoBehaviour
         horizonLine.anchoredPosition = new Vector2(0, yOffset);
     }
 
-    public void DestroyDrone()
+    //spawns Alex's shader glitch effect
+    public void DestroyDroneUI()
     {
-        spawnedDeathScreen = true;
-        droneDestroyed = true;
         Instantiate(deathScreen, transform.position, Quaternion.identity);
     }
-
-    // IEnumerator ShowDeathScreen()
-    // {
-    //     yield return new WaitForSeconds(1f);
-    //     deathScreen.SetActive(true);
-    // }
 }

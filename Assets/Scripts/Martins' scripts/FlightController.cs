@@ -20,8 +20,8 @@ using System.Collections;
 public class FlightController : MonoBehaviour
 {
     DroneInputManager inputManager;
-
-    DroneBatteryManager battery;
+    DroneBoundaryEnforcer boundaryEnforcer;
+    DroneBatteryManager battery;    
 
     [SerializeField]
     DroneCameraManager cameraManager;
@@ -33,6 +33,8 @@ public class FlightController : MonoBehaviour
     SpawnMarker ping;
 
     Rigidbody droneRigidbody;
+
+    BoxCollider droneCollider;
 
     bool droneActive = false;
 
@@ -100,16 +102,15 @@ public class FlightController : MonoBehaviour
 
     Vector3 worldUpVector;
     Vector3 droneUpVector;
-
-    Transform droneStartingTransform;
-
     Vector3 droneForwardVector;
 
     void Awake()
     {
         droneRigidbody = GetComponent<Rigidbody>();
+        droneCollider = GetComponent<BoxCollider>();
         inputManager = GetComponentInChildren<DroneInputManager>();
         battery = GetComponentInChildren<DroneBatteryManager>();
+        boundaryEnforcer = GetComponent<DroneBoundaryEnforcer>();
         propellerScripts = new DronePropellerScript[propellers.Length];
         for (int i = 0; i < propellers.Length; i++)        {
             propellerScripts[i] = propellers[i].GetComponent<DronePropellerScript>();
@@ -118,9 +119,6 @@ public class FlightController : MonoBehaviour
     }
     void Start()
     {
-        droneStartingTransform = transform;
-        droneStartingTransform.position = transform.position;
-        droneStartingTransform.rotation = transform.rotation;
         droneActive = true;
         worldUpVector = Vector3.up.normalized;
         droneUpVector = transform.up.normalized;
@@ -282,45 +280,45 @@ public class FlightController : MonoBehaviour
         Debug.Log("Flight Mode Toggled to: " + flightMode);
     }
     //end of added by V
+
+    //disables drone and applied physics as well as maxRPM, starts respawning and the UI glitch effect
+    //the disabled physics are also applied in V's script, but because I use it later than he does and that it collides with the object, It needs to be applied sooner to avoid problems with 
     public void DestroyDrone()
     {
+        if (!droneActive) return;
         droneActive = false;
-
-        droneRigidbody.linearVelocity = Vector3.zero;
-        droneRigidbody.angularVelocity = Vector3.zero;
-
-        droneRigidbody.isKinematic = true;
-        droneRigidbody.detectCollisions = false;
-
-        StartCoroutine(RespawnCoroutine(1f));
+        droneRigidbody.isKinematic = true; 
+        Debug.Log("Drone destroyed");
+        StartCoroutine(RespawnCoroutine(2f));
     }
 
+    //disables colliders of the drone until the drone respawns so that it doesn't get stuck in the destroying object when it hits hit
+    //also waits for realtime seconds because Alex's glitch effect script sets Time.timeScale to 0
     private IEnumerator RespawnCoroutine(float respawnTime)
     {
-        yield return new WaitForSeconds(respawnTime);
-
+        if (droneCollider) droneCollider.enabled = false;
+        yield return new WaitForSecondsRealtime(respawnTime);
         Respawn();
+        yield return new WaitForSecondsRealtime(0.1f); 
+        if (droneCollider) droneCollider.enabled = true;
+    }
 
-        yield return new WaitForFixedUpdate(); // IMPORTANT
-
-        droneRigidbody.detectCollisions = true;
+    //applies physics back and uses V's teleport script to teleport the drone back to the start position
+    void Respawn()
+    {
+        //needs to be added in even if V's already doing it for some reason
+        //I guess it kindof skips V's rigidbody changes when it teleports the drone back to the start position
         droneRigidbody.isKinematic = false;
+        droneRigidbody.linearVelocity = Vector3.zero;
+        droneRigidbody.angularVelocity = Vector3.zero;
+        maxRPM = 0f; 
+        boundaryEnforcer.TeleportBackToStart();
+        Debug.Log("Drone respawned");
+        droneActive = true;
     }
     public bool GetDroneDestroyed()
     {
         return !droneActive;
     }
 
-    void Respawn()
-    {
-        Vector3 safeSpawn = droneStartingTransform.position + Vector3.up * 2f;
-
-        droneRigidbody.position = safeSpawn;
-        droneRigidbody.rotation = droneStartingTransform.rotation;
-
-        droneRigidbody.linearVelocity = Vector3.zero;
-        droneRigidbody.angularVelocity = Vector3.zero;
-
-        droneActive = true;
-    }
 }

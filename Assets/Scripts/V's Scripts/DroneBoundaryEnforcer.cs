@@ -49,7 +49,7 @@ public class DroneBoundaryEnforcer : MonoBehaviour
         }
     }
 
-    void TeleportBackToStart()
+    public void TeleportBackToStart()
     {
         Debug.Log("teleporting to start");
 

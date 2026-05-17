@@ -113,7 +113,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _UnscaledTime: 30.688478
+    - _UnscaledTime: 15.392749
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
