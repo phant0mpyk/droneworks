@@ -7,70 +7,41 @@ public class DroneInputManager : MonoBehaviour
     FlightController flightController;
 
     float throttleAxis;
-    float pitchAxis; 
-    float yawAxis; 
-    float rollAxis; 
+    float pitchAxis;
+    float yawAxis;
+    float rollAxis;
 
-    [Header("Input")]
-    [Header("Keyboard")]
-    [SerializeField] 
-    InputActionReference flyWASD;
+    // The missing serialized fields that will now show up in your Inspector:
+    [Header("Core Flight Axis References")]
+    [SerializeField] InputActionReference throttleActionRef;
+    [SerializeField] InputActionReference yawActionRef;
+    [SerializeField] InputActionReference pitchActionRef;
+    [SerializeField] InputActionReference rollActionRef;
 
-    [SerializeField] 
-    InputActionReference flyArrows;
-
-    [SerializeField]
-    InputActionReference toggleCameraKeyboard;
-
-    [SerializeField]
-    InputActionReference rotateKeyboardGimbalUp;
-
-    [SerializeField]
-    InputActionReference rotateKeyboardGimbalDown;
-
-    [SerializeField]
-    InputActionReference toggleKeyboardThermalVision;
-
-    [SerializeField]
-    InputActionReference pingKeyboard;
+    [Header("Other Inputs")]
+    [SerializeField] InputActionReference toggleCameraKeyboard;
+    [SerializeField] InputActionReference toggleCameraController;
+    [SerializeField] InputActionReference rotateKeyboardGimbalUp;
+    [SerializeField] InputActionReference rotateKeyboardGimbalDown;
+    [SerializeField] InputActionReference rotateControllerGimbalUp;
+    [SerializeField] InputActionReference rotateControllerGimbalDown;
+    [SerializeField] InputActionReference toggleKeyboardThermalVision;
+    [SerializeField] InputActionReference toggleControllerThermalVision;
+    [SerializeField] InputActionReference pingKeyboard;
+    [SerializeField] InputActionReference pingController;
 
     bool keyboardInputActive = false;
-    [Header("Controller")]
-    [SerializeField]
-    InputActionReference leftStickInputAxis;
-
-    [SerializeField]
-    InputActionReference rightStickInputAxis;
-
-    [SerializeField]
-    InputActionReference toggleCameraController;
-
-    [SerializeField]
-    InputActionReference rotateControllerGimbalUp;
-
-    [SerializeField]
-    InputActionReference rotateControllerGimbalDown;
-
-    [SerializeField]
-    InputActionReference toggleControllerThermalVision;
-
-    [SerializeField]
-    InputActionReference pingController;
-    bool controllerInputActive = false; 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    void Awake()
-    {
-
-    }
+    bool controllerInputActive = false;
 
     void Start()
     {
-        //enable the input actions, because two of them at the same time cancelled eachother
-        flyWASD.action.Enable();
-        flyArrows.action.Enable();
-        leftStickInputAxis.action.Enable();
-        rightStickInputAxis.action.Enable();
+        // 1. Enable our 4 core flight axes
+        if (throttleActionRef != null) throttleActionRef.action.Enable();
+        if (yawActionRef != null) yawActionRef.action.Enable();
+        if (pitchActionRef != null) pitchActionRef.action.Enable();
+        if (rollActionRef != null) rollActionRef.action.Enable();
+
+        // 2. Enable peripheral utilities
         toggleCameraKeyboard.action.Enable();
         toggleCameraController.action.Enable();
         rotateControllerGimbalUp.action.Enable();
@@ -81,14 +52,14 @@ public class DroneInputManager : MonoBehaviour
         toggleControllerThermalVision.action.Enable();
         pingKeyboard.action.Enable();
         pingController.action.Enable();
-        
+
+        // Subscriptions
         toggleKeyboardThermalVision.action.performed += ToggleThermalVision;
         toggleControllerThermalVision.action.performed += ToggleThermalVision;
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
     }
 
-    // Update is called once per frame
     void Update()
     {
         DecideInputMethod();
@@ -97,89 +68,57 @@ public class DroneInputManager : MonoBehaviour
 
     void DecideInputMethod()
     {
-        if(flyWASD.action.triggered || flyArrows.action.triggered)
+        if (throttleActionRef.action.triggered || yawActionRef.action.triggered ||
+            pitchActionRef.action.triggered || rollActionRef.action.triggered)
         {
-            controllerInputActive = false;
-            keyboardInputActive = true;
-        }else if (leftStickInputAxis.action.triggered || rightStickInputAxis.action.triggered)
-        {
-            controllerInputActive = true;
-            keyboardInputActive = false;
+            var activeControl = throttleActionRef.action.activeControl;
+            if (activeControl != null)
+            {
+                if (activeControl.device is Keyboard)
+                {
+                    controllerInputActive = false;
+                    keyboardInputActive = true;
+                }
+                else
+                {
+                    controllerInputActive = true;
+                    keyboardInputActive = false;
+                }
+            }
         }
     }
 
     void ReadInput()
     {
-        //input depending on the currently active controls
-        //looks like action.triggered only fires once when the input is first detected so there are booleans which indicate which layout is active instead
-        if (controllerInputActive)
-        {
-            Vector2 flyLeftStickInput = leftStickInputAxis.action.ReadValue<Vector2>();
-            Vector2 flyRightStickInput = rightStickInputAxis.action.ReadValue<Vector2>();
-            throttleAxis = flyLeftStickInput.y;
-            yawAxis = flyLeftStickInput.x;
-            pitchAxis = flyRightStickInput.y;
-            rollAxis = flyRightStickInput.x;
-            //rotation only allowed for controller, because it's a feature on the dji controller
-            //also it might be too much for the keyboard drone, since it's moves are very erratic, so there will only be toggle with that one
-            GimbalRotation();
-        }else if (keyboardInputActive)
-        {
-            Vector2 flyWASDInput = flyWASD.action.ReadValue<Vector2>();
-            throttleAxis = flyWASDInput.y; 
-            yawAxis = flyWASDInput.x;     
-            Vector2 arrowInput = flyArrows.action.ReadValue<Vector2>();
-            rollAxis = arrowInput.x;
-            pitchAxis = arrowInput.y;
-            GimbalRotation();
-        }
+        // Read directly from the 4 standalone float references
+        throttleAxis = throttleActionRef.action.ReadValue<float>();
+        yawAxis = yawActionRef.action.ReadValue<float>();
+        pitchAxis = pitchActionRef.action.ReadValue<float>();
+        rollAxis = rollActionRef.action.ReadValue<float>();
+
+        GimbalRotation();
     }
 
-    public float GetThrottleAxis()
-    {
-        return throttleAxis;
-    }
+    public float GetThrottleAxis() => throttleAxis;
+    public float GetYawAxis() => yawAxis;
+    public float GetPitchAxis() => pitchAxis;
+    public float GetRollAxis() => rollAxis;
 
-    public float GetYawAxis()
-    {
-        return yawAxis;
-    }
-
-    public float GetPitchAxis()
-    {
-        return pitchAxis;
-    }
-
-    public float GetRollAxis()
-    {
-        return rollAxis;
-    }
-
-    private void CameraToggle(InputAction.CallbackContext context)
-    {
-        flightController.OnCameraToggle();
-    }
-
-    private void Ping(InputAction.CallbackContext context)
-    {
-        flightController.Ping();
-    }
-
-    private void ToggleThermalVision(InputAction.CallbackContext context)
-    {
-        flightController.ToggleThermalVision();
-    }
+    private void CameraToggle(InputAction.CallbackContext context) => flightController.OnCameraToggle();
+    private void Ping(InputAction.CallbackContext context) => flightController.Ping();
+    private void ToggleThermalVision(InputAction.CallbackContext context) => flightController.ToggleThermalVision();
 
     private void GimbalRotation()
     {
-            if (rotateControllerGimbalUp.action.IsPressed() || rotateKeyboardGimbalUp.action.IsPressed())
-            {
-                Debug.Log("UP");
-                flightController.RotateGimbalUp();
-            }else if(rotateControllerGimbalDown.action.IsPressed() || rotateKeyboardGimbalDown.action.IsPressed())
-            {
-                Debug.Log("Down");
-                flightController.RotateGimbalDown();
-            }
+        if (rotateControllerGimbalUp.action.IsPressed() || rotateKeyboardGimbalUp.action.IsPressed())
+        {
+            Debug.Log("UP");
+            flightController.RotateGimbalUp();
+        }
+        else if (rotateControllerGimbalDown.action.IsPressed() || rotateKeyboardGimbalDown.action.IsPressed())
+        {
+            Debug.Log("Down");
+            flightController.RotateGimbalDown();
+        }
     }
 }

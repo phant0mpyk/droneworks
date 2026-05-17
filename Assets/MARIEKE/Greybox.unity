@@ -97039,6 +97039,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneDJIMini2
       objectReference: {fileID: 0}
+    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: yawActionRef
+      value: 
+      objectReference: {fileID: -859858268539393133, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: rollActionRef
+      value: 
+      objectReference: {fileID: 1531588772536972362, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: pitchActionRef
+      value: 
+      objectReference: {fileID: 1475731880797503259, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: throttleActionRef
+      value: 
+      objectReference: {fileID: 4386295940900750490, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32.5
