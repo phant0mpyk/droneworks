@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &893191541733917587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5872151636634427438}
+  - component: {fileID: 1627501810112325279}
+  m_Layer: 0
+  m_Name: CutoffObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5872151636634427438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893191541733917587}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -45.92259, y: 251.62863, z: -473.89648}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1627501810112325279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893191541733917587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad36a8ccef31c884ba8ab63410c019f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glitch: {fileID: 2100000, guid: a9b7f5b8eec94c742a7bee5a41ba303a, type: 2}
+  grain: {fileID: 2100000, guid: b4e6e98b186d65449bfad885c09efea3, type: 2}
+  glitchTimer: 0.5
+  grainTimer: 2
+  noiseMultiplier: 20
+  glitchStrength: 750
+  grainSpeed: 30
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
