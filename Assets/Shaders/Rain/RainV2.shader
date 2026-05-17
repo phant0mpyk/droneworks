@@ -109,6 +109,7 @@ Shader "Unlit/RainV2"
                 worldPos.xz += windOffset;
                 // Convert to clip space (correct way)
                 o.pos = mul(UNITY_MATRIX_VP, float4(worldPos, 1.0));
+                
 
                 o.uv = v.uv;
 

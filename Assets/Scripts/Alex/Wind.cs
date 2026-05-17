@@ -20,6 +20,7 @@ public class Wind : MonoBehaviour
     BoxCollider windCollider;
     bool windZone =  true;
     private Rigidbody droneRigidbody;
+    [SerializeField] private float tuning;
     
     void CalculateRaycastPoints()
     {
@@ -57,7 +58,7 @@ public class Wind : MonoBehaviour
 
     void CalculateWindStrength()
     {
-        windStrength = 0.5f * windVelocity * windVelocity * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient / 3.6f; //calculate wind force from the relative velocity
+        windStrength = tuning* 0.5f * windVelocity * windVelocity * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient / 3.6f /3.6f; //calculate wind force from the relative velocity
     }
     
     private void Start()
@@ -114,8 +115,12 @@ public class Wind : MonoBehaviour
                             continue;
                         }
                         if (hitBack.collider.tag == "Wind")
-                        { 
-                            droneRigidbody.AddForceAtPosition((Time.deltaTime * windStrength) * -point.transform.forward, hit.point, ForceMode.Force);
+                        {
+                            float amplitude = Mathf.Max(0, Vector3.Dot(point.transform.forward.normalized, hit.normal.normalized));
+                            amplitude *= amplitude;
+                            droneRigidbody.AddForceAtPosition(amplitude * windStrength * -point.transform.forward, hit.point, ForceMode.Force);
+                            //droneRigidbody.AddForce((windStrength) * -point.transform.forward, ForceMode.Force);
+
 
                         }
                     }
