@@ -28,6 +28,8 @@ public class DroneCameraManager : MonoBehaviour
 
     float currGimbalAngle;
 
+    float currGimbalAngleFromWorldUp;
+
     [SerializeField]
     float cameraGimbalRotationSpeed = 5f;
 
@@ -103,6 +105,19 @@ public class DroneCameraManager : MonoBehaviour
         currCameraGimbalRotationDirection = _rotationDirection;
         currGimbalAngle += (int)currCameraGimbalRotationDirection * cameraGimbalRotationSpeed * Time.deltaTime;
         currGimbalAngle = Mathf.Clamp(currGimbalAngle, cameraGimbalRotationCap.x,cameraGimbalRotationCap.y);
-        droneFrontCamera.gameObject.transform.localRotation = Quaternion.Euler(-currGimbalAngle,0,0);
+    }
+
+    public void AdjustGimbalAngle(Vector3 worldVectorUp, Vector3 droneVectorForward)
+    {
+        Transform drone = transform.parent;
+        //forward vector of the drone but flattened horizontally without pitch or roll
+        Vector3 droneYawOnlyForward = Vector3.ProjectOnPlane(drone.forward, worldVectorUp).normalized;
+        //adjustment so the camera doesn't glitch out when it's close to the rotation point
+        if (droneYawOnlyForward.sqrMagnitude < 0.001f) return;
+        //drone camera looks only along horizon line 
+        Quaternion droneYaw = Quaternion.LookRotation(droneYawOnlyForward, worldVectorUp);
+        //adds the rotation of camera up/down that can be adjusted by the player
+        Quaternion gimbal = Quaternion.Euler(-currGimbalAngle, 0f, 0f);
+        droneFrontCamera.transform.rotation = droneYaw * gimbal;
     }
 }

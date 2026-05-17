@@ -33,6 +33,12 @@ public class DroneUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private Rigidbody droneRigidbody;
 
+    [Header("Death Screen")]
+    [SerializeField] private GameObject deathScreen;
+    private bool droneDestroyed = false;
+
+    private bool spawnedDeathScreen = false;
+
     private float _timePassed;
 
     void Start()
@@ -42,13 +48,22 @@ public class DroneUIManager : MonoBehaviour
 
     void Update()
     {
-        UpdateBatteryUI();
-        UpdateFlightTimer();
-        UpdateArtificialHorizon();
-        UpdateCargoUI();
-        UpdateAltitudeUI();
-        UpdateCompass();
-        UpdateSpeedUI();
+        droneDestroyed = droneScript.GetDroneDestroyed();
+        if (droneDestroyed && !spawnedDeathScreen)
+        {
+            DestroyDrone();
+        }
+        else
+        {
+            spawnedDeathScreen = false;
+            UpdateBatteryUI();
+            UpdateFlightTimer();
+            UpdateArtificialHorizon();
+            UpdateCargoUI();
+            UpdateAltitudeUI();
+            UpdateCompass();
+            UpdateSpeedUI();
+        }
     }
     void UpdateSpeedUI()
     {
@@ -131,4 +146,17 @@ public class DroneUIManager : MonoBehaviour
         float yOffset = adjustedPitch * pitchSensitivity;
         horizonLine.anchoredPosition = new Vector2(0, yOffset);
     }
+
+    public void DestroyDrone()
+    {
+        spawnedDeathScreen = true;
+        droneDestroyed = true;
+        Instantiate(deathScreen, transform.position, Quaternion.identity);
+    }
+
+    // IEnumerator ShowDeathScreen()
+    // {
+    //     yield return new WaitForSeconds(1f);
+    //     deathScreen.SetActive(true);
+    // }
 }
