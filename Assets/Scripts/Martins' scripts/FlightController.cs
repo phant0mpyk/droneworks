@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using System.Collections;
 
 
 [RequireComponent(typeof(DroneInputManager))]
@@ -20,7 +21,6 @@ public class FlightController : MonoBehaviour
 {
     DroneInputManager inputManager;
 
-    [SerializeField]
     DroneBatteryManager battery;
 
     [SerializeField]
@@ -98,6 +98,13 @@ public class FlightController : MonoBehaviour
     [SerializeField]
     float yawStabilizedRotationMultiplier = 1f;
 
+    Vector3 worldUpVector;
+    Vector3 droneUpVector;
+
+    Transform droneStartingTransform;
+
+    Vector3 droneForwardVector;
+
     void Awake()
     {
         droneRigidbody = GetComponent<Rigidbody>();
@@ -111,14 +118,24 @@ public class FlightController : MonoBehaviour
     }
     void Start()
     {
+        droneStartingTransform = transform;
+        droneStartingTransform.position = transform.position;
+        droneStartingTransform.rotation = transform.rotation;
         droneActive = true;
+        worldUpVector = Vector3.up.normalized;
+        droneUpVector = transform.up.normalized;
+        droneForwardVector = transform.forward.normalized;
     }
 
     //tip for values (English to Slovak)
     //current = prud (Ampers), voltage = napatie (Volts), power = vykon (Watts), energy = energia (Wh), capacity = kapacita (mAh), resistance = odpor (Ohms)
     void Update()
     {
-        
+        if(flightMode == FlightMode.Stabilized)
+        {
+            droneUpVector = transform.up.normalized;
+            cameraManager.AdjustGimbalAngle(worldUpVector, droneForwardVector);
+        }
         if (droneActive)
         {
             //update each frame cuz it needs to respond to the battery voltage dropping the maxRPM over time as battery runs out
@@ -135,6 +152,7 @@ public class FlightController : MonoBehaviour
     //Stabilized flight mode applies same as acrobatic but rotates it using transform instead of torque (also disregards that during currRPM calculations)
     void FixedUpdate()
     {
+        if (!droneActive || !inputManager) return;
         // Debug.Log(GetBatteryPercentageWithBatterySafety() + "% battery remaining. Current battery voltage: " + currBatteryVoltage + "V");
         //the drone will first calculate the voltage drop that affects the maxRPM after which it will apply the change to the maxRPM possible
         if(droneActive && inputManager)
@@ -264,4 +282,45 @@ public class FlightController : MonoBehaviour
         Debug.Log("Flight Mode Toggled to: " + flightMode);
     }
     //end of added by V
+    public void DestroyDrone()
+    {
+        droneActive = false;
+
+        droneRigidbody.linearVelocity = Vector3.zero;
+        droneRigidbody.angularVelocity = Vector3.zero;
+
+        droneRigidbody.isKinematic = true;
+        droneRigidbody.detectCollisions = false;
+
+        StartCoroutine(RespawnCoroutine(1f));
+    }
+
+    private IEnumerator RespawnCoroutine(float respawnTime)
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        Respawn();
+
+        yield return new WaitForFixedUpdate(); // IMPORTANT
+
+        droneRigidbody.detectCollisions = true;
+        droneRigidbody.isKinematic = false;
+    }
+    public bool GetDroneDestroyed()
+    {
+        return !droneActive;
+    }
+
+    void Respawn()
+    {
+        Vector3 safeSpawn = droneStartingTransform.position + Vector3.up * 2f;
+
+        droneRigidbody.position = safeSpawn;
+        droneRigidbody.rotation = droneStartingTransform.rotation;
+
+        droneRigidbody.linearVelocity = Vector3.zero;
+        droneRigidbody.angularVelocity = Vector3.zero;
+
+        droneActive = true;
+    }
 }

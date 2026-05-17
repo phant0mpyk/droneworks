@@ -315,7 +315,8 @@ public class FenceLayoutEditor : Editor
 	// --------------------------------------------------------------------------
 
 	public void CreateFences()
-	{
+	{	//added for sequential fence prefab generation
+		currIndex = 0;
 		// Recreate fences.
 		Vector3 lastPos = new Vector3();
 		bool gotLast = false;
@@ -496,10 +497,17 @@ public class FenceLayoutEditor : Editor
 
 	// --------------------------------------------------------------------------
 
+	private int currIndex = 0;
+	
 	private Transform GetRandomFencePrefab()
 	{
-		int idx = Random.Range(0, m_fenceLayout.FencePrefabs.Length);
-		return m_fenceLayout.FencePrefabs[idx] != null ? m_fenceLayout.FencePrefabs[idx] : m_fenceLayout.FencePrefabs[0];
+		Transform pickedFence = m_fenceLayout.FencePrefabs[currIndex] != null ? m_fenceLayout.FencePrefabs[currIndex] : m_fenceLayout.FencePrefabs[0];
+		currIndex += 1;
+		if (currIndex >= m_fenceLayout.FencePrefabs.Length)
+		{
+			currIndex = 0;
+		}
+		return pickedFence;
 	}
 
 	// --------------------------------------------------------------------------

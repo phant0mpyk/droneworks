@@ -84,8 +84,6 @@ public class DroneInputManager : MonoBehaviour
         
         toggleKeyboardThermalVision.action.performed += ToggleThermalVision;
         toggleControllerThermalVision.action.performed += ToggleThermalVision;
-        pingKeyboard.action.performed += Ping;
-        pingController.action.performed += Ping;
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
     }

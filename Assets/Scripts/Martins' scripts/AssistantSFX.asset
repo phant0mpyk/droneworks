@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbdcb3e0a93dcd46819fa3daed076bf, type: 3}
+  m_Name: AssistantSFX
+  m_EditorClassIdentifier: 
+  audioClipEntries:
+  - clipName: Liftoff
+    audioClip: {fileID: 8300000, guid: 020b0e947ade4d443826124e06502141, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: DontFlyNearPeople
+    audioClip: {fileID: 8300000, guid: d047d55547815b04abbe41f7eea95cf6, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: LightningHeadsUp
+    audioClip: {fileID: 8300000, guid: cb4d6a33d332464428ebfa424595da6f, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: LightningWarning
+    audioClip: {fileID: 8300000, guid: 52a0b8da36eeb7b41b8c1d1b4fe5928d, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: NearCabin
+    audioClip: {fileID: 8300000, guid: 507bfec954b36db4ea279c6db85b9c7d, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: WildlifeHeadsUp
+    audioClip: {fileID: 8300000, guid: 79e6218c5739f594aa609600cd078790, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: WildlifeWarning
+    audioClip: {fileID: 8300000, guid: 46c216af625f6ea409eee5670b912e68, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: CaveHeadsUp
+    audioClip: {fileID: 8300000, guid: 39590fddbd384fb40ac4060c9328a534, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 8300000, guid: 7f8efaad060f992459cbd52ac1537a19, type: 3}
+  - clipName: InCaveEntrance
+    audioClip: {fileID: 8300000, guid: 11968c03952789540907c3bbda92a19d, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 8300000, guid: aab8b1f79234c424b8503685fc09ce89, type: 3}
+  - clipName: TakingTooLong
+    audioClip: {fileID: 8300000, guid: a7de2440e118b8f49a81063c042eb2ea, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: WrongWayInCave
+    audioClip: {fileID: 8300000, guid: 5eb891388a752ef46b04faed9900f4ea, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 8300000, guid: 8bcf835eeeda59b418cab920c7761c23, type: 3}
+  - clipName: FallenTree
+    audioClip: {fileID: 8300000, guid: fcfb8ee97a5e5354ab5b9781f5099c96, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: SteepHills
+    audioClip: {fileID: 8300000, guid: 614c2225909155646902671fb4a6f86c, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: Waterfall
+    audioClip: {fileID: 8300000, guid: e339b7407ecb6204aa0ee02ff7867e89, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: NearEnd
+    audioClip: {fileID: 8300000, guid: dca21732d64412f4784348ed70f0b9b3, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
+  - clipName: NearEnd
+    audioClip: {fileID: 8300000, guid: dca21732d64412f4784348ed70f0b9b3, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DroneUIManager : MonoBehaviour
 {
@@ -33,6 +34,18 @@ public class DroneUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private Rigidbody droneRigidbody;
 
+    [Header("Death Screen")]
+    [SerializeField] private GameObject deathScreen;
+
+    [Header("Flight Limits")]
+    [SerializeField] private CanvasGroup warningCanvasGroup;
+    [SerializeField] private float maxFlightHeight = 120f;
+    [SerializeField] private float fadeSpeed = 2f;
+
+    private bool droneDestroyed = false;
+
+    private bool spawnedDeathScreen = false;
+
     private float _timePassed;
 
     void Start()
@@ -42,13 +55,22 @@ public class DroneUIManager : MonoBehaviour
 
     void Update()
     {
-        UpdateBatteryUI();
-        UpdateFlightTimer();
-        UpdateArtificialHorizon();
-        UpdateCargoUI();
-        UpdateAltitudeUI();
-        UpdateCompass();
-        UpdateSpeedUI();
+        droneDestroyed = droneScript.GetDroneDestroyed();
+        if (droneDestroyed && !spawnedDeathScreen)
+        {
+            DestroyDrone();
+        }
+        else
+        {
+            spawnedDeathScreen = false;
+            UpdateBatteryUI();
+            UpdateFlightTimer();
+            UpdateArtificialHorizon();
+            UpdateCargoUI();
+            UpdateAltitudeUI();
+            UpdateCompass();
+            UpdateSpeedUI();
+        }
     }
     void UpdateSpeedUI()
     {
@@ -75,8 +97,23 @@ public class DroneUIManager : MonoBehaviour
         {
             agl = hit.distance;
         }
+        else
+        {
+            agl = asl;
+        }
 
         altitudeAGLText.text = $"HGT (AGL): {agl:F1} m";
+
+        if (warningCanvasGroup != null)
+        {
+            float targetAlpha = (agl >= maxFlightHeight) ? 1.0f : 0.0f;
+            warningCanvasGroup.alpha = Mathf.MoveTowards(
+                warningCanvasGroup.alpha,
+                targetAlpha,
+                fadeSpeed * Time.deltaTime
+            );
+            altitudeAGLText.color = Color.Lerp(Color.white, Color.red, warningCanvasGroup.alpha);
+        }
     }
     void UpdateBatteryUI()
     {
@@ -131,4 +168,17 @@ public class DroneUIManager : MonoBehaviour
         float yOffset = adjustedPitch * pitchSensitivity;
         horizonLine.anchoredPosition = new Vector2(0, yOffset);
     }
+
+    public void DestroyDrone()
+    {
+        spawnedDeathScreen = true;
+        droneDestroyed = true;
+        Instantiate(deathScreen, transform.position, Quaternion.identity);
+    }
+
+    // IEnumerator ShowDeathScreen()
+    // {
+    //     yield return new WaitForSeconds(1f);
+    //     deathScreen.SetActive(true);
+    // }
 }

@@ -349,7 +349,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7468640436260572831
+--- !u!1001 &674362118
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -357,59 +357,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 706085750377715329, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_Name
+      value: DroneDJIMini2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -45.893482
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 248.34
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -464.31
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+    - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
-      propertyPath: m_Name
-      value: Drone
+    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 633106681}
   - {fileID: 633660785}
-  - {fileID: 7468640436260572831}
+  - {fileID: 674362118}
