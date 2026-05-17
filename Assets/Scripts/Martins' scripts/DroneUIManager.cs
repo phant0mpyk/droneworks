@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DroneUIManager : MonoBehaviour
 {
@@ -35,6 +36,12 @@ public class DroneUIManager : MonoBehaviour
 
     [Header("Death Screen")]
     [SerializeField] private GameObject deathScreen;
+
+    [Header("Flight Limits")]
+    [SerializeField] private CanvasGroup warningCanvasGroup;
+    [SerializeField] private float maxFlightHeight = 120f;
+    [SerializeField] private float fadeSpeed = 2f;
+
     private bool droneDestroyed = false;
 
     private bool spawnedDeathScreen = false;
@@ -90,8 +97,23 @@ public class DroneUIManager : MonoBehaviour
         {
             agl = hit.distance;
         }
+        else
+        {
+            agl = asl;
+        }
 
         altitudeAGLText.text = $"HGT (AGL): {agl:F1} m";
+
+        if (warningCanvasGroup != null)
+        {
+            float targetAlpha = (agl >= maxFlightHeight) ? 1.0f : 0.0f;
+            warningCanvasGroup.alpha = Mathf.MoveTowards(
+                warningCanvasGroup.alpha,
+                targetAlpha,
+                fadeSpeed * Time.deltaTime
+            );
+            altitudeAGLText.color = Color.Lerp(Color.white, Color.red, warningCanvasGroup.alpha);
+        }
     }
     void UpdateBatteryUI()
     {
