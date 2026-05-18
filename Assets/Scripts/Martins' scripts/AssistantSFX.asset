@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: AssistantSFX
   m_EditorClassIdentifier: 
   audioClipEntries:
+  - clipName: TakingTooLong
+    audioClip: {fileID: 8300000, guid: a7de2440e118b8f49a81063c042eb2ea, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
   - clipName: Liftoff
     audioClip: {fileID: 8300000, guid: 020b0e947ade4d443826124e06502141, type: 3}
     timeToPlayTimedClipSeconds: 0
@@ -43,20 +47,20 @@ MonoBehaviour:
     audioTimedClip: {fileID: 0}
   - clipName: CaveHeadsUp
     audioClip: {fileID: 8300000, guid: 39590fddbd384fb40ac4060c9328a534, type: 3}
-    timeToPlayTimedClipSeconds: 0
+    timeToPlayTimedClipSeconds: 30
     audioTimedClip: {fileID: 8300000, guid: 7f8efaad060f992459cbd52ac1537a19, type: 3}
   - clipName: InCaveEntrance
     audioClip: {fileID: 8300000, guid: 11968c03952789540907c3bbda92a19d, type: 3}
-    timeToPlayTimedClipSeconds: 0
+    timeToPlayTimedClipSeconds: 5
     audioTimedClip: {fileID: 8300000, guid: aab8b1f79234c424b8503685fc09ce89, type: 3}
-  - clipName: TakingTooLong
-    audioClip: {fileID: 8300000, guid: a7de2440e118b8f49a81063c042eb2ea, type: 3}
-    timeToPlayTimedClipSeconds: 0
-    audioTimedClip: {fileID: 0}
   - clipName: WrongWayInCave
     audioClip: {fileID: 8300000, guid: 5eb891388a752ef46b04faed9900f4ea, type: 3}
     timeToPlayTimedClipSeconds: 0
     audioTimedClip: {fileID: 8300000, guid: 8bcf835eeeda59b418cab920c7761c23, type: 3}
+  - clipName: Waterfall
+    audioClip: {fileID: 8300000, guid: e339b7407ecb6204aa0ee02ff7867e89, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    audioTimedClip: {fileID: 0}
   - clipName: FallenTree
     audioClip: {fileID: 8300000, guid: fcfb8ee97a5e5354ab5b9781f5099c96, type: 3}
     timeToPlayTimedClipSeconds: 0
@@ -65,15 +69,11 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 614c2225909155646902671fb4a6f86c, type: 3}
     timeToPlayTimedClipSeconds: 0
     audioTimedClip: {fileID: 0}
-  - clipName: Waterfall
-    audioClip: {fileID: 8300000, guid: e339b7407ecb6204aa0ee02ff7867e89, type: 3}
-    timeToPlayTimedClipSeconds: 0
-    audioTimedClip: {fileID: 0}
   - clipName: NearEnd
     audioClip: {fileID: 8300000, guid: dca21732d64412f4784348ed70f0b9b3, type: 3}
     timeToPlayTimedClipSeconds: 0
     audioTimedClip: {fileID: 0}
-  - clipName: NearEnd
-    audioClip: {fileID: 8300000, guid: dca21732d64412f4784348ed70f0b9b3, type: 3}
+  - clipName: End
+    audioClip: {fileID: 8300000, guid: afe80d95770bb7f4a89a264ecd245e28, type: 3}
     timeToPlayTimedClipSeconds: 0
-    audioTimedClip: {fileID: 0}
+    audioTimedClip: {fileID: 8300000, guid: 60690caa82f9d8a4b96f28fad6e269c5, type: 3}

@@ -11,6 +11,10 @@ public class DroneBoundaryEnforcer : MonoBehaviour
     [SerializeField] private FlightController droneScript;
     [SerializeField] private Rigidbody droneRigidbody;
 
+    [SerializeField] private SFXManager sfxManager;
+    [SerializeField] private string heightWarningClipName = "LightningWarning";
+    private bool _hasPlayedWarning = false;
+
     private Vector3 _startPosition;
     private Quaternion _startRotation;
     private float _violationTimer = 0f;
@@ -22,6 +26,7 @@ public class DroneBoundaryEnforcer : MonoBehaviour
 
         if (droneScript == null) droneScript = GetComponent<FlightController>();
         if (droneRigidbody == null) droneRigidbody = GetComponent<Rigidbody>();
+        if (sfxManager == null) sfxManager = FindFirstObjectByType<SFXManager>();
     }
 
     void Update()
@@ -37,7 +42,11 @@ public class DroneBoundaryEnforcer : MonoBehaviour
         if (agl >= maxFlightHeight)
         {
             _violationTimer += Time.deltaTime;
-
+            if(sfxManager != null && !_hasPlayedWarning)
+            {
+                sfxManager.PlayVoicelineSFX(heightWarningClipName);
+                _hasPlayedWarning = true;
+            }
             if (_violationTimer >= warningDuration)
             {
                 TeleportBackToStart();
@@ -46,6 +55,7 @@ public class DroneBoundaryEnforcer : MonoBehaviour
         else
         {
             _violationTimer = 0f;
+            _hasPlayedWarning = false;
         }
     }
 
