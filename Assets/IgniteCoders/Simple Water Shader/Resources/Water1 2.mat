@@ -140,7 +140,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SecondTextureSpeed: 0.5
+    - _SecondTextureSpeed: 3
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -152,10 +152,10 @@ Material:
     m_Colors:
     - Color_36218622185947c6a5ae36366d8e21d8: {r: 0.65913135, g: 0.8073071, b: 0.8679245, a: 0.44705883}
     - Color_93e06cd551a5449091bcde90b46765a0: {r: 0.19023676, g: 0.84637916, b: 0.8962264, a: 0.1960784}
-    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 1, g: 3.28, b: 0, a: 0}
+    - Vector2_4351ac2be1d74054986ec5378db9d578: {r: 4, g: 13.2, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Direction: {r: 1, g: 0, b: 0, a: 0}
+    - _Direction: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
