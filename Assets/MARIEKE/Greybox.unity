@@ -14883,140 +14883,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 706085750377715329, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
   m_PrefabInstance: {fileID: 1893403051}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &360595824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360595823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcf69cb2495cebc4a879f5096dbe5950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxFlightHeight: 50
-  warningDuration: 5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  droneScript: {fileID: 360595831}
-  droneRigidbody: {fileID: 360595828}
-  sfxManager: {fileID: 244422563}
-  heightWarningClipName: LightningWarning
---- !u!54 &360595828 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 3664858985641207630, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-  m_PrefabInstance: {fileID: 1893403051}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &360595831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 624503940978350954, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-  m_PrefabInstance: {fileID: 1893403051}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360595823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eccf32da004ac2945b4466a782e2eb50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!82 &360595838
+--- !u!82 &360595838 stripped
 AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6294644913783615408, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+  m_PrefabInstance: {fileID: 1893403051}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360595823}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &360652646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97867,22 +97738,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DroneDJIMini2
       objectReference: {fileID: 0}
-    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: yawActionRef
-      value: 
-      objectReference: {fileID: -859858268539393133, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: rollActionRef
-      value: 
-      objectReference: {fileID: 1531588772536972362, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: pitchActionRef
-      value: 
-      objectReference: {fileID: 1475731880797503259, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
-    - target: {fileID: 1720362214153490511, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: throttleActionRef
-      value: 
-      objectReference: {fileID: 4386295940900750490, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     - target: {fileID: 4145401326177913306, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.04
@@ -97923,6 +97778,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4314522206375673368, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
+      propertyPath: sfxManager
+      value: 
+      objectReference: {fileID: 244422563}
     - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: speedText
       value: 
@@ -97931,10 +97790,6 @@ PrefabInstance:
       propertyPath: compassDisk
       value: 
       objectReference: {fileID: 663184802}
-    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: deathScreen
-      value: 
-      objectReference: {fileID: 893191541733917587, guid: 1e2856ef5e362284ca787a66aa0f02ab, type: 3}
     - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: headingText
       value: 
@@ -97960,10 +97815,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 882662192}
     - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      propertyPath: maxFlightHeight
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7022915515378010522, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
       propertyPath: warningCanvasGroup
       value: 
       objectReference: {fileID: 704576029}
@@ -97974,13 +97825,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 706085750377715329, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 360595824}
-    - targetCorrespondingSourceObject: {fileID: 706085750377715329, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 360595838}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31287965a35a1534f959c61176c2cb56, type: 3}
 --- !u!1 &1893740740
 GameObject:

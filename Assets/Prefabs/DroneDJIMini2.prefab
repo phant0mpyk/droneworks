@@ -34,19 +34,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -45.893482
+      value: 33.04
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 251.73
+      value: 38.72
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -473.93
+      value: 147.41
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.35265845
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9357521
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -138.7
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -87,6 +87,10 @@ PrefabInstance:
     - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Name
       value: DroneDJIMini2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: energy
@@ -112,6 +116,22 @@ PrefabInstance:
       propertyPath: batteryMaxDischargePercentage
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: yawActionRef
+      value: 
+      objectReference: {fileID: -859858268539393133, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: rollActionRef
+      value: 
+      objectReference: {fileID: 1531588772536972362, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: pitchActionRef
+      value: 
+      objectReference: {fileID: 1475731880797503259, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: throttleActionRef
+      value: 
+      objectReference: {fileID: 4386295940900750490, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: rotateKeyboardGimbalUp
       value: 
@@ -145,6 +165,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 893191541733917587, guid: 1e2856ef5e362284ca787a66aa0f02ab, type: 3}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: droneCamera
       value: 
       objectReference: {fileID: 6657063434801568618}
@@ -156,6 +180,10 @@ PrefabInstance:
       propertyPath: batteryScript
       value: 
       objectReference: {fileID: 1684824922448080046}
+    - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: maxFlightHeight
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5079025306797603152, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Size.x
       value: 0.60082245
@@ -267,19 +295,148 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       insertIndex: 0
       addedObject: {fileID: 4768032816737637082}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4314522206375673368}
+    - targetCorrespondingSourceObject: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6294644913783615408}
   m_SourcePrefab: {fileID: 100100000, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
 --- !u!114 &624503940978350954 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
   m_PrefabInstance: {fileID: 2327874683591548848}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 706085750377715329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eccf32da004ac2945b4466a782e2eb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &706085750377715329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_PrefabInstance: {fileID: 2327874683591548848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4314522206375673368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706085750377715329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf69cb2495cebc4a879f5096dbe5950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFlightHeight: 50
+  warningDuration: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  droneScript: {fileID: 624503940978350954}
+  droneRigidbody: {fileID: 3664858985641207630}
+  sfxManager: {fileID: 0}
+  heightWarningClipName: LightningWarning
+--- !u!82 &6294644913783615408
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706085750377715329}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1684824922448080046 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3976668471448007454, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
@@ -291,6 +448,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd06dd07c256a7d41bd76dc6da2e6859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &3664858985641207630 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1338260013907687678, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+  m_PrefabInstance: {fileID: 2327874683591548848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4145401326177913306 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
