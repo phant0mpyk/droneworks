@@ -243,24 +243,6 @@
             "id": "5db43ca0-9c46-4334-9980-cdb7cd5ac5f4",
             "actions": [
                 {
-                    "name": "Left",
-                    "type": "Value",
-                    "id": "398228d1-c9fd-4af6-ad1f-12db7c9313bd",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Right",
-                    "type": "Value",
-                    "id": "35033f39-4ead-40de-b678-68612e56ada2",
-                    "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone(min=0.1,max=1)",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ToggleCamera",
                     "type": "Button",
                     "id": "9544bb55-e50e-411d-bbff-56b6d02b95d4",
@@ -304,64 +286,45 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Throttle",
+                    "type": "Value",
+                    "id": "6a0aff3d-65d4-4540-98d3-374fe72dfb4d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Yaw",
+                    "type": "Value",
+                    "id": "1a92375d-4e82-4326-9f3a-7e52c07b7e5d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Pitch",
+                    "type": "Value",
+                    "id": "c82f7ca7-a06c-497b-bbd8-56d737a1d080",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Roll",
+                    "type": "Value",
+                    "id": "9b9aaec6-1c74-454a-96c3-f5e4b05f048e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "2D Vector",
-                    "id": "0e885f40-0023-421a-87ac-0f97c7e0fade",
-                    "path": "2DVector(mode=2)",
-                    "interactions": "",
-                    "processors": "StickDeadzone(min=0.1,max=1)",
-                    "groups": "",
-                    "action": "Left",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "acabf11c-fe3c-4ac7-9144-535e634ba3ff",
-                    "path": "<Gamepad>/leftStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "e64c500e-e792-465c-95cc-7a667306ef6c",
-                    "path": "<Gamepad>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "266d272a-efa9-4ef3-8c69-0eca62d0bdd6",
-                    "path": "<Gamepad>/leftStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "2eaf181e-e13a-48f5-84f0-f7f3e8946d37",
-                    "path": "<Gamepad>/leftStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Left",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
                 {
                     "name": "",
                     "id": "c99aa08d-8cd8-4329-b9db-2394dd9bd4bb",
@@ -374,64 +337,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "c57ea372-4edf-44e2-886d-d8da6b6f6e77",
-                    "path": "2DVector(mode=2)",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "788aecac-871f-4c7b-9ba8-fafc47277008",
-                    "path": "<Gamepad>/rightStick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "a6b17702-b44e-4f49-a55f-f8aec74c0342",
-                    "path": "<Gamepad>/rightStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "b9e3985e-b10a-4156-b635-05551aab59c6",
-                    "path": "<Gamepad>/rightStick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "be39fc71-b408-481c-91c7-028905f2caa4",
-                    "path": "<Gamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
                     "id": "4ccea836-b3eb-40f1-a544-b1fe183ac173",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -469,6 +377,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Ping",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37454119-4d09-498b-8e8a-9735cc209ad5",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/stick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throttle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec5a290b-416f-4db2-82f2-035a6ed70863",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/rx",
+                    "interactions": "",
+                    "processors": "AxisDeadzone(min=0.15)",
+                    "groups": "",
+                    "action": "Yaw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a598c2ad-4410-4beb-ab0c-90f7c314d47f",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9408370-595d-47a2-9f73-2cf3624296cf",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/stick/y",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
