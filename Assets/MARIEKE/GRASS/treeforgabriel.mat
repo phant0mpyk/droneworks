@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpeedPineV30
+  m_Name: treeforgabriel
   m_Shader: {fileID: -6465566751694194690, guid: 9920c1f1781549a46ba081a2a15a16ec, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,19 +26,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 2516b25df3c5c0c4785cb3aeb788ea0b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4bd8276128436d94f95e42428ba2205a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ExtraTex:
-        m_Texture: {fileID: 2800000, guid: 44cf22f42c1a3a049b4d222e74340774, type: 3}
+        m_Texture: {fileID: 2800000, guid: 862b8f3566e5c2a4ab5c8259d2b6b918, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ae7c57b3a68589143bcb2c7c3ae15d6f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 594383d0f6dc50846a70a05edd331d66, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubsurfaceTex:
-        m_Texture: {fileID: 2800000, guid: 51e0bf3aaa6d80b499d5e72e17758617, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1a39bfe9ed5334b4f95ccb2a0fa21033, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -59,7 +59,7 @@ Material:
     - EFFECT_BILLBOARD: 0
     - EFFECT_EXTRA_TEX: 1
     - _AlphaClipThreshold: 0.33
-    - _Glossiness: 0.18
+    - _Glossiness: 0.26
     - _HueVariationKwToggle: 0
     - _Metallic: 0
     - _NormalMapKwToggle: 1
@@ -76,7 +76,7 @@ Material:
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5790715922133647074
+--- !u!114 &2886208678875083413
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

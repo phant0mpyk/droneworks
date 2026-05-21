@@ -1,7 +1,12 @@
 fileFormatVersion: 2
 guid: 4f13a3e13681e62459ab3638251270df
 SpeedTreeImporter:
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: treeforgabriel
+    second: {fileID: 2100000, guid: 157a274adcbf16d4c88c09e7c30b05a3, type: 2}
   serializedVersion: 7
   mainColor: {r: 1, g: 1, b: 1, a: 1}
   hueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
