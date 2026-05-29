@@ -49,6 +49,7 @@ MonoBehaviour:
   glitch: {fileID: 2100000, guid: a9b7f5b8eec94c742a7bee5a41ba303a, type: 2}
   noiseMultiplier: 20
   glitchStrength: 750
+  alphaSpeed: 2
 --- !u!54 &3639922077769084012
 Rigidbody:
   m_ObjectHideFlags: 0
