@@ -10,8 +10,13 @@ public class DroneInputManager : MonoBehaviour
     float pitchAxis;
     float yawAxis;
     float rollAxis;
+    private bool isArmed = false;
+    public bool IsArmed => isArmed;
 
-    // The missing serialized fields that will now show up in your Inspector:
+    [Header("Arming References")]
+    [SerializeField] InputActionReference armActionRef;
+    [SerializeField] TMPro.TextMeshProUGUI disarmedTextUI;
+
     [Header("Core Flight Axis References")]
     [SerializeField] InputActionReference throttleActionRef;
     [SerializeField] InputActionReference yawActionRef;
@@ -32,9 +37,13 @@ public class DroneInputManager : MonoBehaviour
 
     bool keyboardInputActive = false;
     bool controllerInputActive = false;
+    private bool forceManualInputSelection = false;
+    private int manualInputChoice = 0;
 
     void Start()
     {
+        if (armActionRef != null) armActionRef.action.Enable();
+
         // 1. Enable our 4 core flight axes
         if (throttleActionRef != null) throttleActionRef.action.Enable();
         if (yawActionRef != null) yawActionRef.action.Enable();
@@ -62,12 +71,43 @@ public class DroneInputManager : MonoBehaviour
 
     void Update()
     {
+        CheckArmStatus();
         DecideInputMethod();
         ReadInput();
     }
 
+    void CheckArmStatus()
+    {
+        if (armActionRef == null || armActionRef.action == null) return;
+
+        if (keyboardInputActive)
+        {
+            if (armActionRef.action.WasPressedThisFrame())
+            {
+                isArmed = !isArmed;
+                if (disarmedTextUI != null) disarmedTextUI.gameObject.SetActive(!isArmed);
+            }
+            return;
+        }
+
+        float switchValue = armActionRef.action.ReadValue<float>();
+        isArmed = Mathf.Approximately(switchValue, 1f);
+
+        if (disarmedTextUI != null)
+        {
+            disarmedTextUI.gameObject.SetActive(!isArmed);
+        }
+    }
+
     void DecideInputMethod()
     {
+        if (forceManualInputSelection)
+        {
+            keyboardInputActive = (manualInputChoice == 0);
+            controllerInputActive = (manualInputChoice == 1);
+            return;
+        }
+
         if (throttleActionRef.action.triggered || yawActionRef.action.triggered ||
             pitchActionRef.action.triggered || rollActionRef.action.triggered)
         {
@@ -90,7 +130,15 @@ public class DroneInputManager : MonoBehaviour
 
     void ReadInput()
     {
-        // Read directly from the 4 standalone float references
+        if (!isArmed)
+        {
+            throttleAxis = 0f;
+            yawAxis = 0f;
+            pitchAxis = 0f;
+            rollAxis = 0f;
+            return;
+        }
+
         throttleAxis = throttleActionRef.action.ReadValue<float>();
         yawAxis = yawActionRef.action.ReadValue<float>();
         pitchAxis = pitchActionRef.action.ReadValue<float>();
@@ -120,5 +168,20 @@ public class DroneInputManager : MonoBehaviour
             Debug.Log("Down");
             flightController.RotateGimbalDown();
         }
+    }
+
+    public void SetInputMethodFromMenu(int index)
+    {
+        if (index == 0)
+        {
+            forceManualInputSelection = false;
+        }
+        else
+        {
+            forceManualInputSelection = true;
+            manualInputChoice = index - 1;
+        }
+
+        Debug.Log($"Input method manually set to index: {index}");
     }
 }
