@@ -13,6 +13,10 @@ public class LeavesManager : MonoBehaviour
     private GameObject dust;
     private ParticleSystem leafParticles;
     private ParticleSystem dustParticles;
+    
+    DroneInputManager inputManager;
+    private float minSpeedMultiplier;
+    
     void Start()
     {
         leaves = Instantiate(leavesPrefab);
@@ -21,18 +25,23 @@ public class LeavesManager : MonoBehaviour
         dustParticles = dust.GetComponent<ParticleSystem>();
         leaves.SetActive(false);
         dust.SetActive(false);
+        inputManager = drone.GetComponent<DroneInputManager>();
+        FlightController controller = drone.GetComponent<FlightController>();
+        minSpeedMultiplier = controller.minRPM / controller.maxRPM;
     }
 
     void UpdateParticles(GameObject particleGO, ParticleSystem particles, RaycastHit hit)
     {
-        if(hit.collider != null)
+        if(hit.collider != null && inputManager.IsArmed)
         {
             particleGO.transform.rotation = Quaternion.LookRotation(-hit.normal);
             particleGO.transform.position =  hit.point + hit.normal * offsetFromGround;
             var particlesShape = particles.shape;
             particlesShape.radiusThickness = 1 - Math.Clamp(hit.distance / rayDistance, 0.25f, 1);
             var particlesMain = particles.main;
-            particlesMain.startSpeed = speed * (0.25f + 0.75f * (1 - hit.distance / rayDistance));
+            particlesMain.startSpeed = speed //only this needs to be adjusted in inspector so it feels correct
+                                       * (0.25f + 0.75f * (1 - hit.distance / rayDistance)) //dependent on the distance from the ground
+                                       * (minSpeedMultiplier + (inputManager.GetThrottleAxis()+1)/2f*(1-minSpeedMultiplier)); //dependent on current throttle
             particleGO.SetActive(true);
         }
         else
@@ -48,13 +57,5 @@ public class LeavesManager : MonoBehaviour
         UpdateParticles(leaves, leafParticles, hit);
         UpdateParticles(dust, dustParticles, hit);
     }
-
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(drone.transform.position, drone.transform.position - drone.transform.up * rayDistance);
-        }
-    }
+    
 }

@@ -66,7 +66,7 @@ public class FlightController : MonoBehaviour
 
     [Tooltip("Maximum RPM the drone propeller can reach. Gets calculated by itself and is influenced by the battery. Per 1 propeller.")]
     [SerializeField]
-    float maxRPM;
+    public float maxRPM;
 
     float originalMaxRPM;
 
@@ -74,7 +74,7 @@ public class FlightController : MonoBehaviour
     [SerializeField]
     float hoverRPMPercentage;
 
-    float minRPM;
+    public float minRPM;
     float hoverRPM;
 
     [Header("Acrobatic Flight Mode Settings")]
