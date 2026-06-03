@@ -322,6 +322,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Arm/Disarm",
+                    "type": "Value",
+                    "id": "60103dec-7b71-4173-a368-96286726b04e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -339,7 +348,7 @@
                 {
                     "name": "",
                     "id": "4ccea836-b3eb-40f1-a544-b1fe183ac173",
-                    "path": "<HID::OpenTX FrSky Taranis Joystick>/trigger",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -421,6 +430,17 @@
                     "processors": "Invert",
                     "groups": "",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "709f7f45-cd1a-4fda-9dc5-c6af45814105",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Arm/Disarm",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
