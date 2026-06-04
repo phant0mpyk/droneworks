@@ -79,23 +79,24 @@ public class DroneInputManager : MonoBehaviour
     void CheckArmStatus()
     {
         if (armActionRef == null || armActionRef.action == null) return;
-
-        if (keyboardInputActive)
+        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
-            if (armActionRef.action.WasPressedThisFrame())
-            {
-                isArmed = !isArmed;
-                if (disarmedTextUI != null) disarmedTextUI.gameObject.SetActive(!isArmed);
-            }
+            isArmed = !isArmed;
+
+            if (disarmedTextUI != null)
+                disarmedTextUI.gameObject.SetActive(!isArmed);
+
             return;
         }
-
-        float switchValue = armActionRef.action.ReadValue<float>();
-        isArmed = Mathf.Approximately(switchValue, 1f);
-
-        if (disarmedTextUI != null)
+        if (controllerInputActive)
         {
-            disarmedTextUI.gameObject.SetActive(!isArmed);
+            float switchValue = armActionRef.action.ReadValue<float>();
+            isArmed = Mathf.Approximately(switchValue, 1f);
+
+            if (disarmedTextUI != null)
+            {
+                disarmedTextUI.gameObject.SetActive(!isArmed);
+            }
         }
     }
 
@@ -158,15 +159,31 @@ public class DroneInputManager : MonoBehaviour
 
     private void GimbalRotation()
     {
-        if (rotateControllerGimbalUp.action.IsPressed() || rotateKeyboardGimbalUp.action.IsPressed())
+        if (keyboardInputActive)
         {
-            Debug.Log("UP");
-            flightController.RotateGimbalUp();
+            if (rotateKeyboardGimbalUp.action.IsPressed())
+            {
+                Debug.Log("Keyboard UP");
+                flightController.RotateGimbalUp();
+            }
+            else if (rotateKeyboardGimbalDown.action.IsPressed())
+            {
+                Debug.Log("Keyboard Down");
+                flightController.RotateGimbalDown();
+            }
         }
-        else if (rotateControllerGimbalDown.action.IsPressed() || rotateKeyboardGimbalDown.action.IsPressed())
+        else if (controllerInputActive)
         {
-            Debug.Log("Down");
-            flightController.RotateGimbalDown();
+            if (rotateControllerGimbalUp.action.IsPressed())
+            {
+                Debug.Log("Controller UP");
+                flightController.RotateGimbalUp();
+            }
+            else if (rotateControllerGimbalDown.action.IsPressed())
+            {
+                Debug.Log("Controller Down");
+                flightController.RotateGimbalDown();
+            }
         }
     }
 
