@@ -139,12 +139,16 @@ public class DroneInputManager : MonoBehaviour
             rollAxis = 0f;
             return;
         }
-
-        throttleAxis = throttleActionRef.action.ReadValue<float>();
-        yawAxis = yawActionRef.action.ReadValue<float>();
-        pitchAxis = pitchActionRef.action.ReadValue<float>();
-        rollAxis = rollActionRef.action.ReadValue<float>();
-
+            throttleAxis = throttleActionRef.action.ReadValue<float>();
+            yawAxis = yawActionRef.action.ReadValue<float>();
+            pitchAxis = pitchActionRef.action.ReadValue<float>();
+        if (keyboardInputActive)
+        {
+            rollAxis = -rollActionRef.action.ReadValue<float>();
+        }else if(controllerInputActive)
+        {
+            rollAxis = rollActionRef.action.ReadValue<float>();
+        }
         GimbalRotation();
     }
 
