@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbdcb3e0a93dcd46819fa3daed076bf, type: 3}
+  m_Name: WildlifeWarning
+  m_EditorClassIdentifier: 
+  audioClipEntry:
+    repeatable: 0
+    clipName: Wildlife
+    englishSubtitles: There is a protected wildlife zone next to the path, let's
+      not disturb the animals.
+    dutchSubtitles: Er is een beschermd natuurgebied langs het pad, laten we de dieren
+      niet storen.
+    audioClip: {fileID: 8300000, guid: 007a459e6409edc4fbb7e4df57fcb827, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    timedClipName: 
+    timedEnglishSubtitles: 
+    timedDutchSubtitles: 
+    audioTimedClip: {fileID: 0}

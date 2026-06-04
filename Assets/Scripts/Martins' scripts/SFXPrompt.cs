@@ -4,19 +4,28 @@ using UnityEngine;
 public class SFXPrompt : MonoBehaviour
 {
     [SerializeField]
-    private string clipName;
-
+    private string entryName;
+    [SerializeField]
+    AudioSFXScriptableObject entryToPlay;
+    
     SFXManager sfxManager;
 
     private bool hasPlayed = false;
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Played SFX: " + clipName);
-        if (other.CompareTag("Player") && sfxManager != null && !hasPlayed)
+        if (other.CompareTag("Player") && sfxManager != null && (!hasPlayed || entryToPlay.audioClipEntry.repeatable))
         {
-            sfxManager.PlayVoicelineSFX(clipName);
-            hasPlayed = true;
+            if(TryGetComponent<AudioSource>(out AudioSource audioSource))
+            {
+                sfxManager?.PlayVoicelineSFX(entryToPlay, entryName, audioSource);
+                hasPlayed = true;
+            }
+            else
+            {
+                sfxManager?.PlayVoicelineSFX(entryToPlay, entryName, null);
+                hasPlayed = true; 
+            }
         }
     }
 

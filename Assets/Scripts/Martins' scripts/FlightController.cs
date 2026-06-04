@@ -38,6 +38,8 @@ public class FlightController : MonoBehaviour
 
     bool droneActive = false;
 
+    bool droneArmed = false;
+
     [Tooltip("Array of the drone propellers")]
     [SerializeField] 
     GameObject[] propellers;
@@ -134,7 +136,7 @@ public class FlightController : MonoBehaviour
             droneUpVector = transform.up.normalized;
             cameraManager.AdjustGimbalAngle(worldUpVector, droneForwardVector);
         }
-        if (droneActive)
+        if (droneActive && droneArmed)
         {
             //update each frame cuz it needs to respond to the battery voltage dropping the maxRPM over time as battery runs out
             minRPM = minRPMPercentage/100 * maxRPM;
@@ -153,7 +155,7 @@ public class FlightController : MonoBehaviour
         if (!droneActive || !inputManager) return;
         // Debug.Log(GetBatteryPercentageWithBatterySafety() + "% battery remaining. Current battery voltage: " + currBatteryVoltage + "V");
         //the drone will first calculate the voltage drop that affects the maxRPM after which it will apply the change to the maxRPM possible
-        if(droneActive && inputManager)
+        if(droneActive && droneArmed && inputManager)
         {
             float voltageDrop = battery.CalculateVoltageDrop(inputManager.GetThrottleAxis());
             maxRPM = battery.CalculateMaxRPMAfterVoltageDrop(voltageDrop);
@@ -287,6 +289,7 @@ public class FlightController : MonoBehaviour
     {
         if (!droneActive) return;
         droneActive = false;
+        droneArmed = false;
         droneRigidbody.isKinematic = true; 
         Debug.Log("Drone destroyed");
         StartCoroutine(RespawnCoroutine(2f));
@@ -319,6 +322,11 @@ public class FlightController : MonoBehaviour
     public bool GetDroneDestroyed()
     {
         return !droneActive;
+    }
+
+    public void SetDroneArmed(bool armed)
+    {
+        droneArmed = armed;
     }
 
 }

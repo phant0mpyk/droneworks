@@ -67,6 +67,8 @@ public class DroneInputManager : MonoBehaviour
         toggleControllerThermalVision.action.performed += ToggleThermalVision;
         toggleCameraController.action.performed += CameraToggle;
         toggleCameraKeyboard.action.performed += CameraToggle;
+
+        flightController.SetDroneArmed(isArmed);
     }
 
     void Update()
@@ -78,14 +80,19 @@ public class DroneInputManager : MonoBehaviour
 
     void CheckArmStatus()
     {
+        if(flightController.GetDroneDestroyed())
+        {
+            isArmed = false;
+            disarmedTextUI.gameObject.SetActive(!isArmed);
+            return;
+        }
         if (armActionRef == null || armActionRef.action == null) return;
         if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
             isArmed = !isArmed;
-
             if (disarmedTextUI != null)
                 disarmedTextUI.gameObject.SetActive(!isArmed);
-
+                flightController.SetDroneArmed(isArmed);
             return;
         }
         if (controllerInputActive)
@@ -96,6 +103,7 @@ public class DroneInputManager : MonoBehaviour
             if (disarmedTextUI != null)
             {
                 disarmedTextUI.gameObject.SetActive(!isArmed);
+                flightController.SetDroneArmed(isArmed);
             }
         }
     }

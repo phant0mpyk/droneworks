@@ -4,7 +4,17 @@ using System.Collections;
 public class SFXManager : MonoBehaviour
 {
     [SerializeField]
-    private AudioSFXScriptableObject audioSFXData;
+    AudioSFXScriptableObject aliveEntry;
+    [SerializeField]
+    AudioSFXScriptableObject deathEntry;
+
+    [SerializeField]
+    AudioSFXScriptableObject destroyedEntry;
+
+    private bool hasPlayedDestroyedSFX = false;
+
+    [SerializeField]
+    FlightController flightController;
 
     [SerializeField]
     private SFXPrompt[] audioTriggers;
@@ -39,20 +49,26 @@ public class SFXManager : MonoBehaviour
 
     void Update()
     {
-        currTimeToPlayConfusedClip += Time.deltaTime;
         currTimeToLetHimDieSeconds += Time.deltaTime;
-        if(currTimeToPlayConfusedClip >= timeToPlayConfusedClipSeconds)
-        {
-            PlayVoicelineSFX("TakingTooLong");
-            currTimeToPlayConfusedClip = 0f;
-        }
         if(currTimeToLetHimDieSeconds >= timeToLetHimDieMinutes * 60f && !timeToLetHimDie)
         {
             timeToLetHimDie = true;
         }
+        if(flightController != null)
+        {
+            if (flightController.GetDroneDestroyed())
+            {
+                if (!hasPlayedDestroyedSFX)
+                {
+                    PlayVoicelineSFX(destroyedEntry, destroyedEntry.audioClipEntry.clipName, null);
+                    hasPlayedDestroyedSFX = true;
+                    StartCoroutine(WaitForRespawn());
+                }
+            }
+        }
     }
 
-    public void PlayVoicelineSFX(string clipName)
+    public void PlayVoicelineSFX(AudioSFXScriptableObject _entry, string _entryName, AudioSource _audioSource)
     {
         currTimeToPlayConfusedClip = 0f;
         if (currSFXCoroutine != null)
@@ -67,37 +83,38 @@ public class SFXManager : MonoBehaviour
         {
             cameraAudioSource.Stop();
         }
-        currClipName = clipName;
-        foreach (AudioClipEntry entry in audioSFXData.audioClipEntries)
+        currClipName = _entryName;
+        if(currClipName == "End")
         {
-            if (entry.clipName == currClipName)
-            {
-                if(currClipName == "End")
-                {
-                    if(!timeToLetHimDie)
-                    {
-                        cameraAudioSource.PlayOneShot(entry.audioClip);
-                    }
-                    else
-                    {
-                        cameraAudioSource.PlayOneShot(entry.audioTimedClip);
-                    }
-                    return;
-                }
-                cameraAudioSource.PlayOneShot(entry.audioClip);
-                if (entry.audioTimedClip != null)
-                {
-                    currTimedSFXCoroutine = PlayTimedSFX(entry.audioTimedClip, entry.timeToPlayTimedClipSeconds);
-                    StartCoroutine(currTimedSFXCoroutine);
-                }   
-            }
+            //do stuff after the end clip plays
+            //insert game logic to end the game after it is played
+            return;
         }
+        if(_audioSource != null)
+        {
+            _audioSource?.PlayOneShot(_entry.audioClipEntry.audioClip);
+        }
+        else
+        {
+            cameraAudioSource?.PlayOneShot(_entry.audioClipEntry.audioClip);
+        }
+        if (_entry.audioClipEntry.audioTimedClip != null)
+        {
+            currTimedSFXCoroutine = PlayTimedSFX(_entry.audioClipEntry.audioTimedClip, _entry.audioClipEntry.timeToPlayTimedClipSeconds);
+            StartCoroutine(currTimedSFXCoroutine);
+        }   
     }
 
     IEnumerator PlayTimedSFX(AudioClip timedClip, float timeToPlaySeconds)
     {
         yield return new WaitForSeconds(timeToPlaySeconds);
-        cameraAudioSource.PlayOneShot(timedClip);
+        cameraAudioSource?.PlayOneShot(timedClip);
+    }
+
+    IEnumerator WaitForRespawn()
+    {
+        yield return new WaitForSeconds(4f);
+        hasPlayedDestroyedSFX = false;
     }
 
     public void RestartAllSFX()

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbdcb3e0a93dcd46819fa3daed076bf, type: 3}
+  m_Name: Bridge
+  m_EditorClassIdentifier: 
+  audioClipEntry:
+    repeatable: 0
+    clipName: 
+    englishSubtitles: It's dangerous to stay here, let's cross the bridge and hope
+      he didn't fall.
+    dutchSubtitles: Het is gevaarlijk om hier te blijven, steek de brug over en laten
+      we hopen dat hij niet gevallen is.
+    audioClip: {fileID: 8300000, guid: 614516020ef106c4ebf06dc665f4f40a, type: 3}
+    timeToPlayTimedClipSeconds: 0
+    timedClipName: 
+    timedEnglishSubtitles: 
+    timedDutchSubtitles: 
+    audioTimedClip: {fileID: 0}

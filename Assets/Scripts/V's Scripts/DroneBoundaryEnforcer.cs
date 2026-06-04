@@ -12,6 +12,7 @@ public class DroneBoundaryEnforcer : MonoBehaviour
     [SerializeField] private Rigidbody droneRigidbody;
 
     [SerializeField] private SFXManager sfxManager;
+    [SerializeField] private AudioSFXScriptableObject heightWarningSFX;
     [SerializeField] private string heightWarningClipName = "LightningWarning";
     private bool _hasPlayedWarning = false;
 
@@ -44,7 +45,7 @@ public class DroneBoundaryEnforcer : MonoBehaviour
             _violationTimer += Time.deltaTime;
             if(sfxManager != null && !_hasPlayedWarning)
             {
-                sfxManager.PlayVoicelineSFX(heightWarningClipName);
+                sfxManager.PlayVoicelineSFX(heightWarningSFX, heightWarningSFX.audioClipEntry.clipName, null);
                 _hasPlayedWarning = true;
             }
             if (_violationTimer >= warningDuration)
