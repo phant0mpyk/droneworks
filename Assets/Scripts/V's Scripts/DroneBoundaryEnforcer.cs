@@ -16,14 +16,14 @@ public class DroneBoundaryEnforcer : MonoBehaviour
     [SerializeField] private string heightWarningClipName = "LightningWarning";
     private bool _hasPlayedWarning = false;
 
-    private Vector3 _startPosition;
-    private Quaternion _startRotation;
+    public Vector3 startPosition;
+    public Quaternion startRotation;
     private float _violationTimer = 0f;
 
     void Start()
     {
-        _startPosition = transform.position;
-        _startRotation = transform.rotation;
+        startPosition = transform.position;
+        startRotation = transform.rotation;
 
         if (droneScript == null) droneScript = GetComponent<FlightController>();
         if (droneRigidbody == null) droneRigidbody = GetComponent<Rigidbody>();
@@ -69,13 +69,13 @@ public class DroneBoundaryEnforcer : MonoBehaviour
             droneRigidbody.linearVelocity = Vector3.zero;
             droneRigidbody.angularVelocity = Vector3.zero;
 
-            droneRigidbody.position = _startPosition;
-            droneRigidbody.rotation = _startRotation;
+            droneRigidbody.position = startPosition;
+            droneRigidbody.rotation = startRotation;
         }
         else
         { 
-            transform.position = _startPosition;
-            transform.rotation = _startRotation;
+            transform.position = startPosition;
+            transform.rotation = startRotation;
         }
 
         _violationTimer = 0f;

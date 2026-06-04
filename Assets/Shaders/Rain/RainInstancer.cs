@@ -1,6 +1,9 @@
+using System;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 public class RainInstancer : MonoBehaviour
 {
@@ -31,7 +34,7 @@ public class RainInstancer : MonoBehaviour
         props = new MaterialPropertyBlock();
 
         direction = new Vector4(-windScript.windDirection.x, -windScript.windDirection.z, 0, 0);
-        windStrength = windScript.windStrength/10;
+        
 
 
         for (int i = 0; i < count; i++)
@@ -53,7 +56,7 @@ public class RainInstancer : MonoBehaviour
 
     void Update()
     {
-
+        windStrength = windScript.windForce.magnitude*5;
         for (int i = 0; i < count; ++i)
         {
             
@@ -65,5 +68,11 @@ public class RainInstancer : MonoBehaviour
         material.SetFloat("_WindStrength", windStrength);
         Graphics.DrawMeshInstanced(mesh, 0, material, matrices, count, props);
         
+    }
+
+    private void OnDestroy()
+    {
+        material.SetFloat("_WindStrength", 0);
+        material.SetVector("_WindDir", Vector4.zero);
     }
 }
