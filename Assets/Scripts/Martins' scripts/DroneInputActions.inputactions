@@ -331,6 +331,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "RotateCameraSwitch",
+                    "type": "Value",
+                    "id": "8d20f8fa-5196-48aa-9d47-559d110cc368",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -628,6 +637,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Arm/Disarm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93f66947-8bcb-4c4b-9464-091ea2f08597",
+                    "path": "<HID::OpenTX FrSky Taranis Joystick>/ry",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateCameraSwitch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

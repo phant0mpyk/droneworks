@@ -34,6 +34,7 @@ public class DroneInputManager : MonoBehaviour
     [SerializeField] InputActionReference toggleControllerThermalVision;
     [SerializeField] InputActionReference pingKeyboard;
     [SerializeField] InputActionReference pingController;
+    [SerializeField] InputActionReference rotateControllerGimbal3Way;
 
     bool keyboardInputActive = false;
     bool controllerInputActive = false;
@@ -42,6 +43,7 @@ public class DroneInputManager : MonoBehaviour
 
     void Start()
     {
+        if (rotateControllerGimbal3Way != null) rotateControllerGimbal3Way.action.Enable();
         if (armActionRef != null) armActionRef.action.Enable();
 
         // 1. Enable our 4 core flight axes
@@ -184,16 +186,18 @@ public class DroneInputManager : MonoBehaviour
                 flightController.RotateGimbalDown();
             }
         }
-        else if (controllerInputActive)
+        else if (controllerInputActive && rotateControllerGimbal3Way != null)
         {
-            if (rotateControllerGimbalUp.action.IsPressed())
+            float switchValue = rotateControllerGimbal3Way.action.ReadValue<float>();
+
+            if (switchValue > 0.5f)
             {
-                Debug.Log("Controller UP");
+                Debug.Log("3-Way Switch UP");
                 flightController.RotateGimbalUp();
             }
-            else if (rotateControllerGimbalDown.action.IsPressed())
+            else if (switchValue < -0.5f)
             {
-                Debug.Log("Controller Down");
+                Debug.Log("3-Way Switch DOWN");
                 flightController.RotateGimbalDown();
             }
         }
