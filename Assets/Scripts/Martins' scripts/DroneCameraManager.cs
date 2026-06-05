@@ -41,11 +41,11 @@ public class DroneCameraManager : MonoBehaviour
         {
             case FlightController.FlightMode.Acrobatic:
                 SetCamera(FlightController.FlightMode.Acrobatic);
-                currGimbalAngle = droneAcrobaticFrontCameraTilt;
+                //currGimbalAngle = droneAcrobaticFrontCameraTilt;
                 break;
             case FlightController.FlightMode.Stabilized:
                 SetCamera(FlightController.FlightMode.Stabilized);
-                currGimbalAngle = -droneStabilizedFrontCameraTilt;
+                //currGimbalAngle = -droneStabilizedFrontCameraTilt;
                 break;
         }
         droneFrontCamera?.gameObject.SetActive(true);
@@ -99,7 +99,7 @@ public class DroneCameraManager : MonoBehaviour
                 break;
         }
     }
-
+    /*
     public void RotateCameraGimbal(CameraGimbalRotationDirection _rotationDirection)
     {
         currCameraGimbalRotationDirection = _rotationDirection;
@@ -119,5 +119,5 @@ public class DroneCameraManager : MonoBehaviour
         //adds the rotation of camera up/down that can be adjusted by the player
         Quaternion gimbal = Quaternion.Euler(-currGimbalAngle, 0f, 0f);
         droneFrontCamera.transform.rotation = droneYaw * gimbal;
-    }
+    }*/
 }

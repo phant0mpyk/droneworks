@@ -134,7 +134,7 @@ public class FlightController : MonoBehaviour
         if(flightMode == FlightMode.Stabilized)
         {
             droneUpVector = transform.up.normalized;
-            cameraManager.AdjustGimbalAngle(worldUpVector, droneForwardVector);
+            //cameraManager.AdjustGimbalAngle(worldUpVector, droneForwardVector);
         }
         if (droneActive && droneArmed)
         {
@@ -242,16 +242,16 @@ public class FlightController : MonoBehaviour
 
     public void RotateGimbalUp()
     {
-        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Up);
+        //cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Up);
     }
     public void RotateGimbalDown()
     {
-        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Down);
+        //cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.Down);
     }
 
     public void RotateGimbalNone()
     {
-        cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.None);
+        //cameraManager.RotateCameraGimbal(DroneCameraManager.CameraGimbalRotationDirection.None);
     }
 
     public void ToggleThermalVision()
