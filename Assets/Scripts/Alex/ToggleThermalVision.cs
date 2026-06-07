@@ -13,7 +13,7 @@ public class ToggleThermalVision : MonoBehaviour
     {
         cam = Camera.main;
         vol = GetComponent<Volume>();
-        cam.cullingMask = ~(1 << LayerMask.NameToLayer("NightVision"));
+        cam.cullingMask &= ~(1 << LayerMask.NameToLayer("NightVision"));
         vol.enabled = false;
         defaultLighting = RenderSettings.ambientIntensity;
     }
@@ -22,13 +22,15 @@ public class ToggleThermalVision : MonoBehaviour
     {
         if (vol.enabled)
         {
-            cam.cullingMask = ~(1 << LayerMask.NameToLayer("NightVision"));
+            cam.cullingMask &= ~(1 << LayerMask.NameToLayer("NightVision"));
+            cam.cullingMask |= (1 << LayerMask.NameToLayer("NoNightVision"));
             vol.enabled = false;
             RenderSettings.ambientIntensity = defaultLighting;
         }
         else
         {
-            cam.cullingMask = ~(1 << LayerMask.NameToLayer("NoNightVision"));
+            cam.cullingMask &= ~ (1 << LayerMask.NameToLayer("NoNightVision"));
+            cam.cullingMask |= (1 << LayerMask.NameToLayer("NightVision"));
             vol.enabled = true;
             RenderSettings.ambientIntensity = nightVisionLighting;
         }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Wind : MonoBehaviour
@@ -10,6 +9,8 @@ public class Wind : MonoBehaviour
     private float dragCoefficient = 1.2f;
     public Vector3 windForce;
     [SerializeField] public Vector3 windDirection;
+    [SerializeField] private bool randomDirection = false;
+    private float windAngle;
     [SerializeField] private float windPrecision;
     [SerializeField] private GameObject drone;
     [SerializeField] private float raycastDistance = 5;
@@ -21,9 +22,17 @@ public class Wind : MonoBehaviour
     bool windZone =  true;
     private Rigidbody droneRigidbody;
     [SerializeField] private float tuning;
+    [SerializeField] private LayerMask droneLayerMask;
+    private float elapsedTime;
 
-    [SerializeField] private float gustAmplitude;
-    [SerializeField] private float gustSinMultiplier = 2;
+    [Tooltip("The higher the number the shorter the peak")][SerializeField] private float gustShortness = 50;
+    [SerializeField] private float gustSinAmplitude = 3;
+    [SerializeField] private float gustSinMultiplier = 0.02f;
+    [SerializeField] private float windSinAmpltude = 1;
+    [SerializeField] private float windSinMultiplier = 0.5f;
+    [SerializeField] private float windVariationSpeed;
+    [SerializeField] private float windVariationFrequency;
+
     public float gustSpeed;
     
     void CalculateRaycastPoints()
@@ -55,23 +64,28 @@ public class Wind : MonoBehaviour
         oldWindPrecision = windPrecision;
         oldRaycastDistance = raycastDistance;
         oldWindVelocity = windSpeed;
-        transform.forward = windDirection;
         CalculateWindStrength();
     }
 
     void CalculateWindStrength()
     {
-        gustSpeed = windSpeed /3.6f + (float) Math.Sin(Time.unscaledTime *gustSinMultiplier) * gustAmplitude + (float) Math.Abs(5*Math.Pow(Math.Sin(Time.unscaledTime/50),20));
+        gustSpeed = windSpeed /3.6f + (float) Math.Sin(Time.unscaledTime *windSinMultiplier) * windSinAmpltude + (float) Math.Abs(gustSinAmplitude*Math.Pow(Math.Sin(Time.unscaledTime * gustSinMultiplier),gustShortness));
         Vector3 velocity = gustSpeed * windDirection.normalized;
         windForce = (tuning* 0.5f * velocity.magnitude * velocity.magnitude * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient) * velocity.normalized; //calculate wind force from the relative velocity
     }
     
     private void Start()
     {
+        if (randomDirection)
+        {
+            windDirection = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f)).normalized;
+        }
+        elapsedTime = 0;
+        windAngle = 0;
         droneRigidbody = drone.GetComponent<Rigidbody>();
         windCollider = GetComponent<BoxCollider>();
         raycastPoints =  new List<GameObject>();
-        
+        transform.forward = windDirection;
         UpdateWind();
     }
 
@@ -87,32 +101,42 @@ public class Wind : MonoBehaviour
             }    
         }
     }
-    
 
-    private void FixedUpdate()
+    void VariateWindDirection()
+    {
+        
+        windAngle = (float)(Math.Sin(Math.PI/2 + elapsedTime/windVariationFrequency) * windVariationSpeed * Time.fixedUnscaledDeltaTime);
+        print(windAngle);
+        windDirection = Quaternion.AngleAxis(windAngle, Vector3.up) * windDirection; 
+        transform.forward = windDirection;
+    }
+
+    private void Update()
     {
         if (oldWindPrecision != windPrecision || oldRaycastDistance != raycastDistance || oldWindVelocity !=  windSpeed)
         {
             UpdateWind();
         }
-
-        if (windDirection != transform.forward)
-        {
-            transform.forward = windDirection;
-        }
+        
         transform.position = drone.transform.position;
         
-        
+        VariateWindDirection();
         CalculateWindStrength();
+        elapsedTime += Time.unscaledDeltaTime;
+    }
+    private void FixedUpdate()
+    {
+        
         if (windZone)
         {
             foreach (GameObject point in raycastPoints)
             {
-                Physics.Raycast(point.transform.position, -point.transform.forward, out RaycastHit hit, raycastDistance*1.1f);
+                Physics.Raycast(point.transform.position, -point.transform.forward, out RaycastHit hit, raycastDistance*1.1f, droneLayerMask);
                 if (hit.collider != null)
                 { 
                     if (hit.collider.tag == "Player")
                     {
+                        print("hello");
                         float amplitude = Mathf.Max(0, Vector3.Dot(point.transform.forward.normalized, hit.normal.normalized));
                         amplitude *= amplitude;
                         droneRigidbody.AddForceAtPosition(amplitude * -windForce, hit.point, ForceMode.Force);

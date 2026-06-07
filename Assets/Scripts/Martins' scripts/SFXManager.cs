@@ -107,18 +107,25 @@ public class SFXManager : MonoBehaviour
         }
         if (_entry.audioClipEntry.audioTimedClip != null)
         {
-            currTimedSFXCoroutine = PlayTimedSFX(_entry.audioClipEntry.audioTimedClip, _entry.audioClipEntry.timeToPlayTimedClipSeconds, _entry.audioClipEntry.timedDutchSubtitles);
+            if (_entry.audioClipEntry.timedClipName == "PeopleWarning" || _audioSource == null)
+            {
+                currTimedSFXCoroutine = PlayTimedSFX(_entry.audioClipEntry.audioTimedClip, cameraAudioSource, _entry.audioClipEntry.timeToPlayTimedClipSeconds, _entry.audioClipEntry.timedDutchSubtitles);
+            }
+            else
+            {
+                currTimedSFXCoroutine = PlayTimedSFX(_entry.audioClipEntry.audioTimedClip, _audioSource, _entry.audioClipEntry.timeToPlayTimedClipSeconds, _entry.audioClipEntry.timedDutchSubtitles);
+            }
             StartCoroutine(currTimedSFXCoroutine);
         }   
     }
 
-    IEnumerator PlayTimedSFX(AudioClip timedClip, float timeToPlaySeconds, string sentence)
+    IEnumerator PlayTimedSFX(AudioClip timedClip,AudioSource _source, float timeToPlaySeconds, string sentence)
     {
         yield return new WaitForSeconds(timeToPlaySeconds);
-        yield return new WaitWhile(() => cameraAudioSource.isPlaying || SFXisPlaying);
-        cameraAudioSource?.PlayOneShot(timedClip);
+        yield return new WaitWhile(() => _source.isPlaying || SFXisPlaying);
+        _source.PlayOneShot(timedClip);
         SFXisPlaying = true;
-        StartCoroutine(DisplaySubtitles(sentence, cameraAudioSource, timedClip));
+        StartCoroutine(DisplaySubtitles(sentence, _source));
     }
 
     IEnumerator PlaySFX(AudioClip clip, AudioSource _source, string sentence)
@@ -126,7 +133,7 @@ public class SFXManager : MonoBehaviour
         yield return new WaitWhile(() => _source.isPlaying || SFXisPlaying);
         _source?.PlayOneShot(clip);
         SFXisPlaying = true;
-        StartCoroutine(DisplaySubtitles(sentence, cameraAudioSource, clip));
+        StartCoroutine(DisplaySubtitles(sentence, _source));
     }
 
     IEnumerator WaitForRespawn()
@@ -136,15 +143,12 @@ public class SFXManager : MonoBehaviour
     }
 
 
-    IEnumerator DisplaySubtitles(string sentence, AudioSource _source, AudioClip _clip)
+    IEnumerator DisplaySubtitles(string sentence, AudioSource _source)
     {
         subtitles.text = sentence;
         yield return new WaitWhile(() => _source.isPlaying);
-        if (_source.clip == _clip)    
-        {
-            subtitles.text = "";
-        }
-        yield return new WaitForSeconds(2f);
+        subtitles.text = "";
+        yield return new WaitForSeconds(0.5f);
         SFXisPlaying = false;
     }
 

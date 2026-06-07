@@ -15,6 +15,7 @@ public class CutoffEffect : MonoBehaviour
     [System.Serializable] public class MyEvent : UnityEvent { }
 
     public MyEvent onDone;
+    private GameObject canvas;
 
     
     void Start()
@@ -22,6 +23,7 @@ public class CutoffEffect : MonoBehaviour
         Time.timeScale = 0;
         glitch.SetFloat("_NoiseMulitplier", noiseMultiplier);
         glitch.SetFloat("_GlitchStrength", glitchStrength);
+        canvas = GameObject.Find("AcrobaticCanvas Variant");
     }
 
     // Update is called once per frame
@@ -35,12 +37,14 @@ public class CutoffEffect : MonoBehaviour
             
         } else if (grainTimer > 0)
         {
+            canvas.SetActive(false);
             Time.timeScale = 1;
             grainTimer -= Time.unscaledDeltaTime;
             grain.SetFloat("_Speed", grainSpeed);
         }
         else
         {
+            canvas.SetActive(true);
             onDone.Invoke();
             Destroy(gameObject);
         }
