@@ -15,12 +15,16 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: 
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: We need to find him as soon as possible, there is no time to
       waste!
     dutchSubtitles: We moeten hem zo snel mogelijk vinden, er is geen tijd te verliezen!
     audioClip: {fileID: 8300000, guid: 4850e56f3ecd4d544b46acc7a1ec113d, type: 3}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}

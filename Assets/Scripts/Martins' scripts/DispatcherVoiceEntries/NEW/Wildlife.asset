@@ -15,6 +15,8 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: 
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: There is a protected wildlife zone next to the path, let's
       not disturb the animals.
     dutchSubtitles: Er is een beschermd natuurgebied langs het pad, laten we de dieren
@@ -22,6 +24,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 007a459e6409edc4fbb7e4df57fcb827, type: 3}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}

@@ -15,6 +15,8 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: 
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: Prepare yourself pilot, there is a cabin in the mountains that
       got struck by lightning, and someone is missing.
     dutchSubtitles: Bereid je voor piloot, er is een huisje afgefikt in de bergen
@@ -22,6 +24,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 3522f4778b8cd364f9505c4f60d00bce, type: 3}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
