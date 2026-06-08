@@ -62,7 +62,7 @@ public class SFXManager : MonoBehaviour
         }
         if(flightController != null)
         {
-            if (flightController.GetDroneDestroyed() && GameManagerScript.GameStarted)
+            if (flightController.GetDroneDestroyed() && GameManagerScript.gameStarted)
             {
                 if (!hasPlayedDestroyedSFX)
                 {
