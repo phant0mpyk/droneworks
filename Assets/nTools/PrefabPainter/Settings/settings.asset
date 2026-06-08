@@ -712,8 +712,8 @@ MonoBehaviour:
       customPreviewImage: {fileID: 0}
     - name: treeforgabriel_colliders
       settings:
-        brushRadius: 2.8
-        brushSpacing: 2.87
+        brushRadius: 0.01
+        brushSpacing: 1.42
         brushOverlapCheckMode: 1
         brushOverlapDistance: 5
         brushOverlapCheckObjects: 1

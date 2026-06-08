@@ -23,7 +23,7 @@ public class CutoffEffect : MonoBehaviour
         Time.timeScale = 0;
         glitch.SetFloat("_NoiseMulitplier", noiseMultiplier);
         glitch.SetFloat("_GlitchStrength", glitchStrength);
-        canvas = GameObject.Find("AcrobaticCanvas Variant");
+        canvas = GameObject.Find("DroneCanvas");
     }
 
     // Update is called once per frame
