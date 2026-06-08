@@ -1,14 +1,6 @@
-using System.Linq;
-using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-#if UNITY_EDITOR
-using UnityEditor.EditorTools;
-#endif
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using System.Collections;
 
 
@@ -49,9 +41,8 @@ public class FlightController : MonoBehaviour
     [Tooltip("Density of the air, standard is 1.225 kg/m^3 at sea level")]
     [SerializeField]
     private float airDensity = 1.225f;
-    float currAltitude = 0f;
 
-    public enum FlightMode { Stabilized, Acrobatic }
+    public enum FlightMode { StabilizedHeight,StabilizedThrottle, Acrobatic }
 
     [SerializeField]
     [Header("Flight Mode")]
@@ -102,6 +93,15 @@ public class FlightController : MonoBehaviour
     [SerializeField]
     float yawStabilizedRotationMultiplier = 1f;
 
+    [Tooltip("Stabilized height mode maximum alg it can hover at.")]
+    [SerializeField]
+    float maxAGL;
+    float currAGL = 0f;
+    float desiredAGL;
+    [Tooltip("Adjusting the strenght of AGL correction.")]
+    [SerializeField]
+    float aglCorrectionStrength;
+    
     Vector3 worldUpVector;
     Vector3 droneUpVector;
     Vector3 droneForwardVector;
@@ -131,7 +131,8 @@ public class FlightController : MonoBehaviour
     //current = prud (Ampers), voltage = napatie (Volts), power = vykon (Watts), energy = energia (Wh), capacity = kapacita (mAh), resistance = odpor (Ohms)
     void Update()
     {
-        if(flightMode == FlightMode.Stabilized)
+        FlightMode currentFlightMode = flightMode;
+        if(currentFlightMode == FlightMode.StabilizedHeight || currentFlightMode == FlightMode.StabilizedThrottle)
         {
             droneUpVector = transform.up.normalized;
             cameraManager.AdjustGimbalAngle(worldUpVector, droneForwardVector);
@@ -172,6 +173,7 @@ public class FlightController : MonoBehaviour
         pitchDelta = _pitchAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
         rollDelta = _rollAxis * deltaRPM * tiltAcrobaticRotationMultiplier;
         yawDelta = yawAxis * deltaRPM * yawAcrobaticRotationMultiplier;
+        desiredAGL = maxAGL/2 + (maxAGL/2 * _throttleAxis);
         switch (flightMode)
         {
             case FlightMode.Acrobatic:
@@ -203,12 +205,12 @@ public class FlightController : MonoBehaviour
                     propellerScripts[i].ApplyPropellerForce(currRPM, airDensity, flightMode);
                 }
                 break;
-            case FlightMode.Stabilized:
+                
+            case FlightMode.StabilizedThrottle:
                 for(int i = 0; i < propellerScripts.Length; i++)
                 {
                     float currRPM = hoverRPM + _throttleAxis * (maxRPM - hoverRPM);
                     currRPM = Mathf.Clamp(currRPM, minRPM, maxRPM);
-                    Debug.Log(propellerScripts[i]);
                     propellerScripts[i].ApplyPropellerForce(currRPM, airDensity, flightMode);
                 }
                 //Simplified version of drone rotation for stabilized mode without 4 propellers changing torque, but just static limited rotation
@@ -216,6 +218,26 @@ public class FlightController : MonoBehaviour
                 // Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
                 //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
+                //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis
+                transform.Rotate(Vector3.up, yawAxis * yawStabilizedRotationMultiplier * Time.fixedDeltaTime, Space.World);
+                break;
+            //this version takes into account the current above ground level and adjusts the throttle accordingly so it hovers around that height
+            //aglError is there to add to the currRPM 
+            case FlightMode.StabilizedHeight:
+                for(int i = 0; i < propellerScripts.Length; i++)
+                {
+                    float baseRPM = hoverRPM + _throttleAxis * (maxRPM - hoverRPM);
+                    float aglError = desiredAGL - currAGL;
+                    float aglErrorNormalized = (aglError / maxAGL) * aglCorrectionStrength;
+                    float currRPM = baseRPM + aglErrorNormalized * (maxRPM - hoverRPM);
+                    currRPM = Mathf.Clamp(currRPM, minRPM, maxRPM);
+                    propellerScripts[i].ApplyPropellerForce(currRPM, airDensity, flightMode);
+                }
+                //Simplified version of drone rotation for stabilized mode without 4 propellers changing torque, but just static limited rotation
+                Quaternion _targetRotation = Quaternion.Euler(_pitchAxis * maxTiltAngle.x, transform.eulerAngles.y, -_rollAxis * maxTiltAngle.z);
+                // Debug.Log("Target rotation: " + targetRotation + " Pitch: " + pitchAxis + "Roll: " + rollAxis);
+                //Slerp is better than lerp for this case, because it simulates the rotation in a more natural curvey instead of lerp which is more linear 
+                transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, tiltStabilizedRotationMultiplier * Time.fixedDeltaTime);
                 //rotation for yaw is separate because it should not be affected by the tilt of the drone for stabilized mode, so it is applied on the world y axis
                 transform.Rotate(Vector3.up, yawAxis * yawStabilizedRotationMultiplier * Time.fixedDeltaTime, Space.World);
                 break;
@@ -263,6 +285,8 @@ public class FlightController : MonoBehaviour
     {
         ping.TryToPing();
     }
+
+    //added more options if you need to set it from the tutorial or wherever
     //added by V
     public void SetFlightModeAcrobatic()
     {
@@ -270,18 +294,18 @@ public class FlightController : MonoBehaviour
         Debug.Log("Flight Mode Switched to: ACROBATIC");
     }
 
-    public void SetFlightModeStabilized()
+    public void SetFlightModeStabilizedThrottle()
     {
-        flightMode = FlightMode.Stabilized;
-        Debug.Log("Flight Mode Switched to: STABILIZED");
+        flightMode = FlightMode.StabilizedThrottle;
+        Debug.Log("Flight Mode Switched to: STABILIZEDTHROTTLE");
     }
 
-    public void ToggleFlightMode()
+    public void SetFlightModeStabilizedHeight()
     {
-        flightMode = (flightMode == FlightMode.Stabilized) ? FlightMode.Acrobatic : FlightMode.Stabilized;
-        Debug.Log("Flight Mode Toggled to: " + flightMode);
+        flightMode = FlightMode.StabilizedHeight;
+        Debug.Log("Flight Mode Switched to: STABILIZEDHEIGHT");
     }
-    //end of added by V
+    // //end of added by V
 
     //disables drone and applied physics as well as maxRPM, starts respawning and the UI glitch effect
     //the disabled physics are also applied in V's script, but because I use it later than he does and that it collides with the object, It needs to be applied sooner to avoid problems with 
@@ -327,6 +351,11 @@ public class FlightController : MonoBehaviour
     public void SetDroneArmed(bool armed)
     {
         droneArmed = armed;
+    }
+
+    public void SetCurrentAGL(float agl)
+    {
+        currAGL = agl;
     }
 
 }

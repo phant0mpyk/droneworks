@@ -104,7 +104,7 @@ public class DroneUIManager : MonoBehaviour
         {
             agl = asl;
         }
-
+        droneScript.SetCurrentAGL(agl);
         altitudeAGLText.text = $"HGT (AGL): {agl:F1} m";
 
         if (warningCanvasGroup != null)
@@ -118,6 +118,7 @@ public class DroneUIManager : MonoBehaviour
             altitudeAGLText.color = Color.Lerp(Color.white, Color.red, warningCanvasGroup.alpha);
         }
     }
+
     void UpdateBatteryUI()
     {
         float vPerCell = batteryScript.currBatteryVoltage / batteryScript.GetBatteryCells();

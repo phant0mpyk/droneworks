@@ -53,6 +53,7 @@ public class DronePropellerScript: MonoBehaviour
     {
         float thrust = thrustCoefficient * _airDensity * Mathf.Pow(Mathf.Round(_currRPM) / 60f, 2) * Mathf.Pow(propellerDiameterMeter, 4);
         float torqueStrength = thrust * propellerDiameterMeter * torqueCoefficient * torqueMultiplier;
+        
         if(droneRigidbody != null)
         {
             droneRigidbody.AddForceAtPosition(propellerTransform.up * thrust, propellerTransform.position);
@@ -60,9 +61,6 @@ public class DronePropellerScript: MonoBehaviour
             {
                 case FlightController.FlightMode.Acrobatic:
                     droneRigidbody.AddTorque(droneRigidbody.transform.up * torqueStrength * yawSign);
-                    break;
-                case FlightController.FlightMode.Stabilized:
-                    // No additional torque applied in stabilized mode, because it already did it with the entire drone itself using transform rotation
                     break;
                 default:
                     Debug.LogWarning("Unknown flight mode: " + _flightMode);

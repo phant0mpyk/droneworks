@@ -166,19 +166,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.04
+      value: 565.26
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 38.72
+      value: 280.691
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 147.41
+      value: -79.34
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.35265845
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9357521
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -138.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1858061650743907946, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -217,16 +217,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: maxAGL
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: flightMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: hoverRPMPercentage
-      value: 55
+      value: 55.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946738125352846554, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: aglCorrectionStrength
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Name
       value: DroneDJIMini2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991164824301586737, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_TagString
@@ -257,6 +273,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: armActionRef
+      value: 
+      objectReference: {fileID: -1352603981975451644, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: yawActionRef
       value: 
       objectReference: {fileID: -859858268539393133, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
@@ -280,6 +300,10 @@ PrefabInstance:
       propertyPath: rotateKeyboardGimbalDown
       value: 
       objectReference: {fileID: 7255833069205610283, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
+    - target: {fileID: 4004177124952297471, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
+      propertyPath: rotateControllerGimbal3Way
+      value: 
+      objectReference: {fileID: 527681823095319937, guid: 0d4c3dc601209914c84d0522df7e8200, type: 3}
     - target: {fileID: 4035110902729009978, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -322,11 +346,11 @@ PrefabInstance:
       objectReference: {fileID: 1684824922448080046}
     - target: {fileID: 4699556527386056234, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: maxFlightHeight
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4941326479523512847, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5079025306797603152, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Size.x
@@ -354,11 +378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444006668031596195, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5742314252180065109, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6193470207396868747, guid: 2935346d0708dac4a97bc360ed480ce3, type: 3}
       propertyPath: m_IsActive
@@ -502,15 +526,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf69cb2495cebc4a879f5096dbe5950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFlightHeight: 50
-  warningDuration: 5
+  maxFlightHeight: 25
+  warningDuration: 8
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   droneScript: {fileID: 624503940978350954}
   droneRigidbody: {fileID: 3664858985641207630}
   sfxManager: {fileID: 0}
-  heightWarningSFX: {fileID: 0}
+  heightWarningSFX: {fileID: 11400000, guid: c4800385c2e40c04289b9c1679363f7b, type: 2}
   heightWarningClipName: LightningWarning
   startPosition: {x: 0, y: 0, z: 0}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -526,7 +550,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -891,6 +915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wind
       objectReference: {fileID: 0}
+    - target: {fileID: 1313332676983857677, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1930278726134990673, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -941,11 +969,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
       propertyPath: windSpeed
-      value: 7.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
       propertyPath: gustShortness
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
+      propertyPath: randomDirection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
       propertyPath: windSinAmpltude
@@ -964,8 +996,16 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
+      propertyPath: windVariationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
       propertyPath: droneLayerMask.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028171579957365670, guid: af46f766a8db78240b5134f4bcb412e0, type: 3}
+      propertyPath: windVariationFrequency
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -43,8 +43,12 @@ public class DroneCameraManager : MonoBehaviour
                 SetCamera(FlightController.FlightMode.Acrobatic);
                 currGimbalAngle = droneAcrobaticFrontCameraTilt;
                 break;
-            case FlightController.FlightMode.Stabilized:
-                SetCamera(FlightController.FlightMode.Stabilized);
+            case FlightController.FlightMode.StabilizedThrottle:
+                SetCamera(FlightController.FlightMode.StabilizedThrottle);
+                currGimbalAngle = -droneStabilizedFrontCameraTilt;
+                break;
+            case FlightController.FlightMode.StabilizedHeight:
+                SetCamera(FlightController.FlightMode.StabilizedHeight);
                 currGimbalAngle = -droneStabilizedFrontCameraTilt;
                 break;
         }
@@ -68,7 +72,13 @@ public class DroneCameraManager : MonoBehaviour
                 //tilt of the camera
                 droneFrontCamera.transform.localRotation = Quaternion.Euler(-droneAcrobaticFrontCameraTilt, 0f, 0f);
                 break;
-            case FlightController.FlightMode.Stabilized:
+            case FlightController.FlightMode.StabilizedThrottle:
+                droneFrontCamera?.gameObject.SetActive(true);
+                droneBottomCamera?.gameObject.SetActive(false);
+                //tilt of the camera
+                droneFrontCamera.transform.localRotation = Quaternion.Euler(droneStabilizedFrontCameraTilt, 0f, 0f);
+                break;
+            case FlightController.FlightMode.StabilizedHeight:
                 droneFrontCamera?.gameObject.SetActive(true);
                 droneBottomCamera?.gameObject.SetActive(false);
                 //tilt of the camera
