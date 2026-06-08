@@ -24,7 +24,7 @@ public class RainInstancer : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main;
+        
         
         matrices = new Matrix4x4[count];
         positions = new Vector3[count];
@@ -56,6 +56,7 @@ public class RainInstancer : MonoBehaviour
 
     void Update()
     {
+        cam = Camera.main;
         windStrength = windScript.windForce.magnitude*5;
         for (int i = 0; i < count; ++i)
         {

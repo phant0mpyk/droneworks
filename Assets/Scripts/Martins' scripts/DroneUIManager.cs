@@ -30,6 +30,12 @@ public class DroneUIManager : MonoBehaviour
     [SerializeField] private RectTransform compassDisk;
     [SerializeField] private TextMeshProUGUI headingText;
 
+    [Header("Objective")] 
+    public GameObject currentObjective;
+    [SerializeField] private RectTransform objectiveDot;
+    [SerializeField] private RawImage objectiveDotImage;
+    [SerializeField] private float dotBlinkSpeed;
+
     [Header("Flight Data")]
     [SerializeField] private TextMeshProUGUI speedText;
     [SerializeField] private Rigidbody droneRigidbody;
@@ -51,6 +57,7 @@ public class DroneUIManager : MonoBehaviour
     void Start()
     {
         if (droneScript == null) droneScript = GetComponent<FlightController>();
+        if (objectiveDot != null) objectiveDotImage = objectiveDot.GetComponent<RawImage>();
     }
 
     void Update()
@@ -73,6 +80,7 @@ public class DroneUIManager : MonoBehaviour
         UpdateCargoUI();
         UpdateAltitudeUI();
         UpdateCompass();
+        UpdateObjective();
         UpdateSpeedUI();
     }
     void UpdateSpeedUI()
@@ -135,6 +143,23 @@ public class DroneUIManager : MonoBehaviour
         {
             headingText.text = $"{Mathf.RoundToInt(heading)}*";
         }
+    }
+
+    void UpdateObjective()
+    {
+        if(currentObjective == null){objectiveDot.gameObject.SetActive(false); return;}
+        if(!objectiveDot.gameObject.activeSelf){objectiveDot.gameObject.SetActive(true);}
+        
+        
+        Vector3 dronePos = droneScript.transform.position;
+        Vector3 objPos = currentObjective.transform.position;
+        Vector3 directionToObjective = new Vector3(objPos.x - dronePos.x, 0, objPos.z - dronePos.z);
+        float angle = Vector3.SignedAngle(directionToObjective.normalized, Vector3.forward, Vector3.up);
+        print(angle);
+
+        objectiveDot.localRotation = Quaternion.Euler(0, 0, angle);
+        objectiveDotImage.color = new Color(objectiveDotImage.color.r, objectiveDotImage.color.g, objectiveDotImage.color.b, (1 + Mathf.Sin(Time.unscaledTime*dotBlinkSpeed)) / 2);
+
     }
 
         void UpdateCargoUI()
