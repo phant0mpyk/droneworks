@@ -62,7 +62,7 @@ public class SFXManager : MonoBehaviour
         }
         if(flightController != null)
         {
-            if (flightController.GetDroneDestroyed())
+            if (flightController.GetDroneDestroyed() && GameManagerScript.GameStarted)
             {
                 if (!hasPlayedDestroyedSFX)
                 {
@@ -72,6 +72,12 @@ public class SFXManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PlayVoicelineEntry(AudioSFXScriptableObject _entry)
+    {
+        PlayVoicelineSFX(_entry, _entry.audioClipEntry.clipName, Camera.main.GetComponent<AudioSource>());
+        Debug.Log("Played voiceline entry");
     }
 
     public void PlayVoicelineSFX(AudioSFXScriptableObject _entry, string _entryName, AudioSource _audioSource)
@@ -148,7 +154,7 @@ public class SFXManager : MonoBehaviour
         subtitles.text = sentence;
         yield return new WaitWhile(() => _source.isPlaying);
         subtitles.text = "";
-        yield return new WaitForSeconds(0.5f);
+        // yield return new WaitForSeconds(0.5f);
         SFXisPlaying = false;
     }
 
