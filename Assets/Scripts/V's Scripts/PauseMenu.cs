@@ -48,9 +48,8 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
-
-        // COMMENTED OUT FOR TESTING
-        // Time.timeScale = 1f; 
+        
+        Time.timeScale = 1f; 
 
         isPaused = false;
 
@@ -61,9 +60,8 @@ public class PauseMenu : MonoBehaviour
     void PauseGame()
     {
         pauseMenuUI.SetActive(true);
-
-        // COMMENTED OUT FOR TESTING
-        // Time.timeScale = 0f; 
+        
+        Time.timeScale = 0f; 
 
         isPaused = true;
 
