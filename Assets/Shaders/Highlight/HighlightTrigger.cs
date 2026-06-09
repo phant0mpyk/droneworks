@@ -5,7 +5,7 @@ public class HighlightTrigger : MonoBehaviour
 {
     [SerializeField] Material highlightMaterial;
     [SerializeField] private bool turnOn;
-    [SerializeField] GameObject objectToHighlight;
+    [SerializeField] GameObject[] objectsToHighlight;
     [SerializeField] private bool customTimer;
     [SerializeField] private float timer;
     
@@ -13,22 +13,26 @@ public class HighlightTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            ToggleHighlight toggleScript;
-            if (!objectToHighlight.TryGetComponent(out toggleScript))
+            foreach (var obj in objectsToHighlight)
             {
-                objectToHighlight.AddComponent<ToggleHighlight>().highlightMaterial = highlightMaterial;
-                toggleScript = objectToHighlight.GetComponent<ToggleHighlight>();
-            }
+                ToggleHighlight toggleScript;
+                if (!obj.TryGetComponent(out toggleScript))
+                {
+                    obj.AddComponent<ToggleHighlight>().highlightMaterial = highlightMaterial;
+                    toggleScript = obj.GetComponent<ToggleHighlight>();
+                }
 
-            if (customTimer)
-            {
-                toggleScript.timer = timer;
-                //toggleScript.Toggle(turnOn,timer);
+                if (customTimer)
+                {
+                    toggleScript.timer = timer;
+                    toggleScript.Toggle(turnOn,timer);
+                }
+                else
+                {
+                    toggleScript.Toggle(turnOn,999999);
+                }
             }
-            else
-            {
-                //toggleScript.Toggle(turnOn,999999);
-            }
+            
 
         }
     }

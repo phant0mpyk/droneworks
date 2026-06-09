@@ -18,12 +18,12 @@ public class SayLeafletType : MonoBehaviour
     {
         if (other.CompareTag("Player") && sfxManager != null && (!hasPlayed))
         {
-            if(TryGetComponent<AudioSource>(out AudioSource audioSource))
-            {
+            AudioSource audioSource = Camera.main.GetComponent<AudioSource>();
+
                 switch (GameManagerScript.instance.victimSpawnLocation)
                 {
                     case GameManagerScript.VictimSpawn.Lake1:
-                        sfxManager?.PlayVoicelineSFX(entryWhenLake, entryName, audioSource);
+                        sfxManager?.PlayVoicelineSFX(entryWhenLake, entryName,audioSource);
                         hasPlayed = true;
                         break;
                     case GameManagerScript.VictimSpawn.Lake2:
@@ -39,7 +39,7 @@ public class SayLeafletType : MonoBehaviour
                         hasPlayed = true;
                         break;
                 }
-            }
+            
         }
     }
 

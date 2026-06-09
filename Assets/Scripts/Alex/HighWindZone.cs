@@ -12,7 +12,7 @@ public class HighWindZone : MonoBehaviour
         if (other.tag == "Player")
         {
             wind = other.transform.Find("Wind").GetComponent<Wind>();
-            defaultWindSpeed = windSpeed;
+            defaultWindSpeed = wind.windSpeed;
             wind.windSpeed = windSpeed;
         }
     }

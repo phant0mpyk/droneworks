@@ -23,7 +23,12 @@ public class ToggleHighlight : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; ++i)
         {
-            transform.GetChild(i).gameObject.AddComponent<ToggleHighlight>().highlightMaterial = highlightMaterial;
+            ToggleHighlight script;
+            if(!transform.GetChild(i).gameObject.TryGetComponent(out script))
+            {
+                script = transform.GetChild(i).gameObject.AddComponent<ToggleHighlight>();
+            }
+            script.highlightMaterial = highlightMaterial;
         }
         Toggle(true,timer);
         
@@ -43,7 +48,12 @@ public class ToggleHighlight : MonoBehaviour
         
         for (int i = 0; i < transform.childCount; ++i)
         {
-            transform.GetChild(i).gameObject.GetComponent<ToggleHighlight>().Toggle(_bool,_timer);
+            ToggleHighlight script;
+            if(!transform.GetChild(i).gameObject.TryGetComponent(out script))
+            {
+                script = transform.GetChild(i).gameObject.AddComponent<ToggleHighlight>();
+            }
+            script.Toggle(_bool,_timer);
         }
         
     }

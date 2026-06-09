@@ -147,6 +147,7 @@ public class DroneUIManager : MonoBehaviour
 
     void UpdateObjective()
     {
+        if (objectiveDot == null){return;}
         if(currentObjective == null){objectiveDot.gameObject.SetActive(false); return;}
         if(!objectiveDot.gameObject.activeSelf){objectiveDot.gameObject.SetActive(true);}
         
@@ -155,7 +156,6 @@ public class DroneUIManager : MonoBehaviour
         Vector3 objPos = currentObjective.transform.position;
         Vector3 directionToObjective = new Vector3(objPos.x - dronePos.x, 0, objPos.z - dronePos.z);
         float angle = Vector3.SignedAngle(directionToObjective.normalized, Vector3.forward, Vector3.up);
-        print(angle);
 
         objectiveDot.localRotation = Quaternion.Euler(0, 0, angle);
         objectiveDotImage.color = new Color(objectiveDotImage.color.r, objectiveDotImage.color.g, objectiveDotImage.color.b, (1 + Mathf.Sin(Time.unscaledTime*dotBlinkSpeed)) / 2);

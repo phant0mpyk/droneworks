@@ -25,7 +25,7 @@ public class Wind : MonoBehaviour
     [SerializeField] private LayerMask droneLayerMask;
     private float elapsedTime;
 
-    [Tooltip("The higher the number the shorter the peak")][SerializeField] private float gustShortness = 50;
+    [Tooltip("The higher the number the shorter the peak (timewise)")][SerializeField] private float gustShortness = 50;
     [SerializeField] private float gustSinAmplitude = 3;
     [SerializeField] private float gustSinMultiplier = 0.02f;
     [SerializeField] private float windSinAmpltude = 1;
@@ -107,7 +107,6 @@ public class Wind : MonoBehaviour
     {
         
         windAngle = (float)(Math.Sin(Math.PI/2 + elapsedTime/windVariationFrequency) * windVariationSpeed * Time.fixedUnscaledDeltaTime);
-        print(windAngle);
         windDirection = Quaternion.AngleAxis(windAngle, Vector3.up) * windDirection; 
         transform.forward = windDirection;
     }
@@ -137,7 +136,6 @@ public class Wind : MonoBehaviour
                 { 
                     if (hit.collider.tag == "Player")
                     {
-                        print("hello");
                         float amplitude = Mathf.Max(0, Vector3.Dot(point.transform.forward.normalized, hit.normal.normalized));
                         amplitude *= amplitude;
                         droneRigidbody.AddForceAtPosition(amplitude * -windForce, hit.point, ForceMode.Force);
