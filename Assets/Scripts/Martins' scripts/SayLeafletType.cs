@@ -9,7 +9,8 @@ public class SayLeafletType : MonoBehaviour
     AudioSFXScriptableObject entryWhenCave;
     [SerializeField]
     AudioSFXScriptableObject entryWhenLake;
-    
+
+    [SerializeField]
     SFXManager sfxManager;
 
     private bool hasPlayed = false;

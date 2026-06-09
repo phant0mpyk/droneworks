@@ -30,13 +30,15 @@ public class VictimScript : MonoBehaviour
         if(col.CompareTag("Player"))
         {
             found = true;
-            if(currTimeToDieSeconds >= timeToDieMinutes * 60f)
+            GameManagerScript.instance.SetVictimFound(true);
+            AudioSource audioSource = col.gameObject.GetComponent<AudioSource>();
+            if (currTimeToDieSeconds >= timeToDieMinutes * 60f)
             {
-                sfxManager?.PlayVoicelineSFX(victimFoundDeadSFXClip, victimFoundDeadSFXClip.audioClipEntry.clipName, Camera.main.GetComponent<AudioSource>());
+                sfxManager?.PlayVoicelineSFX(victimFoundDeadSFXClip, victimFoundDeadSFXClip.audioClipEntry.clipName, audioSource);
             }
             else
             {
-                sfxManager?.PlayVoicelineSFX(victimFoundAliveSFXClip, victimFoundAliveSFXClip.audioClipEntry.clipName, Camera.main.GetComponent<AudioSource>());
+                sfxManager?.PlayVoicelineSFX(victimFoundAliveSFXClip, victimFoundAliveSFXClip.audioClipEntry.clipName, audioSource);
             }
             return;
         }

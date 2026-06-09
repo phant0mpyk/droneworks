@@ -18,6 +18,7 @@ public class SFXManager : MonoBehaviour
     string currClipName;
     IEnumerator currSFXCoroutine;
     IEnumerator currTimedSFXCoroutine;
+    public AudioSource currAudioSource;
 
     [SerializeField]
     private AudioSource cameraAudioSource;
@@ -36,7 +37,7 @@ public class SFXManager : MonoBehaviour
     void Start()
     {
         audioTriggers = GetComponentsInChildren<SFXPrompt>();
-        foreach(SFXPrompt audioTrigger in audioTriggers)
+        foreach (SFXPrompt audioTrigger in audioTriggers)
         {
             audioTrigger.SetManager(this);
         }
@@ -45,7 +46,7 @@ public class SFXManager : MonoBehaviour
 
     void Update()
     {
-        if(flightController != null)
+        if (flightController != null)
         {
             if (flightController.GetDroneDestroyed() && GameManagerScript.gameStarted)
             {
@@ -81,16 +82,15 @@ public class SFXManager : MonoBehaviour
             cameraAudioSource.Stop();
         }*/
         currClipName = _entryName;
-        if(currClipName == "End")
+        if (currClipName == "End")
         {
             //do stuff after the end clip plays
             //insert game logic to end the game after it is played
             return;
         }
-        if(_audioSource != null)
+        if (_audioSource != null)
         {
             StartCoroutine(PlaySFX(_entry.audioClipEntry.audioClip, _audioSource, _entry.audioClipEntry.dutchSubtitles));
-
         }
         else
         {
@@ -106,14 +106,14 @@ public class SFXManager : MonoBehaviour
             {
                 currTimedSFXCoroutine = PlayTimedSFX(_entry.audioClipEntry.audioTimedClip, _audioSource, _entry.audioClipEntry.timeToPlayTimedClipSeconds, _entry.audioClipEntry.timedDutchSubtitles);
             }
-            StartCoroutine(currTimedSFXCoroutine);
-        }   
+        }
     }
 
-    IEnumerator PlayTimedSFX(AudioClip timedClip,AudioSource _source, float timeToPlaySeconds, string sentence)
+    IEnumerator PlayTimedSFX(AudioClip timedClip, AudioSource _source, float timeToPlaySeconds, string sentence)
     {
         yield return new WaitForSeconds(timeToPlaySeconds);
         yield return new WaitWhile(() => _source.isPlaying || SFXisPlaying);
+        currAudioSource = _source;
         _source.PlayOneShot(timedClip);
         SFXisPlaying = true;
         StartCoroutine(DisplaySubtitles(sentence, _source));
@@ -122,6 +122,7 @@ public class SFXManager : MonoBehaviour
     IEnumerator PlaySFX(AudioClip clip, AudioSource _source, string sentence)
     {
         yield return new WaitWhile(() => _source.isPlaying || SFXisPlaying);
+        currAudioSource = _source;
         _source?.PlayOneShot(clip);
         SFXisPlaying = true;
         StartCoroutine(DisplaySubtitles(sentence, _source));
@@ -145,9 +146,19 @@ public class SFXManager : MonoBehaviour
 
     public void RestartAllSFX()
     {
-        foreach(SFXPrompt audioTrigger in audioTriggers)
+        foreach (SFXPrompt audioTrigger in audioTriggers)
         {
             audioTrigger.SetPlayed(false);
         }
     }
+    public void StopCoroutines(){
+        if (currTimedSFXCoroutine != null)
+        {
+            StopCoroutine(currTimedSFXCoroutine);
+        }
+    }
+    public void StopAudioSource(){
+        currAudioSource.Stop();
+    }
 }
+

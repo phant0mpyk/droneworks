@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -61,9 +62,11 @@ public class GameManagerScript : MonoBehaviour
     {
         if(victimFound)
         {
+            Debug.Log("victimfound");
             currVictimFoundTimerSeconds += Time.deltaTime;
             if(currVictimFoundTimerSeconds >= victimFoundTimerSeconds){
                 GameEnd();
+                Debug.Log("victimfound");
             }
         }
     }
@@ -178,8 +181,9 @@ public class GameManagerScript : MonoBehaviour
         victimFound = found;
     }
     //V, put stuff with UI and other logic here so it starts when the game ends and the victim is found
+
     private void GameEnd()
     {
-        
+        SceneManager.LoadScene(0);
     }
 }

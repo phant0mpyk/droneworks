@@ -10,6 +10,7 @@ public class CollisionSensor : MonoBehaviour
     [SerializeField] private float minDistance;
     private float maxDistance;
     [SerializeField] private GameObject drone;
+    bool collided = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,11 +25,13 @@ public class CollisionSensor : MonoBehaviour
         {
             sensorImage.color = new Color(0,0,0,0);
         }
-        else
+        else if (collided) 
         {
             sensorImage.color = new Color(1, Mathf.Clamp((distance-minDistance)/(maxDistance-minDistance),0,1), 0, 1-Mathf.Clamp((distance-minDistance)/(maxDistance-minDistance),0,1));
+            distance = 100;
+            collided = false;
         }
-        distance = 100;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,6 +52,7 @@ public class CollisionSensor : MonoBehaviour
             distance = newDistance;
             print(distance);
         }
+        collided = true;
         
     }
 }
