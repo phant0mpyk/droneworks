@@ -5,15 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/V's scenes/MainMenu.unity
     guid: 4562fa80dc9c4da4bafb2da2059af835
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/V's scenes/Tutorial.unity
     guid: 6780094e813602b48aeac2fc46614e59
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Martins' scenes/Search&Rescue.unity
     guid: 0df9cc4db6db07a44809c426c9c96ccc
+  - enabled: 1
+    path: Assets/Scenes/V's scenes/MainMenuNew.unity
+    guid: f4af4194084c8da468b21621da0c7eac
+  - enabled: 1
+    path: Assets/Scenes/Gabriel Playground/Map.unity
+    guid: decdcfc052d487c45995c38e61da4711
+  - enabled: 1
+    path: Assets/Scenes/V's scenes/TwoToriel.unity
+    guid: a99c64a33f24e424fb4cf84980d35dae
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 6527c4cd4c5d03a43b55027c1d4e4ebd, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
