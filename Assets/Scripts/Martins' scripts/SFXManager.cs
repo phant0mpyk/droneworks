@@ -5,11 +5,6 @@ using TMPro;
 public class SFXManager : MonoBehaviour
 {
     [SerializeField]
-    AudioSFXScriptableObject aliveEntry;
-    [SerializeField]
-    AudioSFXScriptableObject deathEntry;
-
-    [SerializeField]
     AudioSFXScriptableObject destroyedEntry;
 
     private bool hasPlayedDestroyedSFX = false;
@@ -34,11 +29,6 @@ public class SFXManager : MonoBehaviour
     private float currTimeToPlayConfusedClip = 0f;
 
     [SerializeField]
-    private float timeToLetHimDieMinutes;
-    private float currTimeToLetHimDieSeconds = 0f;
-    private bool timeToLetHimDie = false;
-
-    [SerializeField]
     private TextMeshProUGUI subtitles;
     bool SFXisPlaying = false;
 
@@ -55,11 +45,6 @@ public class SFXManager : MonoBehaviour
 
     void Update()
     {
-        currTimeToLetHimDieSeconds += Time.deltaTime;
-        if(currTimeToLetHimDieSeconds >= timeToLetHimDieMinutes * 60f && !timeToLetHimDie)
-        {
-            timeToLetHimDie = true;
-        }
         if(flightController != null)
         {
             if (flightController.GetDroneDestroyed() && GameManagerScript.gameStarted)

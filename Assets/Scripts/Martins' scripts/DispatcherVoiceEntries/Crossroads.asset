@@ -15,11 +15,17 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: Crossroads
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: Do you think he went to the cave or the lake?
     dutchSubtitles: Denk je dat hij naar de grot of het meer is gegaan?
     audioClip: {fileID: 8300000, guid: fb5aef3f470955e41b08ff7c538d93cb, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

@@ -19,7 +19,7 @@ public class FlightController : MonoBehaviour
     DroneCameraManager cameraManager;
 
     [SerializeField]
-    ToggleThermalVision toggleThermalVision;
+    public ToggleThermalVision toggleThermalVision;
 
     [SerializeField]
     SpawnMarker ping;
@@ -31,6 +31,8 @@ public class FlightController : MonoBehaviour
     bool droneActive = false;
 
     bool droneArmed = false;
+
+    bool nightVisionActive = false;
 
     [Tooltip("Array of the drone propellers")]
     [SerializeField] 
@@ -101,7 +103,7 @@ public class FlightController : MonoBehaviour
     [Tooltip("Adjusting the strenght of AGL correction.")]
     [SerializeField]
     float aglCorrectionStrength;
-    
+
     Vector3 worldUpVector;
     Vector3 droneUpVector;
     Vector3 droneForwardVector;
@@ -278,6 +280,14 @@ public class FlightController : MonoBehaviour
 
     public void ToggleThermalVision()
     {
+        if (nightVisionActive)
+        {
+            nightVisionActive = false;
+        }
+        else
+        {
+            nightVisionActive = true;
+        }
         toggleThermalVision.ToggleVision();
     }
 
@@ -333,6 +343,7 @@ public class FlightController : MonoBehaviour
     //applies physics back and uses V's teleport script to teleport the drone back to the start position
     void Respawn()
     {
+        if(nightVisionActive) toggleThermalVision.ToggleVision(); nightVisionActive = false;
         //needs to be added in even if V's already doing it for some reason
         //I guess it kindof skips V's rigidbody changes when it teleports the drone back to the start position
         droneRigidbody.isKinematic = false;

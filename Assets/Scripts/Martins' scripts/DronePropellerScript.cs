@@ -63,7 +63,6 @@ public class DronePropellerScript: MonoBehaviour
                     droneRigidbody.AddTorque(droneRigidbody.transform.up * torqueStrength * yawSign);
                     break;
                 default:
-                    Debug.LogWarning("Unknown flight mode: " + _flightMode);
                     break;
             }
         }else{

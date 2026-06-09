@@ -15,13 +15,19 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: RainWarning
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: Keep flying under the trees, because it's pouring rain out
       there
     dutchSubtitles: Blijf onder de bomen vliegen want het regent erg hard.
     audioClip: {fileID: 8300000, guid: 7773ef1ed3fea3d4586aa86e552627cf, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 4
     timedClipName: Branches
+    timedEnglishSpeakerName: Dispatcher
+    timedDutchSpeakerName: Verzender
     timedEnglishSubtitles: Watch out for the branches, the drone can get stuck in
       them.
     timedDutchSubtitles: Pas op voor de takken, de drone kan er in blijven vast zitten
     audioTimedClip: {fileID: 8300000, guid: fbdddf9aa25232344962cbed2ac74460, type: 3}
+    audioTimedClipAlternative: {fileID: 0}

@@ -15,13 +15,19 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: Lake
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: It looks like he was planning to visit the nearby lake, keep
       that in mind.
     dutchSubtitles: Het lijkt erop dat hij van plan was het dichtsbijzijnde meer
       wilde bezoeken, houd dat in het achterhoofd.
     audioClip: {fileID: 8300000, guid: 9daa8f4c46bba8b42ba0a1473d8171c2, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

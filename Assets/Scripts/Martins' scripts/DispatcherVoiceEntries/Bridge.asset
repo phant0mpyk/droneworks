@@ -15,13 +15,19 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: 
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: It's dangerous to stay here, let's cross the bridge and hope
       he didn't fall.
     dutchSubtitles: Het is gevaarlijk om hier te blijven, steek de brug over en laten
       we hopen dat hij niet gevallen is.
     audioClip: {fileID: 8300000, guid: 614516020ef106c4ebf06dc665f4f40a, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

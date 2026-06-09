@@ -10,9 +10,17 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField]
     private GameObject[] playerCanvases;
 
-    public enum VictimSpawn{Lake, Cave};
-    [Header("Victim Spawn Settings")]
-    public static VictimSpawn victimSpawnLocation { get; private set; }
+    public enum VictimSpawn{Lake1, Lake2, Cave1, Cave2};
+    [Header("Victim Settings")]
+    bool victimFound = false;
+    [SerializeField]
+    float victimFoundTimerSeconds;
+    float currVictimFoundTimerSeconds = 0f;
+    public VictimSpawn victimSpawnLocation { get; private set; }
+    [SerializeField]
+    public GameObject[] victimGameObjectSpawns;
+    [SerializeField] 
+    private GameObject[] victimNearbyPrompts;
     [SerializeField]
     private GameObject[] victimLakeItems;
     [SerializeField]
@@ -43,7 +51,7 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         SpawnTranslatedObjects();
-        ChooseVictimSpawn();
+        SpawnVictim();
         SpawnVictimItems();
         introductionCutscene.SetActive(true);
     }
@@ -51,7 +59,13 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(victimFound)
+        {
+            currVictimFoundTimerSeconds += Time.deltaTime;
+            if(currVictimFoundTimerSeconds >= victimFoundTimerSeconds){
+                GameEnd();
+            }
+        }
     }
 
     public void IntroductionFinished()
@@ -64,17 +78,30 @@ public class GameManagerScript : MonoBehaviour
         }
         gameStarted = true;
     }
-    private void ChooseVictimSpawn()
+    private void SpawnVictim()
     {
         int randomIndex = Random.Range(0, System.Enum.GetValues(typeof(VictimSpawn)).Length);
         victimSpawnLocation = (VictimSpawn)randomIndex;
+        for(int i = 0; i < victimGameObjectSpawns.Length; i++)
+        {
+            if(i == randomIndex)
+            {
+                victimGameObjectSpawns[i].SetActive(true);
+                victimNearbyPrompts[i].SetActive(true);
+            }
+            else
+            {
+                victimGameObjectSpawns[i].SetActive(false);
+                victimNearbyPrompts[i].SetActive(false);
+            }
+        }
     }
 
     private void SpawnVictimItems()
     {
         switch (victimSpawnLocation)
         {
-            case VictimSpawn.Lake:
+            case VictimSpawn.Lake1:
                 for(int i = 0; i < victimLakeItems.Length; i++)
                 {
                     victimLakeItems[i].SetActive(true);
@@ -83,8 +110,20 @@ public class GameManagerScript : MonoBehaviour
                 {
                     victimCaveItems[i].SetActive(false);
                 }
+                victimGameObjectSpawns[(int)VictimSpawn.Lake1].SetActive(true);
                 break;
-            case VictimSpawn.Cave:
+            case VictimSpawn.Lake2:
+                for(int i = 0; i < victimLakeItems.Length; i++)
+                {
+                    victimLakeItems[i].SetActive(true);
+                }
+                for(int i = 0; i < victimCaveItems.Length; i++)
+                {
+                    victimCaveItems[i].SetActive(false);
+                }
+                victimGameObjectSpawns[(int)VictimSpawn.Lake2].SetActive(true);
+                break;
+            case VictimSpawn.Cave1:
                 for(int i = 0; i < victimCaveItems.Length; i++)
                 {
                     victimCaveItems[i].SetActive(true);
@@ -93,6 +132,18 @@ public class GameManagerScript : MonoBehaviour
                 {
                     victimLakeItems[i].SetActive(false);
                 }
+                victimGameObjectSpawns[(int)VictimSpawn.Cave1].SetActive(true);
+                break;
+            case VictimSpawn.Cave2:
+                for(int i = 0; i < victimCaveItems.Length; i++)
+                {
+                    victimCaveItems[i].SetActive(true);
+                }
+                for(int i = 0; i < victimLakeItems.Length; i++)
+                {
+                    victimLakeItems[i].SetActive(false);
+                }
+                victimGameObjectSpawns[(int)VictimSpawn.Cave2].SetActive(true);
                 break;
         }
     }
@@ -121,5 +172,14 @@ public class GameManagerScript : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void SetVictimFound(bool found)
+    {
+        victimFound = found;
+    }
+    //V, put stuff with UI and other logic here so it starts when the game ends and the victim is found
+    private void GameEnd()
+    {
+        
     }
 }

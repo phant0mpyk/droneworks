@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbdcb3e0a93dcd46819fa3daed076bf, type: 3}
+  m_Name: VictimRepeating1
+  m_EditorClassIdentifier: 
+  audioClipEntry:
+    repeatable: 0
+    clipName: VictimRepeat
+    englishSpeakerName: Victim
+    dutchSpeakerName: Slachtoffer
+    englishSubtitles: 'I can see the light at the end of the tunnel. '
+    dutchSubtitles: Ik zie licht aan het einde van de tunnel.
+    audioClip: {fileID: 8300000, guid: 0a01b62a344bae24f8f6cc63e59ea489, type: 3}
+    audioClipAlternative: {fileID: 0}
+    timeToPlayTimedClipSeconds: 10
+    timedClipName: VictimRepeat
+    timedEnglishSpeakerName: Victim
+    timedDutchSpeakerName: Slachtoffer
+    timedEnglishSubtitles: Help! I don't feel my legs.
+    timedDutchSubtitles: Help! Ik heb geen gevoel meer aan mijn benen.
+    audioTimedClip: {fileID: 8300000, guid: cca21409e0ffcf7449a89976b0381bf7, type: 3}
+    audioTimedClipAlternative: {fileID: 0}

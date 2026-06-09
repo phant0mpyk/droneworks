@@ -44,7 +44,7 @@ public class ToggleHighlight : MonoBehaviour
         
         for (int i = 0; i < transform.childCount; ++i)
         {
-            transform.GetChild(i).gameObject.GetComponent<ToggleHighlight>().Toggle(_bool,_timer);
+            //transform.GetChild(i).gameObject.GetComponent<ToggleHighlight>().Toggle(_bool,_timer);
         }
         
     }

@@ -15,13 +15,19 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: NearCabin
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: The weather is to extreme to fly through, quickly get into
       the cabin!
     dutchSubtitles: Het weer is te gevaarlijk om in te vliegen, snel, ga het huisje
       in!
     audioClip: {fileID: 8300000, guid: 7a7400cf8257be149bd1345286227393, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

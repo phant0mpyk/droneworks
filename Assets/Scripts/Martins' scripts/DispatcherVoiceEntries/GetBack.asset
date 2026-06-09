@@ -15,11 +15,17 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 1
     clipName: GetBack
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: Where are you going? Get back!
     dutchSubtitles: Waar ga je naar toe? Kom terug!
     audioClip: {fileID: 8300000, guid: b520a95f984c06142968bc24179d82df, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

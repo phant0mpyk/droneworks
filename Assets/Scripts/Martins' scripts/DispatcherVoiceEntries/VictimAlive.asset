@@ -15,13 +15,19 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: VictimAlive
+    englishSpeakerName: Victim
+    dutchSpeakerName: Slachtoffer
     englishSubtitles: Over here! I'm bleeding out and I need help.
     dutchSubtitles: Hierheen! Ik bloed hevig en heb hulp nodig.
     audioClip: {fileID: 8300000, guid: 9e3a8ccf25f8cde47800f75422a63e06, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 5
     timedClipName: End
+    timedEnglishSpeakerName: Dispatcher
+    timedDutchSpeakerName: Verzender
     timedEnglishSubtitles: He's still alive, well done, I'll quickly get the medics
       up there.
     timedDutchSubtitles: Hij is nog in leven, goed gedaan, ik haal snel het medische
       team erbij.
     audioTimedClip: {fileID: 8300000, guid: 7225dcd67b14e7248adca7c71dfa94ba, type: 3}
+    audioTimedClipAlternative: {fileID: 0}

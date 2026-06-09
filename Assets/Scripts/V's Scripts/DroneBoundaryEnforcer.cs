@@ -50,7 +50,8 @@ public class DroneBoundaryEnforcer : MonoBehaviour
             }
             if (_violationTimer >= warningDuration)
             {
-                TeleportBackToStart();
+                droneScript.DestroyDrone();
+                _violationTimer = 0f;
             }
         }
         else

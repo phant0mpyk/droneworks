@@ -15,12 +15,18 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: 
+    englishSpeakerName: Dispatcher
+    dutchSpeakerName: Verzender
     englishSubtitles: Oh, look, there is another path, let's try going that way.
     dutchSubtitles: Oh, kijk, er is nog een pad, laten we proberen die kant op te
       gaan.
     audioClip: {fileID: 8300000, guid: 3f20f19decfe8444f9403a8311d9e340, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}

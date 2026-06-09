@@ -15,11 +15,17 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: VictimDead
-    englishSubtitles: Oh, we're to late, it looks like he passed away...
-    dutchSubtitles: Oh, we zijn te laat, ik denk dat hij is overleden...
-    audioClip: {fileID: 8300000, guid: 07128f79d3606dd48936257d6d4d814f, type: 3}
-    timeToPlayTimedClipSeconds: 0
-    timedClipName: 
-    timedEnglishSubtitles: 
-    timedDutchSubtitles: 
-    audioTimedClip: {fileID: 0}
+    englishSpeakerName: Victim
+    dutchSpeakerName: Slachtoffer
+    englishSubtitles: '*dies'
+    dutchSubtitles: '*sterft'
+    audioClip: {fileID: 8300000, guid: fd9ce02f3abd2014c8ff07843395d6ed, type: 3}
+    audioClipAlternative: {fileID: 0}
+    timeToPlayTimedClipSeconds: 5
+    timedClipName: End
+    timedEnglishSpeakerName: Dispatcher
+    timedDutchSpeakerName: Verzender
+    timedEnglishSubtitles: Oh, we're to late, it looks like he passed away...
+    timedDutchSubtitles: Oh, we zijn te laat, ik denk dat hij is overleden...
+    audioTimedClip: {fileID: 8300000, guid: 07128f79d3606dd48936257d6d4d814f, type: 3}
+    audioTimedClipAlternative: {fileID: 0}

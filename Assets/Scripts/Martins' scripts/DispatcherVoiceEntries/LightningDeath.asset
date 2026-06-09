@@ -15,11 +15,17 @@ MonoBehaviour:
   audioClipEntry:
     repeatable: 0
     clipName: Death
+    englishSpeakerName: 
+    dutchSpeakerName: 
     englishSubtitles: '*lightning strike*'
     dutchSubtitles: '*blikseminslag*'
     audioClip: {fileID: 8300000, guid: 98fe4af15e565de478408946e7f4d297, type: 3}
+    audioClipAlternative: {fileID: 0}
     timeToPlayTimedClipSeconds: 0
     timedClipName: 
+    timedEnglishSpeakerName: 
+    timedDutchSpeakerName: 
     timedEnglishSubtitles: 
     timedDutchSubtitles: 
     audioTimedClip: {fileID: 0}
+    audioTimedClipAlternative: {fileID: 0}
