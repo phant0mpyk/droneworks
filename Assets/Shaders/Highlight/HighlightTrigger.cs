@@ -22,11 +22,12 @@ public class HighlightTrigger : MonoBehaviour
 
             if (customTimer)
             {
-                toggleScript.Toggle(turnOn,timer);
+                toggleScript.timer = timer;
+                //toggleScript.Toggle(turnOn,timer);
             }
             else
             {
-                toggleScript.Toggle(turnOn,999999);
+                //toggleScript.Toggle(turnOn,999999);
             }
 
         }

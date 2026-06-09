@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wind : MonoBehaviour
 {
-    [SerializeField] private float windSpeed;
+    [SerializeField] public float windSpeed;
     [SerializeField] private float airDensity = 1.225f;
     private float dragCoefficient = 1.2f;
     public Vector3 windForce;
@@ -69,7 +69,8 @@ public class Wind : MonoBehaviour
 
     void CalculateWindStrength()
     {
-        gustSpeed = windSpeed /3.6f + (float) Math.Sin(Time.unscaledTime *windSinMultiplier) * windSinAmpltude + (float) Math.Abs(gustSinAmplitude*Math.Pow(Math.Sin(Time.unscaledTime * gustSinMultiplier),gustShortness));
+        float windSpeedIU = windSpeed / 3.6f;
+        gustSpeed = windSpeedIU + (float) Math.Sin(Time.unscaledTime *windSinMultiplier) * windSinAmpltude + windSpeedIU * (float) Math.Abs(gustSinAmplitude*Math.Pow(Math.Sin(Time.unscaledTime * gustSinMultiplier),gustShortness));
         Vector3 velocity = gustSpeed * windDirection.normalized;
         windForce = (tuning* 0.5f * velocity.magnitude * velocity.magnitude * airDensity * (windCollider.size.x * windCollider.size.y / raycastPoints.Count) * dragCoefficient) * velocity.normalized; //calculate wind force from the relative velocity
     }

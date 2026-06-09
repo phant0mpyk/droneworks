@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ToggleHighlight : MonoBehaviour
 {
@@ -9,7 +7,7 @@ public class ToggleHighlight : MonoBehaviour
     [SerializeField] private Texture2D texture;
     [SerializeField] private Material originalMaterial;
     [SerializeField] private Material highlightCopy;
-    [SerializeField] private float timer = 9999999;
+    [SerializeField] public float timer = 9999999;
     MeshRenderer rend;
     void Start()
     {
@@ -27,6 +25,7 @@ public class ToggleHighlight : MonoBehaviour
         {
             transform.GetChild(i).gameObject.AddComponent<ToggleHighlight>().highlightMaterial = highlightMaterial;
         }
+        Toggle(true,timer);
         
     }
 
@@ -44,7 +43,7 @@ public class ToggleHighlight : MonoBehaviour
         
         for (int i = 0; i < transform.childCount; ++i)
         {
-            //transform.GetChild(i).gameObject.GetComponent<ToggleHighlight>().Toggle(_bool,_timer);
+            transform.GetChild(i).gameObject.GetComponent<ToggleHighlight>().Toggle(_bool,_timer);
         }
         
     }
